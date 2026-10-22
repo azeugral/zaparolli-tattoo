@@ -1,7 +1,7 @@
 /* Zaparolli Tattoo · dark art, preto e cinza
    Identidade tirada do Instagram dele: meio-tom sépia dos posts fixados, letra larga e
    pesada com desgaste (Archivo expandida), rótulos condensados com "BR" (Oswald),
-   letreiro arranhado dos destaques (Jolly Lodger + filtro #risco), X e caixas de contorno. */
+   X e caixas de contorno. */
 
 :root {
   --carvao: #0c0a09;
@@ -18,7 +18,6 @@
   --gutter: clamp(16px, 4vw, 40px);
   --larga: 'Archivo', 'Arial Black', sans-serif;
   --cond: 'Oswald', 'Arial Narrow', sans-serif;
-  --risco: 'Jolly Lodger', 'Oswald', fantasy;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -39,7 +38,6 @@ a { color: inherit; }
 button, input, select, textarea { font: inherit; color: inherit; }
 p { margin: 0 0 1em; }
 ::selection { background: var(--sangue); color: var(--osso); }
-.filtros-svg { position: absolute; width: 0; height: 0; }
 
 .wrap { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 var(--gutter); position: relative; z-index: 1; }
 
@@ -82,15 +80,25 @@ p { margin: 0 0 1em; }
   top: .3em;
 }
 
-.destaque-fonte {
-  font-family: var(--risco);
-  font-size: clamp(27px, 2.6vw, 34px);
+.chapeu {
+  display: inline-block;
+  margin: 0 0 18px;
+  padding: 7px 11px 6px;
+  border: 1.5px solid var(--osso);
+  font-family: var(--larga);
+  font-stretch: 125%;
+  font-weight: 900;
+  font-size: 12.5px;
   line-height: 1;
+  letter-spacing: .09em;
+  text-transform: uppercase;
   color: var(--osso);
-  margin: 0 0 14px;
-  filter: url(#risco);
-  letter-spacing: .02em;
+  -webkit-mask-image: url(../img/desgaste.png);
+  mask-image: url(../img/desgaste.png);
+  -webkit-mask-size: 360px auto;
+  mask-size: 360px auto;
 }
+.verm { font-style: normal; font-weight: 600; color: var(--sangue); }
 
 .olho { max-width: 560px; color: var(--cinza); font-size: 17px; }
 .abre { font-size: clamp(18px, 1.6vw, 21px); line-height: 1.5; color: var(--osso); }
@@ -343,7 +351,7 @@ p { margin: 0 0 1em; }
 .foto-moldura { margin: 0; padding: 10px; border: 1px solid var(--linha); background: var(--carvao); }
 .foto-moldura img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
 .foto-moldura figcaption { font: 500 13px/1 var(--cond); letter-spacing: .1em; text-transform: uppercase; color: var(--cinza); padding: 12px 2px 2px; }
-.historia .texto p:not(.destaque-fonte):not(.abre) { color: var(--osso-2); }
+.historia .texto p:not(.chapeu):not(.abre) { color: var(--osso-2); }
 .citacao { margin: 28px 0 0; padding: 4px 0 4px 22px; border-left: 3px solid var(--sangue); font-style: italic; font-weight: 500; font-size: 19px; line-height: 1.45; color: var(--osso); }
 .citacao cite { display: block; margin-top: 10px; font: normal 500 13px/1 var(--cond); letter-spacing: .1em; text-transform: uppercase; color: var(--cinza); }
 
@@ -424,18 +432,11 @@ p { margin: 0 0 1em; }
 .relato .de { margin: 0 8px 8px; font-family: var(--larga); font-stretch: 125%; font-weight: 900; font-size: 19px; text-transform: uppercase; color: var(--osso); line-height: 1.1; }
 .relato p:not(.de) { margin: 0 8px; color: var(--cinza); font-size: 15.5px; }
 
-/* trajetória */
-.trajetoria { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
-.trajetoria > div:first-child { position: sticky; top: 100px; }
-.trajetoria .titulo { font-size: clamp(30px, 3.6vw, 52px); }
-.trajetoria .foto-moldura { max-width: 420px; margin-top: 28px; }
-.linha { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--linha-forte); }
-.linha li { display: grid; grid-template-columns: 86px minmax(0, 1fr); gap: 16px; padding: 22px 0; border-bottom: 1px solid var(--linha); transition: background-color .4s var(--ease); }
-.linha li:hover { background: rgba(236, 228, 214, .025); }
-.linha .ano { font-family: var(--larga); font-stretch: 125%; font-weight: 900; font-size: 22px; line-height: 1.2; color: var(--cinza-2); transition: color .4s var(--ease); }
-.linha li:hover .ano { color: var(--sangue); }
-.linha b { display: block; font-weight: 700; font-size: 18px; color: var(--osso); line-height: 1.35; margin-bottom: 4px; }
-.linha span:not(.ano) { color: var(--cinza); font-size: 15.5px; }
+/* tattoo week */
+.tattoo-week { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+.tattoo-week .foto-moldura { max-width: 480px; }
+.tattoo-week .citacao { margin: 6px 0 24px; }
+.tattoo-week .btn { margin-top: 6px; }
 
 /* estúdio */
 .estudio { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(32px, 6vw, 88px); align-items: center; }
@@ -578,9 +579,9 @@ p { margin: 0 0 1em; }
 }
 
 @media (max-width: 860px) {
-  .historia, .cobertura, .trajetoria, .estudio, .contato { grid-template-columns: minmax(0, 1fr); }
+  .historia, .cobertura, .tattoo-week, .estudio, .contato { grid-template-columns: minmax(0, 1fr); }
+  .tattoo-week .foto-moldura { max-width: 440px; }
   .historia .foto-moldura { max-width: 440px; }
-  .trajetoria > div:first-child { position: static; }
   .estudio .fotos { order: 2; }
   .numeros { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .numeros > div:nth-child(3) { padding-left: 0; border-left: 0; }
@@ -617,8 +618,6 @@ p { margin: 0 0 1em; }
   .ficha-pe .btn { width: 100%; }
   .portfolio-pe .btn { flex: 1 1 100%; }
   .contato dl > div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
-  .linha li { grid-template-columns: 62px minmax(0, 1fr); gap: 12px; }
-  .linha .ano { font-size: 18px; }
   .zap { height: 50px; padding: 0 14px; }
   .luz .nav { top: auto; bottom: -2px; transform: none; width: 46px; height: 46px; }
   .luz-palco { padding-bottom: 56px; }

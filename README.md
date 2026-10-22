@@ -5,10 +5,10 @@ Site do tatuador **Thiago “Zapa” Zaparolli** (@zaparollitattoo), dark art e 
 Versão 1 (22/10/2026), no mesmo esquema do site do Fernando Fernandes, com a identidade puxada do Instagram dele:
 
 - **Hero**: as costas de 5 dias (guest no Obscuro) em **meio-tom**, o pontilhado sépia dos 3 posts fixados, com uma fumaça lenta que engorda e afina os pontos, sem interação com o mouse. No desktop roda em WebGL (`assets/js/meio-tom.js`). Em celular, tablet e telas de toque toca um MP4 em loop do mesmo shader: `meio-tom-celular.mp4` em pé (720×1560) e `meio-tom-deitado.mp4` deitado (1280×590), 12 s. Por cima, a pilha "ZAPA BR / REALISMO BR…", o X com fio e o nome numa caixa de contorno, como o "AGENDAR" dos fixados.
-- **Tipos**: Archivo expandida 900 com desgaste (a letra larga e grossa dos fixados), Oswald nos rótulos condensados e Jolly Lodger com o filtro SVG `#risco` nos chapéus de seção, lembrando o letreiro arranhado das capas dos destaques (Cobertura, Cicatrizado, Estúdio, Orçamentos, Feedback).
+- **Tipos**: Archivo expandida 900 com desgaste (a letra larga e grossa dos fixados), também nos chapéus de seção em caixa de contorno, e Oswald nos rótulos condensados. A fonte arranhada dos destaques saiu na v2 (22/10), a pedido.
 - **Paleta**: carvão #0c0a09, fuligem #141110, osso #ece4d6 e sangue #cf3a24 só em detalhes. Fotos de apoio em sépia com grão, como os posts dele; o portfólio fica com a cor original.
 - **Portfólio** em grade rígida 4:5 com filtros (dark art, realismo, fechamentos, coberturas) e tela cheia com gesto e botão "Quero algo assim" já com o nome da obra no WhatsApp. 70 obras.
-- Seções: História, Portfólio, Coberturas, Gente que cruza o mapa, Trajetória e prêmios, Estúdio, Como agendar + formulário de agendamento (vira mensagem pronta no WhatsApp) e Contato.
+- Seções: História (palavras-chave em vermelho, retrato dele do post de 27/04/2025), Portfólio, Coberturas, Gente que cruza o mapa, Tattoo Week (só ela, sem a lista de prêmios), Estúdio, Como agendar + formulário de agendamento (vira mensagem pronta no WhatsApp) e Contato.
 
 Páginas: `index.html`, `portfolio.html`, `404.html`.
 
@@ -24,7 +24,7 @@ Só o Instagram dele (extraído em 22/10/2026): bio, 674 legendas, fotos e os de
 ## CONFIRMAR antes do domínio
 
 1. **Estúdio**: o texto (prédio comercial com vista para o mar, um cliente por dia, alvará sanitário) vem de um post de março/2022. Continua igual? O site não mostra endereço, só "privado, em São José; o endereço vai junto com o agendamento".
-2. **Prêmios**: a lista vem das legendas (Trifronteira 2020, Barroso e Tattoo Citi 2021, Expo Tattoo BC e Barravas 2022, Revista Tattoo Brasil 2020, jurado na Tattoo Week 2025). Faltou algum? O "2º lugar no Arena Tattoo Club" (2019) ficou de fora porque a legenda não diz a categoria.
+2. **Prêmios**: só a Tattoo Week aparece (pedido em 22/10). Os outros (Trifronteira, Barroso, Tattoo Citi, Expo Tattoo BC, Barravas) ficaram de fora. Ele faz só cobertura, nada de "reforma".
 3. **"Desde 2013"**: ele comprou a primeira máquina em 29/01/2013, mas fala em "11 anos" em 2025. Confirmar como quer contar.
 4. **Relatos** (Califórnia, Nicole de Brusque, Natan): tirados das legendas. Os clientes topam aparecer pelo primeiro nome?
 5. **Atendimento pela equipe** no WhatsApp: veio do destaque de orçamentos (antigo). Continua assim?
