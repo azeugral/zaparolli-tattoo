@@ -15,16 +15,16 @@
     (document.fonts ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 1200))]) : Promise.resolve()).then(entrar);
   }
 
-  /* fundo do hero: a arte das costas, sem interação. Padrão: xerox chiado (xerox.js);
-     ?hero=meiotom volta ao meio-tom com fumaça (meio-tom.js).
+  /* fundo do hero: a arte das costas, sem interação. Padrão: meio-tom fino com fumaça
+     vermelha (meio-tom.js); ?hero=xerox mostra o xerox chiado (xerox.js), guardado.
      Desktop: WebGL ao vivo. Toque/celular: MP4 renderizado do mesmo shader. */
   const tela = $('#meio-tom'), video = $('#meio-tom-video');
-  const MEIOTOM = new URLSearchParams(location.search).get('hero') === 'meiotom';
-  if (MEIOTOM && video) {
-    video.poster = 'assets/img/meio-tom-poster.webp';
-    video.dataset.emPe = 'assets/video/meio-tom-celular.mp4';
-    video.dataset.deitado = 'assets/video/meio-tom-deitado.mp4';
-    if (hero) hero.style.backgroundImage = 'url(assets/img/meio-tom-poster.webp)';
+  const MEIOTOM = new URLSearchParams(location.search).get('hero') !== 'xerox';
+  if (!MEIOTOM && video) {
+    video.poster = 'assets/img/xerox-poster.webp';
+    video.dataset.emPe = 'assets/video/xerox-celular.mp4';
+    video.dataset.deitado = 'assets/video/xerox-deitado.mp4';
+    if (hero) hero.style.backgroundImage = 'url(assets/img/xerox-poster.webp)';
   }
   const celular = matchMedia('(max-width: 760px), (hover: none) and (pointer: coarse)');
   const deitado = matchMedia('(orientation: landscape)');
@@ -77,7 +77,7 @@
         if (visivel && !celular.matches && !document.hidden) {
           const seg = reduz ? 1 : (agora - t0) / 1000;
           const fase = (seg / PERIODO) * Math.PI * 2;
-          if (MEIOTOM) { medir(); t.desenhar(fase, RAIO, 7 * dpr); }
+          if (MEIOTOM) { medir(); t.desenhar(fase, RAIO, 3.2 * dpr); }
           else {
             const passo = Math.floor(seg * QPS);
             if (passo !== ultimo) { ultimo = passo; medir(); t.desenhar(fase, passo); }

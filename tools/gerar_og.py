@@ -1,5 +1,5 @@
 """Gera og.jpg (1200x630), a imagem que aparece quando o link é compartilhado.
-Monta uma página com o xerox chiado do hero (assets/js/xerox.js) e a tipografia do site
+Monta uma página com o meio-tom fino do hero (assets/js/meio-tom.js) e a tipografia do site
 e fotografa com Playwright + Brave. Precisa de um servidor local na pasta do projeto:
     python -m http.server 8811   (rodado em PROJETOS LRGZ/Zaparolli Tattoo)
 Uso: python tools/gerar_og.py"""
@@ -40,7 +40,7 @@ canvas { position:absolute; left:-1114px; top:-135px; width:2449px; height:900px
 .local { position:absolute; right:58px; bottom:52px; text-align:right; font:500 16px/1.4 'Oswald'; letter-spacing:.1em; text-transform:uppercase; color:var(--osso); }
 .local b { display:block; color:var(--sangue); font-weight:500; }
 </style></head><body>
-<canvas id="c" width="2449" height="900"></canvas>
+<canvas id="c" width="3674" height="1350"></canvas>
 <div class="veu"></div>
 <div class="moldura"></div>
 <div class="pilha">Zapa<sup>BR</sup><br>Realismo<sup>BR</sup><br>Preto<sup>BR</sup><br>Cinza<sup>BR</sup></div>
@@ -52,10 +52,10 @@ canvas { position:absolute; left:-1114px; top:-135px; width:2449px; height:900px
   <div class="selo desgaste">Jurado Tattoo Week 2025</div>
 </div>
 <div class="local">São José · SC<b>Agende pelo WhatsApp</b></div>
-<script src="assets/js/xerox.js"></script>
+<script src="assets/js/meio-tom.js"></script>
 <script>
 const im = new Image();
-im.onload = () => { const t = xeroxGL(document.getElementById('c'), im, {preserveDrawingBuffer:true}); t.desenhar(1.1, 7); document.fonts.ready.then(() => { document.title = 'pronto'; }); };
+im.onload = () => { const t = meioTomGL(document.getElementById('c'), im, {preserveDrawingBuffer:true}); t.desenhar(1.1, .45, 6); document.fonts.ready.then(() => { document.title = 'pronto'; }); };
 im.src = 'assets/img/meio-tom-fonte.jpg';
 </script></body></html>""" % BASE
 

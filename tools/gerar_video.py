@@ -1,8 +1,8 @@
 """Renderiza o fundo do hero dos aparelhos de toque, em pé e deitado, e o pôster.
-Modo padrão: xerox chiado (assets/js/xerox.js), 12 quadros por segundo, cada quadro com
-um chiado novo. Com --meiotom: o meio-tom antigo (assets/js/meio-tom.js).
+Modo padrão: meio-tom fino (assets/js/meio-tom.js). Com --xerox: o xerox chiado
+(assets/js/xerox.js), 12 quadros por segundo, cada quadro com um chiado novo.
 Quadro a quadro num Chromium headless (Playwright + Brave), ffmpeg do imageio-ffmpeg.
-Uso: python tools/gerar_video.py [--meiotom]"""
+Uso: python tools/gerar_video.py [--xerox]"""
 import os, sys, subprocess, base64
 from playwright.sync_api import sync_playwright
 import imageio_ffmpeg
@@ -13,9 +13,9 @@ SAIDA = os.path.join(SITE, 'assets', 'video')
 BRAVE = r'C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe'
 
 # nome, largura, altura, tamanho da célula do pontilhado em px do vídeo
-MEIOTOM = '--meiotom' in sys.argv
+MEIOTOM = '--xerox' not in sys.argv
 if MEIOTOM:
-    VERSOES = [('meio-tom-celular', 720, 1560, 11), ('meio-tom-deitado', 1280, 590, 9)]
+    VERSOES = [('meio-tom-celular', 720, 1560, 5.5), ('meio-tom-deitado', 1280, 590, 4.5)]
     FPS, SEGUNDOS, SCRIPT, FUNC, POSTER = 24, 12, 'meio-tom.js', 'meioTomGL', 'meio-tom-poster.webp'
 else:
     # resolução menor de propósito: o chiado pesa no vídeo e o grão grosso combina com o xerox

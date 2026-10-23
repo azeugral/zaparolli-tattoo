@@ -249,7 +249,7 @@ p { margin: 0 0 1em; }
   display: flex; align-items: flex-end;
   padding: calc(96px + env(safe-area-inset-top)) 0 clamp(36px, 6vh, 64px);
   overflow: hidden;
-  background: var(--carvao) url(../img/xerox-poster.webp) center / cover no-repeat;
+  background: var(--carvao) url(../img/meio-tom-poster.webp) center / cover no-repeat;
 }
 .hero-fundo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.4s var(--ease); }
 .hero-fundo.pronto { opacity: 1; }
