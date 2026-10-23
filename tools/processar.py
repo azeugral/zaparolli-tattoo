@@ -172,6 +172,13 @@ def main():
     w, h = arte.size
     salvar(arte.crop((round(w * .1), round(h * .13), round(w * .95), round(h * .98))), 'hero-arte-m', (720, 860), q=90)
 
+    # logo oficial ZAPAROLLI enviado pelo cliente (23/10): só recorta a sobra transparente
+    logo = Image.open(os.path.join(REF, 'logo-cliente', 'logo-original.png')).convert('RGBA')
+    logo = logo.crop(logo.getchannel('A').point(lambda v: 255 if v > 8 else 0).getbbox())
+    logo.save(os.path.join(IMG, 'logo-zaparolli.webp'), 'WEBP', quality=90, method=6)
+    logo.resize((1200, round(logo.height * 1200 / logo.width)), Image.LANCZOS).save(os.path.join(IMG, 'logo-zaparolli-1200.webp'), 'WEBP', quality=90, method=6)
+    print('logo', logo.size)
+
     # fonte do meio-tom do hero: as costas de 5 dias, em cinza com contraste puxado
     hf = ImageOps.grayscale(abrir('014_9'))
     hf = ImageOps.autocontrast(hf, cutoff=1)
