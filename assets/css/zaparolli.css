@@ -502,7 +502,7 @@ p { margin: 0 0 1em; }
 .passos h3 { margin: 0 0 8px; font-family: var(--larga); font-stretch: 112%; font-weight: 800; font-size: 18px; text-transform: uppercase; color: var(--osso); line-height: 1.2; }
 .passos p { margin: 0; color: var(--cinza); font-size: 15.5px; }
 
-.ficha { margin-top: clamp(48px, 6vw, 80px); border: 1px solid var(--linha-forte); background: var(--carvao); padding: clamp(22px, 4vw, 52px); scroll-margin-top: 88px; }
+.ficha { margin-top: clamp(48px, 6vw, 80px); border: 1px solid var(--linha-forte); background: var(--fuligem); padding: clamp(22px, 4vw, 52px); scroll-margin-top: 88px; }
 .ficha-cab { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; margin-bottom: 30px; }
 .ficha-cab .caixa { font-size: clamp(32px, 6vw, 64px); }
 .ficha-cab p { margin: 0; font: 500 18px/1.2 var(--cond); letter-spacing: .08em; text-transform: uppercase; color: var(--cinza); flex-basis: 100%; }
@@ -513,7 +513,7 @@ p { margin: 0 0 1em; }
 .campo legend { margin-bottom: 8px; }
 .campo input, .campo select, .campo textarea {
   width: 100%; min-height: 52px; padding: 13px 15px;
-  background: var(--fuligem); border: 1.5px solid var(--linha-forte); border-radius: 0;
+  background: var(--carvao); border: 1.5px solid var(--linha-forte); border-radius: 0;
   font-size: 16px; color: var(--osso);
   transition: border-color .3s var(--ease), background-color .3s var(--ease);
   -webkit-appearance: none; appearance: none;
@@ -526,7 +526,7 @@ p { margin: 0 0 1em; }
 }
 .campo select option { background: var(--fuligem); color: var(--osso); }
 .campo input::placeholder, .campo textarea::placeholder { color: var(--cinza-2); }
-.campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: var(--osso); background-color: #191919; }
+.campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: var(--osso); background-color: #0f0f0f; }
 .campo.erro input, .campo.erro textarea { border-color: var(--sangue); }
 .marcar { display: flex; flex-wrap: wrap; gap: 8px; }
 .marcar label { position: relative; cursor: pointer; }
