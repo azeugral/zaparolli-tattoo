@@ -351,7 +351,11 @@ p { margin: 0 0 1em; }
 .foto-moldura { margin: 0; padding: 10px; border: 1px solid var(--linha); background: var(--carvao); }
 .foto-moldura img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
 .foto-moldura figcaption { font: 500 13px/1 var(--cond); letter-spacing: .1em; text-transform: uppercase; color: var(--cinza); padding: 12px 2px 2px; }
-.historia .texto p:not(.chapeu):not(.abre) { color: var(--osso-2); }
+.historia .texto p:not(.chapeu):not(.abre):not(.frase):not(.fecho):not(.assina) { color: var(--osso-2); }
+.frase { margin: 4px 0 22px; padding-left: 20px; border-left: 3px solid var(--sangue); font-weight: 700; font-size: clamp(20px, 1.9vw, 25px); line-height: 1.32; color: var(--sangue); text-wrap: balance; }
+.fecho { margin-top: 1.4em; font-size: clamp(18px, 1.6vw, 21px); line-height: 1.45; color: var(--osso); }
+.fecho .verm { font-weight: 700; }
+.assina { margin: 14px 0 0; font: 500 13px/1 var(--cond); letter-spacing: .1em; text-transform: uppercase; color: var(--cinza); }
 .citacao { margin: 28px 0 0; padding: 4px 0 4px 22px; border-left: 3px solid var(--sangue); font-style: italic; font-weight: 500; font-size: 19px; line-height: 1.45; color: var(--osso); }
 .citacao cite { display: block; margin-top: 10px; font: normal 500 13px/1 var(--cond); letter-spacing: .1em; text-transform: uppercase; color: var(--cinza); }
 
