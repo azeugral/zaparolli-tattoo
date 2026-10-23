@@ -160,6 +160,15 @@ def main():
         im = grao(sepia(im, .5), 8)
         salvar(im, nome, larguras)
 
+    # arte do hero (v6): as costas de 5 dias inteiras, sem a borda vermelha do post, em preto e cinza
+    arte = abrir('014_9').crop((20, 18, 1040, 1424))
+    arte = ImageOps.grayscale(arte)
+    arte = ImageOps.autocontrast(arte, cutoff=(1, .4))
+    arte = ImageEnhance.Contrast(arte).enhance(1.12)
+    arte = ImageEnhance.Brightness(arte).enhance(1.12).convert('RGB')
+    arte = ImageOps.colorize(arte.convert('L'), black=(8, 8, 8), mid=(122, 121, 119), white=(244, 243, 240))
+    salvar(arte, 'hero-arte', (720, 1020), q=84)
+
     # fonte do meio-tom do hero: as costas de 5 dias, em cinza com contraste puxado
     hf = ImageOps.grayscale(abrir('014_9'))
     hf = ImageOps.autocontrast(hf, cutoff=1)

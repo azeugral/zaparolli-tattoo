@@ -11,8 +11,8 @@
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="Zaparolli Tattoo · Dark art e coberturas">
 <meta property="og:description" content="Jurado da Tattoo Week 2025. Dark art e realismo preto e cinza autorais, coberturas e fechamentos em estúdio privado em São José, SC. Agende pelo WhatsApp.">
-<meta property="og:image" content="https://azeugral.github.io/zaparolli-tattoo/og.jpg?v=6">
-<meta property="og:image:secure_url" content="https://azeugral.github.io/zaparolli-tattoo/og.jpg?v=6">
+<meta property="og:image" content="https://azeugral.github.io/zaparolli-tattoo/og.jpg?v=7">
+<meta property="og:image:secure_url" content="https://azeugral.github.io/zaparolli-tattoo/og.jpg?v=7">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="Zaparolli Tattoo">
 <meta property="og:url" content="https://azeugral.github.io/zaparolli-tattoo/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://azeugral.github.io/zaparolli-tattoo/og.jpg?v=6">
+<meta name="twitter:image" content="https://azeugral.github.io/zaparolli-tattoo/og.jpg?v=7">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon-32.png" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -86,8 +86,10 @@
 
 <!-- HERO -->
 <section class="hero" id="inicio">
-  <canvas class="hero-fundo" id="meio-tom" aria-hidden="true"></canvas>
-  <video class="hero-fundo hero-video" id="meio-tom-video" muted loop playsinline webkit-playsinline disablepictureinpicture preload="none" poster="assets/img/meio-tom-poster.webp" data-em-pe="assets/video/meio-tom-celular.mp4" data-deitado="assets/video/meio-tom-deitado.mp4" aria-hidden="true"></video>
+  <div class="hero-arte" aria-hidden="true">
+    <img src="assets/img/hero-arte-1020.webp" srcset="assets/img/hero-arte-720.webp 720w, assets/img/hero-arte-1020.webp 1020w" sizes="(max-width: 760px) 100vw, 62vw" alt="" width="1020" height="1406" fetchpriority="high" decoding="async">
+  </div>
+  <div class="hero-nevoa" aria-hidden="true"></div>
 
   <div class="hero-corpo wrap">
     <ul class="pilha" aria-label="Zapa, realismo preto e cinza">
@@ -102,16 +104,21 @@
     </div>
 
     <ul class="etiquetas" aria-label="Especialidades">
-      <li class="forte">Dark art<br><b>autoral</b></li>
-      <li class="forte">Coberturas<br><b>o diferencial</b></li>
-      <li>Realismo<br><b>preto e cinza</b></li>
-      <li>Estúdio privado<br><b>São José · SC</b></li>
+      <li class="forte"><span>Dark art<br><b>autoral</b></span></li>
+      <li class="forte"><span>Cobertura<br><b>estratégica</b></span></li>
+      <li><span>Realismo<br><b>preto e cinza</b></span></li>
     </ul>
 
     <div class="hero-acoes">
-      <a class="btn claro" href="#agendar">Agendar orçamento</a>
-      <a class="btn" href="#portfolio">Ver portfólio</a>
+      <a class="btn claro" href="#agendar">Agendar orçamento<span class="seta" aria-hidden="true">→</span></a>
+      <a class="btn" href="#portfolio">Ver portfólio<span class="seta" aria-hidden="true">→</span></a>
     </div>
+
+    <ul class="hero-info">
+      <li><b>Estúdio privado</b>São José · SC</li>
+      <li><b>12 anos</b>de trajetória</li>
+      <li><b>Jurado</b>Tattoo Week 2025</li>
+    </ul>
   </div>
 </section>
 
@@ -426,8 +433,6 @@
 </div>
 
 <script src="assets/js/obras.js"></script>
-<script src="assets/js/meio-tom.js"></script>
-<script src="assets/js/xerox.js"></script>
 <script src="assets/js/zaparolli.js"></script>
 </body>
 </html>
