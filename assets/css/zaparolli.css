@@ -347,7 +347,25 @@ p { margin: 0 0 1em; }
 .surge.visto { opacity: 1; transform: none; filter: none; }
 
 /* história */
-.historia { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+.historia { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+.video-historia { position: sticky; top: 96px; max-width: 420px; justify-self: center; width: 100%; }
+.tela-video { position: relative; aspect-ratio: 9 / 16; background: var(--carvao) url(../img/historia-poster.webp) center / cover; overflow: hidden; }
+.tela-video video { width: 100%; height: 100%; object-fit: cover; }
+.som {
+  position: absolute; left: 12px; bottom: 12px;
+  display: inline-flex; align-items: center; gap: 9px;
+  min-height: 42px; padding: 0 14px;
+  background: rgba(12, 10, 9, .78); border: 1.5px solid var(--osso); color: var(--osso); cursor: pointer;
+  font-family: var(--larga); font-stretch: 115%; font-weight: 800; font-size: 11.5px; letter-spacing: .07em; text-transform: uppercase;
+  transition: background-color .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease);
+}
+.som:hover { background: var(--osso); color: var(--carvao); }
+.som:active { transform: scale(.97); }
+.som[aria-pressed="true"] { background: var(--sangue); border-color: var(--sangue); color: var(--osso); }
+.som .ic { position: relative; width: 14px; height: 14px; flex: none; }
+.som .ic::before { content: ''; position: absolute; inset: 0; background: currentColor; clip-path: polygon(0 32%, 32% 32%, 72% 0, 72% 100%, 32% 68%, 0 68%); }
+.som .ic::after { content: ''; position: absolute; right: -4px; top: 3px; width: 5px; height: 8px; border: 2px solid currentColor; border-left: 0; border-radius: 0 8px 8px 0; opacity: 0; transition: opacity .3s var(--ease); }
+.som[aria-pressed="true"] .ic::after { opacity: 1; }
 .foto-moldura { margin: 0; padding: 10px; border: 1px solid var(--linha); background: var(--carvao); }
 .foto-moldura img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
 .foto-moldura figcaption { font: 500 13px/1 var(--cond); letter-spacing: .1em; text-transform: uppercase; color: var(--cinza); padding: 12px 2px 2px; }
@@ -586,6 +604,7 @@ p { margin: 0 0 1em; }
   .historia, .cobertura, .tattoo-week, .estudio, .contato { grid-template-columns: minmax(0, 1fr); }
   .tattoo-week .foto-moldura { max-width: 440px; }
   .historia .foto-moldura { max-width: 440px; }
+  .video-historia { position: static; max-width: min(100%, 380px); }
   .estudio .fotos { order: 2; }
   .numeros { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .numeros > div:nth-child(3) { padding-left: 0; border-left: 0; }

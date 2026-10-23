@@ -90,7 +90,6 @@ PORTFOLIO = [
 
 # fotos de apoio: nome -> (post_foto, recorte (l, t, r, b) relativo ou None, proporção, larguras)
 APOIO = {
-    'thiago-retrato': ('060_0', None, (4, 5), (640, 1080)),
     'tattoo-week': ('034_0', None, (4, 5), (640, 1080)),
     'cobertura-antes-depois': ('048_0', None, (1, 1), (640, 1200)),
     'estudio-recepcao': ('210_0', None, (4, 5), (640, 1080)),

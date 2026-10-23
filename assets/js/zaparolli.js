@@ -141,6 +141,30 @@
   const observar = el => io ? io.observe(el) : el.classList.add('visto');
   $$('.surge').forEach(observar);
 
+  /* vídeo da história: toca mudo (tem legenda) só quando está na tela; o botão liga o som e volta ao início */
+  const vh = $('#video-historia'), somBtn = $('.som');
+  if (vh) {
+    let comSom = false;
+    const tocar = () => { const p = vh.play(); if (p && p.catch) p.catch(() => {}); };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { if (vh.preload === 'none') vh.preload = 'auto'; if (!reduz || comSom) tocar(); }
+        else vh.pause();
+      }, { threshold: .35 }).observe(vh);
+    }
+    somBtn && somBtn.addEventListener('click', () => {
+      comSom = !comSom;
+      vh.muted = !comSom;
+      if (comSom) { vh.currentTime = 0; vh.loop = false; tocar(); } else vh.loop = true;
+      somBtn.setAttribute('aria-pressed', String(comSom));
+      $('.txt', somBtn).textContent = comSom ? 'Tirar o som' : 'Ouvir com som';
+    });
+    vh.addEventListener('ended', () => {
+      comSom = false; vh.muted = true; vh.loop = true; tocar();
+      if (somBtn) { somBtn.setAttribute('aria-pressed', 'false'); $('.txt', somBtn).textContent = 'Ouvir com som'; }
+    });
+  }
+
   /* portfólio: grade 4:5 com filtros */
   const CATS = { todos: 'Todos', dark: 'Dark art', real: 'Realismo', fech: 'Fechamentos', cob: 'Coberturas' };
   const galeria = $('#galeria');
