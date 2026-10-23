@@ -21,6 +21,8 @@ Só o Instagram dele (extraído em 22/10/2026): bio, 674 legendas, fotos e os de
 - `tools/processar.py` gera `assets/obras`, `assets/js/obras.js`, `assets/img`, a textura `desgaste.png`, favicons e `og.jpg` a partir de `../_ref/ig` (fora do repositório). Para trocar o portfólio, edite `PORTFOLIO` e rode `python tools/processar.py`.
 - `tools/gerar_video.py` renderiza os MP4 do celular e o pôster a partir de `meio-tom.js` (Playwright + Brave + ffmpeg do imageio-ffmpeg). Rodar de novo se mexer no shader.
 
+- `tools/gerar_og.py` gera o `og.jpg` (prévia do link no WhatsApp/Instagram) com o meio-tom do hero e a tipografia do site; precisa do servidor local `python -m http.server 8811` na pasta do projeto. As metatags usam a URL absoluta do Pages: trocar ao mudar de domínio.
+
 ## CONFIRMAR antes do domínio
 
 1. **Estúdio**: o texto (prédio comercial com vista para o mar, um cliente por dia, alvará sanitário) vem de um post de março/2022. Continua igual? O site não mostra endereço, só "privado, em São José; o endereço vai junto com o agendamento".
