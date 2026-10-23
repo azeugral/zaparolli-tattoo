@@ -111,7 +111,7 @@
   if (galeria && obras.length) {
     const limite = +galeria.dataset.limite || Infinity;
     galeria.innerHTML = obras.map((o, i) => `<button class="obra" type="button" data-c="${o.c}" data-i="${i}" aria-label="Ampliar: ${o.t}">
-      <span class="moldura"><img src="assets/obras/${o.f}-640.webp" alt="${o.t}" loading="lazy" decoding="async" width="640" height="800"></span>
+      <span class="moldura"><img src="assets/obras/${o.f}-640.webp" srcset="assets/obras/${o.f}-640.webp 640w, assets/obras/${o.f}-1080.webp 1080w" sizes="(max-width: 640px) 48vw, (max-width: 1100px) 32vw, 300px" alt="${o.t}" loading="lazy" decoding="async" width="640" height="800" onload="this.classList.add('carregou')"></span>
       <span class="leg"><small>${CATS[o.c]}</small><span>${o.t}</span></span></button>`).join('');
     const filtros = $('.filtros');
     filtros.innerHTML = Object.entries(CATS).map(([k, v], i) =>

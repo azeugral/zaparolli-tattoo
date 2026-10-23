@@ -122,7 +122,7 @@ def sepia(im, quanto=.55):
     return Image.blend(im, tom, quanto)
 
 
-def salvar(im, nome, larguras, pasta=IMG, q=80):
+def salvar(im, nome, larguras, pasta=IMG, q=86):
     for w in larguras:
         h = round(im.height * w / im.width)
         im.resize((w, h), Image.LANCZOS).save(os.path.join(pasta, f'{nome}-{w}.webp'), 'WEBP', quality=q, method=6)
@@ -145,9 +145,9 @@ def main():
     for post, k, cat, leg, foco in PORTFOLIO:
         im = recortar(abrir(f'{post:03d}_{k}'), (4, 5), foco)
         f = f'z{post:03d}'
-        im.resize((640, 800), Image.LANCZOS).save(os.path.join(OBRAS, f + '-640.webp'), 'WEBP', quality=80, method=6)
+        im.resize((640, 800), Image.LANCZOS).save(os.path.join(OBRAS, f + '-640.webp'), 'WEBP', quality=86, method=6)
         larg = min(1080, im.width)
-        im.resize((larg, round(larg * 1.25)), Image.LANCZOS).save(os.path.join(OBRAS, f + '-1080.webp'), 'WEBP', quality=82, method=6)
+        im.resize((larg, round(larg * 1.25)), Image.LANCZOS).save(os.path.join(OBRAS, f + '-1080.webp'), 'WEBP', quality=88, method=6)
         dados.append({'f': f, 'c': cat, 't': leg})
     with open(os.path.join(SITE, 'assets', 'js', 'obras.js'), 'w', encoding='utf-8') as fp:
         fp.write('/* gerado por tools/processar.py */\nwindow.OBRAS = ' + json.dumps(dados, ensure_ascii=False, indent=0) + ';\n')
@@ -157,7 +157,7 @@ def main():
         if box:
             im = im.crop((round(box[0] * im.width), round(box[1] * im.height), round(box[2] * im.width), round(box[3] * im.height)))
         im = recortar(im, prop)
-        im = grao(sepia(im, .5), 8)
+        im = sepia(im, .5)
         salvar(im, nome, larguras)
 
     # arte do hero (v7): as costas de 5 dias, sem a borda vermelha do post, no tom quente
