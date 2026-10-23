@@ -13,7 +13,8 @@ REF = os.path.join(os.path.dirname(SITE), '_ref')
 
 TXT = 'ZAPAROLLI'
 TAM = 520            # corpo da letra em px
-ESPACO = -14         # letras quase encostadas
+ESPACO = -4          # letras quase encostadas (depois de engordar)
+ENGORDA = 9          # tamanho do filtro (ímpar) que engorda a letra, para ficar bem pesada como no mockup
 MARGEM = 40
 rng = np.random.default_rng(23)
 random.seed(23)
@@ -22,6 +23,15 @@ random.seed(23)
 def ruido(w, h, escala, sigma=0):
     """Ruído suave em [0,1] com grão de `escala` px."""
     n = rng.random((max(2, h // escala), max(2, w // escala)))
+    im = Image.fromarray((n * 255).astype(np.uint8)).resize((w, h), Image.BICUBIC)
+    if sigma:
+        im = im.filter(ImageFilter.GaussianBlur(sigma))
+    return np.asarray(im, dtype=np.float32) / 255
+
+
+def ruido2(w, h, ex, ey, sigma=0):
+    """Ruído esticado (ex por ey px), para manchas riscadas de xerox."""
+    n = rng.random((max(2, h // ey), max(2, w // ex)))
     im = Image.fromarray((n * 255).astype(np.uint8)).resize((w, h), Image.BICUBIC)
     if sigma:
         im = im.filter(ImageFilter.GaussianBlur(sigma))
@@ -42,6 +52,7 @@ def main():
     for c, lg in zip(TXT, larguras):
         d.text((x, MARGEM - y0), c, font=fonte, fill=255)
         x += lg + ESPACO
+    m = m.filter(ImageFilter.MaxFilter(ENGORDA))
     a = np.asarray(m, dtype=np.float32) / 255
 
     # 2. bordas roídas: desfoca, soma ruído fino e corta de novo
@@ -70,26 +81,37 @@ def main():
         L = random.uniform(20, 120); ang = random.uniform(-.5, .2)
         fd.line((cx, cy, cx + L, cy + L * ang), fill=255, width=random.choice((1, 2)))
     # 4. riscos longos na diagonal (de baixo à esquerda para cima à direita)
-    for xa, ya, xb, yb, w in [(-.05, .82, .72, .12, 6), (.36, 1.04, 1.06, .3, 5), (.0, .66, .4, .36, 2)]:
+    for xa, ya, xb, yb, w in [(-.05, .84, .74, .1, 9), (.34, 1.05, 1.06, .28, 7), (.0, .66, .42, .34, 3), (.6, .98, 1.04, .7, 2)]:
         n = 80
         pts = []
         for i in range(n + 1):
             t = i / n
             pts.append((W * (xa + (xb - xa) * t) + random.uniform(-2, 2), H * (ya + (yb - ya) * t) + random.uniform(-2, 2)))
         fd.line(pts, fill=255, width=w)
+    for _ in range(26):    # falhas grandes, como tinta que não pegou
+        cx, cy = random.uniform(0, W), random.uniform(0, H)
+        rx, ry = random.uniform(10, 46), random.uniform(5, 22)
+        pts = [(cx + rx * random.uniform(.4, 1.3) * np.cos(t), cy + ry * random.uniform(.4, 1.3) * np.sin(t)) for t in np.linspace(0, 6.28, 9)[:-1]]
+        fd.polygon(pts, fill=255)
+    for _ in range(40):    # lascas grandes encostadas nas bordas
+        cx, cy = random.uniform(0, W), random.choice((random.uniform(0, H * .16), random.uniform(H * .84, H)))
+        pts = [(cx + random.uniform(-22, 22), cy + random.uniform(-12, 12)) for _ in range(5)]
+        fd.polygon(pts, fill=255)
     f = np.asarray(furos.filter(ImageFilter.GaussianBlur(.6)), dtype=np.float32) / 255
     a = np.clip(a - f * 1.2, 0, 1)
 
     # 5. textura de concreto: creme com manchas cinza e pontinhos escuros
     creme = np.array([236, 228, 214], np.float32)
-    cinza = np.array([150, 144, 135], np.float32)
+    cinza = np.array([178, 170, 158], np.float32)
     escuro = np.array([70, 66, 61], np.float32)
-    manchas = ruido(W, H, 90, 8) * .55 + ruido(W, H, 26, 2) * .3 + ruido(W, H, 6) * .15
-    mancha = np.clip((manchas - .48) * 4, 0, 1)[..., None] * .9
+    manchas = ruido2(W, H, 70, 180, 4) * .5 + ruido2(W, H, 6, 40) * .35 + ruido(W, H, 4) * .15
+    mancha = np.clip((manchas - .54) * 5, 0, 1)[..., None] * .8
+    sombra = np.clip((ruido2(W, H, 30, 8, 1) * .6 + ruido(W, H, 3) * .4 - .74) * 9, 0, 1)[..., None] * .7
     riscos_v = np.clip((ruido(W, H, 1, 0)[:, :1].repeat(W, 1) * 0 + (np.asarray(Image.fromarray((rng.random((8, W)) * 255).astype(np.uint8)).resize((W, H), Image.BICUBIC), dtype=np.float32) / 255) - .82) * 4, 0, 1)[..., None] * .3
-    pont = (ruido(W, H, 2) > .965).astype(np.float32)[..., None] * .5
+    pont = (ruido(W, H, 2) > .955).astype(np.float32)[..., None] * .7
     veio = np.clip((ruido(W, H, 5, 1) - .7) * 4, 0, 1)[..., None] * .35
     cor = creme * (1 - mancha) + cinza * mancha
+    cor = cor * (1 - sombra) + escuro * sombra
     cor = cor * (1 - pont) + escuro * pont
     cor = cor * (1 - veio) + escuro * veio
     cor = cor * (1 - riscos_v) + cinza * riscos_v
