@@ -26,7 +26,7 @@ Só o Instagram dele (extraído em 22/10/2026): bio, 674 legendas, fotos e os de
 ## CONFIRMAR antes do domínio
 
 1. **Estúdio**: o texto (prédio comercial com vista para o mar, um cliente por dia, alvará sanitário) vem de um post de março/2022. Continua igual? O site não mostra endereço, só "privado, em São José; o endereço vai junto com o agendamento".
-2. **Prêmios**: só a Tattoo Week aparece (pedido em 22/10). Os outros (Trifronteira, Barroso, Tattoo Citi, Expo Tattoo BC, Barravas) ficaram de fora. Ele faz só cobertura, nada de "reforma".
+2. **Prêmios**: nos números da História aparece "15 prêmios em convenções, nos estilos realismo, dark art e cobertura" (informado pelo cliente em 22/10). Fora isso, só a Tattoo Week tem destaque. Ele faz só cobertura, nada de "reforma".
 3. **Trajetória**: o texto dele fala em 12 anos; o site usa "12 anos".
 4. **Relatos** (Califórnia, Nicole de Brusque, Natan): tirados das legendas. Os clientes topam aparecer pelo primeiro nome?
 5. **Atendimento pela equipe** no WhatsApp: veio do destaque de orçamentos (antigo). Continua assim?
