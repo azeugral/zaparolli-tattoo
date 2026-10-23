@@ -1,5 +1,5 @@
 """Gera og.jpg (1200x630), a imagem que aparece quando o link é compartilhado.
-Monta uma página com o meio-tom do hero (assets/js/meio-tom.js) e a tipografia do site
+Monta uma página com o xerox chiado do hero (assets/js/xerox.js) e a tipografia do site
 e fotografa com Playwright + Brave. Precisa de um servidor local na pasta do projeto:
     python -m http.server 8811   (rodado em PROJETOS LRGZ/Zaparolli Tattoo)
 Uso: python tools/gerar_og.py"""
@@ -20,7 +20,7 @@ HTML = """<!doctype html><html><head><meta charset="utf-8">
 body { width:1200px; height:630px; background:var(--carvao); overflow:hidden; position:relative; font-family:'Archivo'; }
 /* a caveira fica centrada atrás do texto: o canvas é maior que a página e deslocado */
 canvas { position:absolute; left:-1114px; top:-135px; width:2449px; height:900px; }
-.veu { position:absolute; inset:0; background:radial-gradient(ellipse 330px 250px at 50%% 52%%, rgba(11,11,11,.78), rgba(11,11,11,.45) 65%%, rgba(11,11,11,0) 100%%), linear-gradient(180deg, rgba(11,11,11,.35), rgba(11,11,11,0) 30%%, rgba(11,11,11,0) 70%%, rgba(11,11,11,.55)); }
+.veu { position:absolute; inset:0; background:radial-gradient(ellipse 360px 270px at 50%% 52%%, rgba(11,11,11,.9), rgba(11,11,11,.62) 65%%, rgba(11,11,11,.1) 100%%), linear-gradient(180deg, rgba(11,11,11,.35), rgba(11,11,11,0) 30%%, rgba(11,11,11,0) 70%%, rgba(11,11,11,.55)); }
 .moldura { position:absolute; inset:22px; border:1px solid rgba(242,242,240,.22); }
 .centro { position:absolute; left:300px; width:600px; top:0; bottom:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
 .sobre { font:500 18px/1 'Oswald'; letter-spacing:.16em; text-transform:uppercase; color:var(--osso); opacity:.8; margin-bottom:18px; }
@@ -40,7 +40,7 @@ canvas { position:absolute; left:-1114px; top:-135px; width:2449px; height:900px
 .local { position:absolute; right:58px; bottom:52px; text-align:right; font:500 16px/1.4 'Oswald'; letter-spacing:.1em; text-transform:uppercase; color:var(--osso); }
 .local b { display:block; color:var(--sangue); font-weight:500; }
 </style></head><body>
-<canvas id="c" width="3674" height="1350"></canvas>
+<canvas id="c" width="2449" height="900"></canvas>
 <div class="veu"></div>
 <div class="moldura"></div>
 <div class="pilha">Zapa<sup>BR</sup><br>Realismo<sup>BR</sup><br>Preto<sup>BR</sup><br>Cinza<sup>BR</sup></div>
@@ -48,14 +48,14 @@ canvas { position:absolute; left:-1114px; top:-135px; width:2449px; height:900px
   <div class="sobre">Thiago Zaparolli · <b style="color:var(--sangue);font-weight:500">Tatuador</b></div>
   <div class="linha-x"><span class="fio"></span><span class="xis"></span><span class="fio"></span></div>
   <div class="caixa"><span class="desgaste">Zaparolli</span></div>
-  <div class="lema">Dark art<b>✕</b>Realismo preto e cinza</div>
+  <div class="lema">Dark art<b>✕</b>Coberturas</div>
   <div class="selo desgaste">Jurado Tattoo Week 2025</div>
 </div>
 <div class="local">São José · SC<b>Agende pelo WhatsApp</b></div>
-<script src="assets/js/meio-tom.js"></script>
+<script src="assets/js/xerox.js"></script>
 <script>
 const im = new Image();
-im.onload = () => { const t = meioTomGL(document.getElementById('c'), im, {preserveDrawingBuffer:true}); t.desenhar(1.1, .45, 10); document.fonts.ready.then(() => { document.title = 'pronto'; }); };
+im.onload = () => { const t = xeroxGL(document.getElementById('c'), im, {preserveDrawingBuffer:true}); t.desenhar(1.1, 7); document.fonts.ready.then(() => { document.title = 'pronto'; }); };
 im.src = 'assets/img/meio-tom-fonte.jpg';
 </script></body></html>""" % BASE
 

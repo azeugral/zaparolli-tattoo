@@ -15,9 +15,17 @@
     (document.fonts ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 1200))]) : Promise.resolve()).then(entrar);
   }
 
-  /* fundo do hero: as costas em meio-tom com fumaça, sem interação.
-     Desktop: WebGL ao vivo (meio-tom.js). Toque/celular: MP4 renderizado do mesmo shader. */
+  /* fundo do hero: a arte das costas, sem interação. Padrão: xerox chiado (xerox.js);
+     ?hero=meiotom volta ao meio-tom com fumaça (meio-tom.js).
+     Desktop: WebGL ao vivo. Toque/celular: MP4 renderizado do mesmo shader. */
   const tela = $('#meio-tom'), video = $('#meio-tom-video');
+  const MEIOTOM = new URLSearchParams(location.search).get('hero') === 'meiotom';
+  if (MEIOTOM && video) {
+    video.poster = 'assets/img/meio-tom-poster.webp';
+    video.dataset.emPe = 'assets/video/meio-tom-celular.mp4';
+    video.dataset.deitado = 'assets/video/meio-tom-deitado.mp4';
+    if (hero) hero.style.backgroundImage = 'url(assets/img/meio-tom-poster.webp)';
+  }
   const celular = matchMedia('(max-width: 760px), (hover: none) and (pointer: coarse)');
   const deitado = matchMedia('(orientation: landscape)');
   let glAtivo = false, videoAtivo = false;
@@ -25,7 +33,7 @@
   function escolherFundo() {
     if (!hero) return;
     if (celular.matches) { if (!videoAtivo) iniciarVideo(); }
-    else if (!glAtivo) iniciarMeioTom();
+    else if (!glAtivo) iniciarShader();
   }
   function iniciarVideo() {
     if (!video) return;
@@ -46,27 +54,34 @@
     const p = video.play();
     if (p && p.catch) p.catch(() => {});
   }
-  function iniciarMeioTom() {
-    if (!tela || !window.meioTomGL) return;
+  function iniciarShader() {
+    const criar = MEIOTOM ? window.meioTomGL : window.xeroxGL;
+    if (!tela || !criar) return;
     glAtivo = true;
     const foto = new Image();
     foto.onload = () => {
-      const t = window.meioTomGL(tela, foto);
+      const t = criar(tela, foto);
       if (!t) return;
-      const PERIODO = 18, RAIO = .45;
-      const dpr = Math.min(devicePixelRatio || 1, 2);
+      const PERIODO = 18, RAIO = .45, QPS = 12;
+      /* o xerox fica em 1x de propósito: o grão chiado é mais grosso e pesa menos */
+      const dpr = MEIOTOM ? Math.min(devicePixelRatio || 1, 2) : 1;
       function medir() {
         const w = Math.max(1, Math.round(tela.clientWidth * dpr)), h = Math.max(1, Math.round(tela.clientHeight * dpr));
         if (tela.width !== w || tela.height !== h) { tela.width = w; tela.height = h; }
       }
       medir(); addEventListener('resize', medir);
-      let visivel = true;
+      let visivel = true, ultimo = -1;
       new IntersectionObserver(([e]) => { visivel = e.isIntersecting; }).observe(hero);
       const t0 = performance.now();
       function quadro(agora) {
         if (visivel && !celular.matches && !document.hidden) {
-          medir();
-          t.desenhar(reduz ? 1 : ((agora - t0) / 1000 / PERIODO) * Math.PI * 2, RAIO, 7 * dpr);
+          const seg = reduz ? 1 : (agora - t0) / 1000;
+          const fase = (seg / PERIODO) * Math.PI * 2;
+          if (MEIOTOM) { medir(); t.desenhar(fase, RAIO, 7 * dpr); }
+          else {
+            const passo = Math.floor(seg * QPS);
+            if (passo !== ultimo) { ultimo = passo; medir(); t.desenhar(fase, passo); }
+          }
           tela.classList.add('pronto');
         }
         if (!reduz) requestAnimationFrame(quadro);
@@ -166,7 +181,7 @@
   }
 
   /* portfólio: grade 4:5 com filtros */
-  const CATS = { todos: 'Todos', dark: 'Dark art', real: 'Realismo', fech: 'Fechamentos', cob: 'Coberturas' };
+  const CATS = { todos: 'Todos', dark: 'Dark art', cob: 'Coberturas', real: 'Realismo', fech: 'Fechamentos' };
   const galeria = $('#galeria');
   const obras = window.OBRAS || [];
   let visiveis = [];
@@ -197,7 +212,8 @@
       $$('button', filtros).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.f === cat)));
     }
     filtros.addEventListener('click', e => { const b = e.target.closest('button'); if (b) filtrar(b.dataset.f, true); });
-    filtrar('todos');
+    const inicial = new URLSearchParams(location.search).get('f');
+    filtrar(CATS[inicial] ? inicial : 'todos');
     $$('.obra', galeria).forEach((b, i) => { b.style.transitionDelay = (i % 4) * 70 + 'ms'; observar(b); });
     galeria.addEventListener('click', e => { const b = e.target.closest('.obra'); if (b) abrirLuz(visiveis.indexOf(b)); });
   }
