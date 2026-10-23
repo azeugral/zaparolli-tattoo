@@ -28,7 +28,8 @@ void main(){
   vec2 o1=vec2(cos(a),sin(a))*k, o2=vec2(sin(a),cos(a))*k*.8;
   vec2 q=vec2(fbm(p*1.5+o1),fbm(p*1.5+vec2(4.1,2.7)-o2));
   float fum=fbm(p*1.25+2.2*q+o2*.6);
-  float v=lum*(.62+.75*fum)+smoothstep(.45,.95,fum)*.22;
+  float fumo=smoothstep(.42,.92,fum)*.33*(1.-smoothstep(.05,.35,lum));
+  float v=lum*(.62+.75*fum)+fumo+smoothstep(.45,.95,fum)*.12;
   if(deitado)v*=mix(.32,1.,smoothstep(asp*.18,asp*.58,p.x));
   else v*=mix(.16,.95,smoothstep(.28,.72,p.y));
   vec2 vc=gl_FragCoord.xy/r-.5; v*=1.-.9*dot(vc*vec2(.9,1.),vc*vec2(.9,1.));
@@ -36,9 +37,10 @@ void main(){
   float raio=sqrt(v)*.66;
   float aa=1.4/c;
   float pt=smoothstep(raio+aa*.5,raio-aa*.5,length(fr));
-  vec3 osso=vec3(.92,.88,.81), sep=vec3(.55,.41,.31);
-  vec3 tinta=mix(sep,osso,smoothstep(.15,.85,v));
-  vec3 fundo=vec3(.045,.037,.032)+(h(px+fract(a))-.5)*.018;
+  vec3 osso=vec3(.94,.94,.93), cin=vec3(.46,.46,.45), verm=vec3(.78,.13,.09);
+  vec3 tinta=mix(cin,osso,smoothstep(.15,.85,v));
+  tinta=mix(tinta,verm,smoothstep(.0,.12,fumo)*(1.-smoothstep(.08,.3,lum))*.9);
+  vec3 fundo=vec3(.04,.04,.04)+(h(px+fract(a))-.5)*.018;
   float dobra=exp(-pow((gl_FragCoord.y/r.y-.47)*r.y/2.2,2.))*.05;
   vec3 col=mix(fundo,tinta,pt*.9)+dobra;
   gl_FragColor=vec4(col,1.);

@@ -116,9 +116,9 @@ def grao(im, forca=10, semente=1):
 
 
 def sepia(im, quanto=.55):
-    """Puxa a foto para o marrom queimado dos posts fixados."""
+    """Puxa a foto para o preto e cinza do site (antes era sépia)."""
     cinza = ImageOps.grayscale(im)
-    tom = ImageOps.colorize(cinza, black=(12, 9, 7), mid=(120, 98, 82), white=(238, 228, 212))
+    tom = ImageOps.colorize(cinza, black=(10, 10, 10), mid=(118, 118, 116), white=(242, 242, 240))
     return Image.blend(im, tom, quanto)
 
 
@@ -187,22 +187,22 @@ def main():
     rgba.save(os.path.join(IMG, 'desgaste.png'), optimize=True)
 
     # favicon: X sobre carvão
-    fav = Image.new('RGB', (512, 512), (12, 10, 9))
+    fav = Image.new('RGB', (512, 512), (11, 11, 11))
     d = ImageDraw.Draw(fav)
-    d.text((256, 262), 'Z', font=fonte(380), fill=(236, 228, 214), anchor='mm')
+    d.text((256, 262), 'Z', font=fonte(380), fill=(242, 242, 240), anchor='mm')
     fav.resize((32, 32), Image.LANCZOS).save(os.path.join(SITE, 'favicon-32.png'))
     fav.resize((180, 180), Image.LANCZOS).save(os.path.join(SITE, 'apple-touch-icon.png'))
     fav.save(os.path.join(SITE, 'favicon.ico'), sizes=[(16, 16), (32, 32), (48, 48)])
 
     # og.jpg 1200x630
-    og = Image.new('RGB', (1200, 630), (12, 10, 9))
+    og = Image.new('RGB', (1200, 630), (11, 11, 11))
     foto = grao(sepia(ImageOps.fit(abrir('014_9'), (520, 630), centering=(.5, .45)), .45), 8)
     og.paste(foto, (680, 0))
     d = ImageDraw.Draw(og)
-    d.rectangle((54, 196, 640, 318), outline=(236, 228, 214), width=3)
-    d.text((80, 257), 'ZAPAROLLI', font=fonte(84), fill=(236, 228, 214), anchor='lm')
+    d.rectangle((54, 196, 640, 318), outline=(242, 242, 240), width=3)
+    d.text((80, 257), 'ZAPAROLLI', font=fonte(84), fill=(242, 242, 240), anchor='lm')
     d.text((60, 120), 'THIAGO ZAPAROLLI', font=fonte(34, 500, arquivo='Oswald.ttf'), fill=(170, 158, 145))
-    d.text((60, 360), 'DARK ART · PRETO E CINZA · COBERTURAS', font=fonte(30, 500, arquivo='Oswald.ttf'), fill=(196, 52, 38))
+    d.text((60, 360), 'DARK ART · PRETO E CINZA · COBERTURAS', font=fonte(30, 500, arquivo='Oswald.ttf'), fill=(212, 42, 30))
     d.text((60, 410), 'São José, Santa Catarina', font=fonte(30, 400, arquivo='Oswald.ttf'), fill=(170, 158, 145))
     og.save(os.path.join(SITE, 'og.jpg'), quality=86)
     print(len(dados), 'obras')

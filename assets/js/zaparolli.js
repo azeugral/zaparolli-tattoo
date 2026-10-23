@@ -169,8 +169,6 @@
   const CATS = { todos: 'Todos', dark: 'Dark art', real: 'Realismo', fech: 'Fechamentos', cob: 'Coberturas' };
   const galeria = $('#galeria');
   const obras = window.OBRAS || [];
-  const total = $('#total-obras');
-  if (total) total.textContent = obras.length;
   let visiveis = [];
   if (galeria && obras.length) {
     const limite = +galeria.dataset.limite || Infinity;
@@ -178,9 +176,8 @@
       <span class="moldura"><img src="assets/obras/${o.f}-640.webp" alt="${o.t}" loading="lazy" decoding="async" width="640" height="800"></span>
       <span class="leg"><small>${CATS[o.c]}</small><span>${o.t}</span></span></button>`).join('');
     const filtros = $('.filtros');
-    const conta = c => c === 'todos' ? obras.length : obras.filter(o => o.c === c).length;
     filtros.innerHTML = Object.entries(CATS).map(([k, v], i) =>
-      `<button type="button" data-f="${k}" aria-pressed="${i === 0}">${v}<sup>${conta(k)}</sup></button>`).join('');
+      `<button type="button" data-f="${k}" aria-pressed="${i === 0}">${v}</button>`).join('');
     function filtrar(cat, animar) {
       let n = 0;
       $$('.obra', galeria).forEach(b => {
@@ -206,7 +203,7 @@
   }
 
   /* tela cheia */
-  const luz = $('#luz'), luzImg = $('#luz-img'), luzLeg = $('#luz-leg'), luzCont = $('#luz-cont'), luzZap = $('#luz-zap');
+  const luz = $('#luz'), luzImg = $('#luz-img'), luzLeg = $('#luz-leg'), luzZap = $('#luz-zap');
   let li = 0, ultimoFoco = null, luzTimer;
   function pintarLuz() {
     const b = visiveis[li]; if (!b) return;
@@ -217,7 +214,6 @@
     const mostrar = () => { luzImg.src = src; luzImg.alt = o.t; luzImg.style.opacity = 1; };
     tmp.decode ? tmp.decode().then(mostrar, mostrar) : mostrar();
     luzLeg.innerHTML = `<small>${CATS[o.c]}</small>${o.t}`;
-    luzCont.textContent = `${li + 1} / ${visiveis.length}`;
     if (luzZap) {
       luzZap.href = zapLink(`Olá, Zapa! Vim pelo site e curti o trabalho "${o.t}". Quero um orçamento para algo nessa linha.`);
       luzZap.target = '_blank'; luzZap.rel = 'noopener';
