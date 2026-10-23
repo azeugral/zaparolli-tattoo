@@ -169,6 +169,8 @@ def main():
     arte = ImageOps.colorize(arte, black=(9, 8, 7), mid=(120, 112, 102), white=(238, 229, 214))
     arte = grao(arte, 5, 3)
     salvar(arte, 'hero-arte', (720, 1020), q=90)
+    w, h = arte.size
+    salvar(arte.crop((round(w * .1), round(h * .13), round(w * .95), round(h * .98))), 'hero-arte-m', (720, 860), q=90)
 
     # fonte do meio-tom do hero: as costas de 5 dias, em cinza com contraste puxado
     hf = ImageOps.grayscale(abrir('014_9'))

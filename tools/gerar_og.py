@@ -30,6 +30,7 @@ body { width:1200px; height:630px; background:var(--carvao); overflow:hidden; po
 .xis { position:relative; width:40px; height:40px; }
 .xis::before,.xis::after { content:''; position:absolute; left:50%%; top:50%%; width:118%%; height:21%%; background:var(--sangue); transform:translate(-50%%,-50%%) rotate(45deg); }
 .xis::after { transform:translate(-50%%,-50%%) rotate(-45deg); }
+.logo { width:500px; height:auto; filter:drop-shadow(0 4px 24px rgba(12,11,10,.85)); }
 .caixa { font-family:'Anton'; font-size:118px; line-height:.88; text-transform:uppercase; color:var(--osso); filter:drop-shadow(0 4px 24px rgba(12,11,10,.8)); }
 .rachado { display:inline-block; -webkit-mask-image:url(assets/img/rachado.png); mask-image:url(assets/img/rachado.png); -webkit-mask-size:1200px auto; mask-size:1200px auto; }
 .desgaste { -webkit-mask-image:url(assets/img/desgaste.png); mask-image:url(assets/img/desgaste.png); -webkit-mask-size:520px auto; mask-size:520px auto; }
@@ -48,15 +49,14 @@ body { width:1200px; height:630px; background:var(--carvao); overflow:hidden; po
 <div class="centro">
   <div class="sobre">Thiago Zaparolli · Artista tatuador</div>
   <div class="linha-x"><span class="fio"></span><span class="xis"></span><span class="fio"></span></div>
-  <div class="caixa"><span class="rachado">Zaparolli</span></div>
+  <img class="logo" src="assets/img/logo-zaparolli.webp" alt="">
   <div class="lema">Realismo<b>✕</b>Dark art<b>✕</b>Cover-up</div>
   <div class="selo desgaste">Jurado Tattoo Week 2025</div>
 </div>
 <div class="local">São José · SC<b>Agende pelo WhatsApp</b></div>
 <script>
-const im = document.querySelector('.arte');
-const pronto = () => document.fonts.ready.then(() => { document.title = 'pronto'; });
-im.complete ? pronto() : im.addEventListener('load', pronto);
+const ims = [...document.images];
+Promise.all(ims.map(i => i.complete ? 1 : new Promise(r => i.addEventListener('load', r)))).then(() => document.fonts.ready).then(() => { document.title = 'pronto'; });
 </script></body></html>""" % BASE
 
 

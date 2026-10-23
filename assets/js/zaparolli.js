@@ -8,22 +8,6 @@
   const ano = $('#ano');
   if (ano) ano.textContent = new Date().getFullYear();
 
-  /* nome do hero: ocupa a largura do bloco (no desktop, no máximo ~62% da tela) */
-  const nome = $('#nome');
-  function ajustarNome() {
-    if (!nome) return;
-    const span = nome.firstElementChild;
-    nome.style.fontSize = '100px';
-    const larg = span.getBoundingClientRect().width;
-    const alvo = Math.min(nome.parentElement.clientWidth, innerWidth > 860 ? Math.max(560, innerWidth * .5) : 9999);
-    const max = innerWidth > 860 ? Math.min(200, innerHeight * .19) : innerHeight * .2;
-    if (larg) nome.style.fontSize = Math.min(100 * alvo / larg * .995, max) + 'px';
-  }
-  if (nome) {
-    (document.fonts ? document.fonts.ready : Promise.resolve()).then(ajustarNome);
-    addEventListener('resize', ajustarNome);
-  }
-
   /* entrada do hero depois das fontes */
   const hero = $('.hero');
   if (hero) {

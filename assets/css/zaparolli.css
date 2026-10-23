@@ -266,6 +266,7 @@ p { margin: 0 0 1em; }
     linear-gradient(0deg, var(--carvao) 0%, rgba(12, 11, 10, .55) 20%, rgba(12, 11, 10, 0) 44%),
     linear-gradient(180deg, rgba(12, 11, 10, .5) 0%, rgba(12, 11, 10, 0) 14%);
 }
+.hero-arte::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(42% 46% at 0% 30%, rgba(12, 11, 10, .9), rgba(12, 11, 10, .45) 55%, rgba(12, 11, 10, 0) 100%); }
 /* fumaça muito sutil: duas manchas claras que passam devagar */
 .hero-fumaca { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 .hero-fumaca i {
@@ -290,16 +291,8 @@ p { margin: 0 0 1em; }
 .assinatura { margin: 0; padding-bottom: 10px; width: max-content; border-bottom: 1px solid rgba(236, 228, 214, .5); }
 
 .hero-base { display: flex; flex-direction: column; align-items: flex-start; }
-.nome {
-  margin: 0 0 6px -.02em; font: 400 100px/.86 var(--nome); letter-spacing: -.005em; text-transform: uppercase; color: var(--osso);
-  white-space: nowrap;
-}
-.nome span {
-  display: inline-block;
-  -webkit-mask-image: url(../img/rachado.png); mask-image: url(../img/rachado.png);
-  -webkit-mask-size: 1200px auto; mask-size: 1200px auto; -webkit-mask-position: 0 40%; mask-position: 0 40%;
-  filter: drop-shadow(0 4px 30px rgba(12, 11, 10, .6));
-}
+.nome { margin: 0 0 10px; line-height: 0; width: min(100%, 52vw, 860px); }
+.nome img { display: block; width: 100%; height: auto; filter: drop-shadow(0 6px 30px rgba(12, 11, 10, .65)); }
 .lema { margin: 8px 0 0; font: 400 clamp(17px, 1.7vw, 22px)/1.35 var(--cond); letter-spacing: .14em; text-transform: uppercase; color: var(--osso-2); }
 .lema .verm { font-weight: 400; }
 .etiquetas {
@@ -327,9 +320,9 @@ p { margin: 0 0 1em; }
   opacity: 0; transform: translateY(16px);
   transition: opacity 1s var(--ease), transform 1s var(--ease);
 }
-.hero .nome span { clip-path: inset(-10% 100% -10% 0); transition: clip-path 1.3s var(--ease) .35s; }
+.hero .nome img { clip-path: inset(-10% 100% -10% 0); transition: clip-path 1.3s var(--ease) .35s; }
 .hero.entrou .hero-lado, .hero.entrou .lema, .hero.entrou .etiquetas, .hero.entrou .hero-acoes .btn, .hero.entrou .hero-info, .hero.entrou .descer { opacity: 1; transform: none; }
-.hero.entrou .nome span { clip-path: inset(-10% -2% -10% 0); }
+.hero.entrou .nome img { clip-path: inset(-10% -2% -10% 0); }
 .hero.entrou .hero-lado { transition-delay: .2s; }
 .hero.entrou .lema { transition-delay: .9s; }
 .hero.entrou .etiquetas { transition-delay: 1.05s; }
@@ -599,12 +592,8 @@ p { margin: 0 0 1em; }
 
 /* rodapé */
 .rodape { border-top: 1px solid var(--linha); padding: 0 0 calc(92px + env(safe-area-inset-bottom)); overflow: hidden; }
-.rodape .gigante {
-  margin: 0; padding: .12em 0 0; text-align: center;
-  font-family: var(--larga); font-stretch: 125%; font-weight: 900; text-transform: uppercase;
-  font-size: calc((100vw - 16px) / 9.3); line-height: .9; color: var(--sepia);
-  white-space: nowrap; user-select: none;
-}
+.rodape .gigante { margin: 0 auto; padding: clamp(36px, 6vw, 72px) var(--gutter) 0; max-width: 1180px; line-height: 0; }
+.rodape .gigante img { display: block; width: 100%; height: auto; opacity: .92; }
 .rodape .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 26px; font-size: 14px; color: var(--cinza); }
 .rodape p { margin: 0; }
 .rodape a { color: var(--osso); text-decoration-color: var(--sangue); text-underline-offset: 3px; }
@@ -684,9 +673,11 @@ p { margin: 0 0 1em; }
   .topo .wrap { height: 62px; }
   .topo .btn.pequeno { display: none; }
   .hero { padding-top: calc(80px + env(safe-area-inset-top)); }
-  .hero-arte { width: 100%; height: 78%; bottom: auto; }
-  .hero-arte img { object-position: 50% 24%; -webkit-mask-image: none; mask-image: none; }
-  .hero-arte::after { background: linear-gradient(0deg, var(--carvao) 0%, rgba(12, 11, 10, .82) 18%, rgba(12, 11, 10, .2) 46%, rgba(12, 11, 10, 0) 62%), linear-gradient(180deg, rgba(12, 11, 10, .55) 0%, rgba(12, 11, 10, 0) 14%), linear-gradient(90deg, rgba(12, 11, 10, .55) 0%, rgba(12, 11, 10, 0) 42%); }
+  .hero-arte { width: 100%; height: 76%; bottom: auto; }
+  .hero-arte img { object-position: 50% 0; -webkit-mask-image: none; mask-image: none; }
+  .hero-arte::before { background: radial-gradient(70% 42% at 0% 26%, rgba(12, 11, 10, .92), rgba(12, 11, 10, .55) 50%, rgba(12, 11, 10, 0) 100%); }
+  .hero-arte::after { background: linear-gradient(0deg, var(--carvao) 0%, rgba(12, 11, 10, .8) 16%, rgba(12, 11, 10, .15) 40%, rgba(12, 11, 10, 0) 55%), linear-gradient(180deg, rgba(12, 11, 10, .6) 0%, rgba(12, 11, 10, 0) 13%); }
+  .nome { width: 100%; }
   .hero-corpo { gap: 18px; }
   .hero-lado { gap: 22px; }
   .hero-estilos { margin-top: 30px; }
