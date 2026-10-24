@@ -50,7 +50,15 @@ p { margin: 0 0 1em; }
 
 /* ---------- peças da identidade ---------- */
 
-.desgaste { display: inline; }
+/* desgaste dos títulos principais (falhas e riscos), pedido de volta em 24/10 */
+.desgaste {
+  -webkit-mask-image: url(../img/desgaste.png);
+  mask-image: url(../img/desgaste.png);
+  -webkit-mask-size: 520px auto;
+  mask-size: 520px auto;
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+}
 
 .titulo {
   margin: 0 0 .5em;
@@ -64,7 +72,7 @@ p { margin: 0 0 1em; }
   color: var(--osso);
   text-wrap: balance;
 }
-.titulo .desgaste { display: inline; }
+.titulo .desgaste { display: inline; -webkit-mask-size: 860px auto; mask-size: 860px auto; }
 .titulo sup.contagem {
   font: 500 clamp(15px, 1.6vw, 20px)/1 var(--cond);
   letter-spacing: .04em;
