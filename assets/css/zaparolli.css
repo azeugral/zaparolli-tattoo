@@ -482,6 +482,7 @@ p { margin: 0 0 1em; }
 .etapas li::before { content: counter(e, decimal-leading-zero); grid-row: span 2; font: 500 15px/1.5 var(--cond); color: var(--sangue); letter-spacing: .06em; }
 .etapas b { font: 500 16px/1.4 var(--cond); letter-spacing: .06em; text-transform: uppercase; color: var(--osso); }
 .etapas span { color: var(--cinza); font-size: 15.5px; }
+.cobertura .citacao { margin: 6px 0 24px; }
 .cobertura .btn { margin-top: 8px; }
 .antes-depois { margin: 0; position: relative; border: 1px solid var(--linha); padding: 10px; background: var(--carvao); }
 .antes-depois img { width: 100%; aspect-ratio: 1; object-fit: cover; }
