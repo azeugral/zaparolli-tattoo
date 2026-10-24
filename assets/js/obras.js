@@ -46,29 +46,9 @@ window.OBRAS = [
 "t": "Entre túmulos e sombras"
 },
 {
-"f": "z176",
-"c": "dark",
-"t": "Os próprios demônios"
-},
-{
-"f": "z025",
-"c": "dark",
-"t": "Collab com Roger Santos"
-},
-{
 "f": "z006",
 "c": "dark",
 "t": "Onde existe instinto"
-},
-{
-"f": "z170",
-"c": "real",
-"t": "Leão"
-},
-{
-"f": "z103",
-"c": "dark",
-"t": "Blackwork e biorgânico em collab"
 },
 {
 "f": "z009",
@@ -246,11 +226,6 @@ window.OBRAS = [
 "t": "Caveira Harley-Davidson"
 },
 {
-"f": "z084",
-"c": "real",
-"t": "A força do lobo"
-},
-{
 "f": "z089",
 "c": "cob",
 "t": "Renascimento"
@@ -269,11 +244,6 @@ window.OBRAS = [
 "f": "z097",
 "c": "cob",
 "t": "Perna nova"
-},
-{
-"f": "z100",
-"c": "real",
-"t": "Primeira tattoo, vindo da Califórnia"
 },
 {
 "f": "z105",
@@ -329,11 +299,6 @@ window.OBRAS = [
 "f": "z164",
 "c": "dark",
 "t": "Ghostface"
-},
-{
-"f": "z169",
-"c": "real",
-"t": "Retrato feminino"
 },
 {
 "f": "z184",
