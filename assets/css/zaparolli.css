@@ -486,11 +486,10 @@ p { margin: 0 0 1em; }
 .cobertura .btn { margin-top: 8px; }
 /* antes e depois no esquema da WRM: duas fotos sobrepostas, o controle (range) move a divisa */
 .antes-depois { position: relative; margin: 0 auto; width: 100%; max-width: 440px; justify-self: center; }
-.antes-depois .antes-depois__palco, .antes-depois { --pos: 50%; }
-.antes-depois img { display: block; width: 100%; aspect-ratio: 600 / 1100; object-fit: cover; pointer-events: none; user-select: none; -webkit-user-drag: none; }
-.antes-depois__depois { position: relative; border: 1px solid var(--linha-forte); }
-.antes-depois__antes { position: absolute; left: 0; top: 0; z-index: 1; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
-.antes-depois__linha { position: absolute; top: 0; height: calc(100% - 34px); left: var(--pos); z-index: 2; width: 2px; margin-left: -1px; background: var(--osso); pointer-events: none; box-shadow: 0 0 18px rgba(12, 11, 10, .6); }
+.antes-depois__palco { position: relative; overflow: hidden; aspect-ratio: 600 / 1100; border: 1px solid var(--linha-forte); background: var(--fuligem); }
+.antes-depois img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; user-select: none; -webkit-user-drag: none; }
+.antes-depois__antes { z-index: 1; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.antes-depois__linha { position: absolute; top: 0; bottom: 0; left: var(--pos); z-index: 2; width: 2px; margin-left: -1px; background: var(--osso); pointer-events: none; box-shadow: 0 0 18px rgba(12, 11, 10, .6); }
 .antes-depois__linha::after {
   content: '\2194'; position: absolute; top: 50%; left: 50%; width: 46px; height: 46px; transform: translate(-50%, -50%);
   display: grid; place-items: center; background: var(--sangue); color: var(--osso); font: 500 22px/1 var(--cond); border: 1.5px solid var(--osso);
@@ -504,8 +503,8 @@ p { margin: 0 0 1em; }
 }
 .antes-depois__rot--a { left: 14px; }
 .antes-depois__rot--d { right: 14px; color: var(--osso); border-color: var(--sangue); }
-.antes-depois__controle { position: absolute; left: 0; top: 0; z-index: 4; width: 100%; height: calc(100% - 34px); margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
-.antes-depois:has(.antes-depois__controle:focus-visible) .antes-depois__depois { outline: 2px solid var(--sangue); outline-offset: 4px; }
+.antes-depois__controle { position: absolute; left: 0; top: 0; z-index: 4; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
+.antes-depois:has(.antes-depois__controle:focus-visible) .antes-depois__palco { outline: 2px solid var(--sangue); outline-offset: 4px; }
 .antes-depois figcaption { margin-top: 12px; text-align: center; font: 500 13px/1 var(--cond); letter-spacing: .14em; text-transform: uppercase; color: var(--cinza); }
 
 .coberturas-feitas { margin-top: clamp(48px, 6vw, 80px); }
