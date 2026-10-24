@@ -181,11 +181,20 @@ def main():
     w, h = arte.size
     salvar(arte.crop((round(w * .1), round(h * .13), round(w * .95), round(h * .98))), 'hero-arte-m', (720, 860), q=90)
 
-    # antes e depois da cobertura (post 048, as duas fotos lado a lado): separa as metades
-    # no mesmo enquadramento, com a lua e o corvo alinhados, para o comparador deslizante
-    ad = abrir('048_0')
-    for nome, caixa in (('cobertura-antes', (0, 190, 636, 1250)), ('cobertura-depois', (772, 50, 1408, 1110))):
-        salvar(ad.crop(caixa), nome, (480, 636), q=88)
+    # coberturas enviadas pelo cliente (24/10), em ../_ref/coberturas-cliente: cada foto junta
+    # o antes (esquerda) e o depois (direita).
+    COB = os.path.join(REF, 'coberturas-cliente')
+    # médico da peste: metades separadas, ombro e contorno do braço alinhados, para o comparador
+    peste = Image.open(os.path.join(COB, 'medico-peste.jpg')).convert('RGB')
+    for nome, caixa in (('cobertura-antes', (10, 90, 610, 1190)), ('cobertura-depois', (670, 90, 1270, 1190))):
+        salvar(peste.crop(caixa), nome, (480, 600), q=88)
+    # as outras quatro entram inteiras (antes | depois), em quadrado
+    os.makedirs(os.path.join(IMG, 'cob'), exist_ok=True)
+    for nome in ('mascara-gas', 'espartano-corvo', 'vampira', 'viking'):
+        im = Image.open(os.path.join(COB, nome + '.jpg')).convert('RGB')
+        lado = min(im.size)
+        im = ImageOps.fit(im, (lado, lado), Image.LANCZOS, centering=(.5, .5))
+        salvar(im, nome, (640, 1080), pasta=os.path.join(IMG, 'cob'), q=86)
 
     # logo oficial ZAPAROLLI enviado pelo cliente (23/10): só recorta a sobra transparente
     logo = Image.open(os.path.join(REF, 'logo-cliente', 'logo-original.png')).convert('RGBA')

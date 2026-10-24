@@ -204,7 +204,7 @@
         const fig = x.closest('figure'); const leg = fig && $('figcaption', fig);
         const titulo = $('.de', x.closest('article') || document.createElement('i'));
         const alt = x.alt || (titulo && titulo.textContent) || (leg && leg.textContent) || '';
-        return { src: fonte, alt: alt, zap: /\/obras\//.test(fonte) };
+        return { src: fonte, alt: alt, zap: /\/(obras|cob)\//.test(fonte) };
       });
       abrirLuz(itens, grupo.indexOf(img));
     };
