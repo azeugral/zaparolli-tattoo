@@ -31,14 +31,34 @@ window.OBRAS = [
 "t": "Cobertura: antes e depois"
 },
 {
+"f": "c-medico-peste",
+"c": "cob",
+"t": "Médico da peste sobre a carpa colorida"
+},
+{
+"f": "c-mascara-gas",
+"c": "cob",
+"t": "Máscara de gás sobre o desenho antigo"
+},
+{
+"f": "c-espartano-corvo",
+"c": "cob",
+"t": "Espartano e corvo sobre o dragão colorido"
+},
+{
+"f": "c-vampira",
+"c": "cob",
+"t": "Vampira com vela sobre o gato"
+},
+{
+"f": "c-viking",
+"c": "cob",
+"t": "Viking de tapa-olho sobre o braço fechado"
+},
+{
 "f": "z028",
 "c": "fech",
 "t": "30 horas em 4 dias seguidos"
-},
-{
-"f": "z002",
-"c": "cob",
-"t": "Cobertura, já cicatrizada"
 },
 {
 "f": "z001",
@@ -64,11 +84,6 @@ window.OBRAS = [
 "f": "z064",
 "c": "dark",
 "t": "O abraço do mal"
-},
-{
-"f": "z057",
-"c": "cob",
-"t": "Experimento 626, cobertura"
 },
 {
 "f": "z083",
@@ -101,11 +116,6 @@ window.OBRAS = [
 "t": "Luz e trevas, cicatrizado"
 },
 {
-"f": "z027",
-"c": "cob",
-"t": "Cobertura: quem você se tornou"
-},
-{
 "f": "z030",
 "c": "real",
 "t": "O sagrado"
@@ -134,11 +144,6 @@ window.OBRAS = [
 "f": "z037",
 "c": "dark",
 "t": "Entre sombras e ossos"
-},
-{
-"f": "z038",
-"c": "cob",
-"t": "Cobertura pensada na anatomia"
 },
 {
 "f": "z042",
@@ -186,11 +191,6 @@ window.OBRAS = [
 "t": "Dez anos de espera"
 },
 {
-"f": "z062",
-"c": "cob",
-"t": "Cobertura com 1 ano e meio"
-},
-{
 "f": "z065",
 "c": "dark",
 "t": "O mal triunfou"
@@ -216,44 +216,14 @@ window.OBRAS = [
 "t": "Nas sombras das velas"
 },
 {
-"f": "z074",
-"c": "cob",
-"t": "Patagônia sobre a estrela antiga"
-},
-{
 "f": "z075",
 "c": "real",
 "t": "Caveira Harley-Davidson"
 },
 {
-"f": "z089",
-"c": "cob",
-"t": "Renascimento"
-},
-{
-"f": "z090",
-"c": "cob",
-"t": "Cobertura planejada"
-},
-{
 "f": "z092",
 "c": "dark",
 "t": "Jack Skellington"
-},
-{
-"f": "z097",
-"c": "cob",
-"t": "Perna nova"
-},
-{
-"f": "z105",
-"c": "cob",
-"t": "Apagar o passado"
-},
-{
-"f": "z110",
-"c": "cob",
-"t": "Cobertura cicatrizada"
 },
 {
 "f": "z112",

@@ -23,27 +23,23 @@ PORTFOLIO = [
     (4, 0, 'dark', 'A criatura que respira com a pele', .45),
     (48, 0, 'cob', 'Cobertura: antes e depois', .5),
     (28, 0, 'fech', '30 horas em 4 dias seguidos', .45),
-    (2, 0, 'cob', 'Cobertura, já cicatrizada', .45),
     (1, 0, 'dark', 'Entre túmulos e sombras', .45),
     (6, 0, 'dark', 'Onde existe instinto', .45),
     (9, 0, 'dark', 'Vivendo dentro da escuridão', .45),
     (191, 0, 'fech', 'Costas cicatrizadas', .45),
     (64, 0, 'dark', 'O abraço do mal', .45),
-    (57, 0, 'cob', 'Experimento 626, cobertura', .45),
     (83, 0, 'dark', 'Médico da peste', .45),
     (77, 0, 'fech', 'Máscara Hannya', .45),
     (10, 0, 'dark', 'A verdadeira morte', .45),
     (19, 0, 'dark', 'Portas irreversíveis', .45),
     (20, 0, 'real', 'Caveira e capacete', .45),
     (26, 0, 'dark', 'Luz e trevas, cicatrizado', .45),
-    (27, 0, 'cob', 'Cobertura: quem você se tornou', .45),
     (30, 0, 'real', 'O sagrado', .45),
     (31, 0, 'dark', 'A sombra do que vai morrer', .45),
     (33, 0, 'dark', 'Feita em São Paulo', .45),
     (35, 0, 'real', 'Entre a luz e o abismo', .45),
     (36, 0, 'dark', 'Biomecânico', .45),
     (37, 0, 'dark', 'Entre sombras e ossos', .45),
-    (38, 0, 'cob', 'Cobertura pensada na anatomia', .45),
     (42, 0, 'dark', 'O rei da escuridão eterna', .45),
     (43, 0, 'dark', 'Destino entre ossos', .45),
     (44, 0, 'dark', 'Nossos demônios', .45),
@@ -53,20 +49,13 @@ PORTFOLIO = [
     (54, 0, 'dark', 'No escuro, me encontrei', .45),
     (56, 0, 'real', 'Passagem bíblica', .45),
     (59, 0, 'dark', 'Dez anos de espera', .45),
-    (62, 0, 'cob', 'Cobertura com 1 ano e meio', .45),
     (65, 0, 'dark', 'O mal triunfou', .45),
     (66, 0, 'fech', 'Fechamento cicatrizado', .45),
     (68, 0, 'dark', 'O pavor no olhar', .45),
     (72, 0, 'fech', 'Braço novo com o ceifador', .45),
     (73, 0, 'dark', 'Nas sombras das velas', .45),
-    (74, 0, 'cob', 'Patagônia sobre a estrela antiga', .45),
     (75, 0, 'real', 'Caveira Harley-Davidson', .45),
-    (89, 0, 'cob', 'Renascimento', .45),
-    (90, 0, 'cob', 'Cobertura planejada', .45),
     (92, 0, 'dark', 'Jack Skellington', .45),
-    (97, 0, 'cob', 'Perna nova', .45),
-    (105, 0, 'cob', 'Apagar o passado', .45),
-    (110, 0, 'cob', 'Cobertura cicatrizada', .45),
     (112, 0, 'fech', 'Fechamento com máscara', .45),
     (117, 0, 'dark', 'Refazer-se dos cacos', .45),
     (118, 0, 'dark', 'O ponto final', .45),
@@ -139,6 +128,19 @@ def main():
         larg = min(1080, im.width)
         im.resize((larg, round(larg * 1.25)), Image.LANCZOS).save(os.path.join(OBRAS, f + '-1080.webp'), 'WEBP', quality=88, method=6)
         dados.append({'f': f, 'c': cat, 't': leg})
+    # coberturas com antes e depois enviadas pelo cliente (24/10): na grade, recorte 4:5 do centro;
+    # na tela cheia (1080), a foto inteira com o antes e o depois lado a lado
+    COBS = [('medico-peste', 'Médico da peste sobre a carpa colorida'), ('mascara-gas', 'Máscara de gás sobre o desenho antigo'),
+            ('espartano-corvo', 'Espartano e corvo sobre o dragão colorido'), ('vampira', 'Vampira com vela sobre o gato'),
+            ('viking', 'Viking de tapa-olho sobre o braço fechado')]
+    pos = next(i for i, d in enumerate(dados) if d['c'] == 'cob') + 1
+    for nome, leg in reversed(COBS):
+        im = Image.open(os.path.join(REF, 'coberturas-cliente', nome + '.jpg')).convert('RGB')
+        f = 'c-' + nome
+        ImageOps.fit(im, (640, 800), Image.LANCZOS, centering=(.5, .5)).save(os.path.join(OBRAS, f + '-640.webp'), 'WEBP', quality=86, method=6)
+        larg = min(1080, im.width)
+        im.resize((larg, round(larg * im.height / im.width)), Image.LANCZOS).save(os.path.join(OBRAS, f + '-1080.webp'), 'WEBP', quality=88, method=6)
+        dados.insert(pos, {'f': f, 'c': 'cob', 't': leg})
     with open(os.path.join(SITE, 'assets', 'js', 'obras.js'), 'w', encoding='utf-8') as fp:
         fp.write('/* gerado por tools/processar.py */\nwindow.OBRAS = ' + json.dumps(dados, ensure_ascii=False, indent=0) + ';\n')
 
