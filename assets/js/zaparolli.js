@@ -233,13 +233,45 @@
     });
   }
 
-  /* antes e depois: o controle (range) move a divisa, como no site da WRM */
+  /* antes e depois (esquema da WRM): arrasta pela alça ou pelo palco. No toque só conta como
+     arraste quando o dedo anda mais na horizontal que na vertical; rolar a página não mexe na
+     divisa e um toque solto não pula. O range escondido serve ao teclado. */
   $$('[data-comparar]').forEach(fig => {
-    const ctl = $('input', fig);
-    const pos = () => fig.style.setProperty('--pos', `${ctl.value}%`);
-    ctl.addEventListener('input', pos);
-    pos();
+    const ctl = $('input', fig), palco = $('.antes-depois__palco', fig) || fig;
+    const definir = v => { v = Math.max(0, Math.min(100, v)); ctl.value = v; fig.style.setProperty('--pos', `${v}%`); };
+    ctl.addEventListener('input', () => definir(+ctl.value));
+    const pela = x => { const r = palco.getBoundingClientRect(); return (x - r.left) / r.width * 100; };
+    let ini = null, arrasto = false;
+    palco.addEventListener('pointerdown', e => {
+      ini = { x: e.clientX, y: e.clientY, id: e.pointerId, tipo: e.pointerType, alca: !!e.target.closest('.antes-depois__alca') };
+      arrasto = e.pointerType === 'mouse' || ini.alca;
+      if (arrasto) { palco.setPointerCapture(e.pointerId); fig.classList.add('arrastando'); definir(pela(e.clientX)); }
+    });
+    palco.addEventListener('pointermove', e => {
+      if (!ini || e.pointerId !== ini.id) return;
+      if (!arrasto) {
+        const dx = Math.abs(e.clientX - ini.x), dy = Math.abs(e.clientY - ini.y);
+        if (dy > 8 && dy > dx) { ini = null; return; }          // rolagem: larga
+        if (dx > 10 && dx > dy * 1.4) { arrasto = true; palco.setPointerCapture(e.pointerId); fig.classList.add('arrastando'); }
+        else return;
+      }
+      definir(pela(e.clientX));
+    });
+    const soltar = () => { ini = null; arrasto = false; fig.classList.remove('arrastando'); };
+    palco.addEventListener('pointerup', soltar);
+    palco.addEventListener('pointercancel', soltar);
+    definir(+ctl.value);
+    /* dica de uso: a divisa balança uma vez quando o comparador aparece */
+    if ('IntersectionObserver' in window && !reduz) {
+      const io = new IntersectionObserver(([en]) => {
+        if (!en.isIntersecting) return;
+        io.disconnect();
+        setTimeout(() => definir(36), 500); setTimeout(() => definir(64), 1100); setTimeout(() => definir(50), 1700);
+      }, { threshold: .6 });
+      io.observe(fig);
+    }
   });
+
 
   /* agendamento -> mensagem pronta no WhatsApp */
   const form = $('#agendar');

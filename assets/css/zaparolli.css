@@ -489,13 +489,26 @@ p { margin: 0 0 1em; }
 .antes-depois__palco { position: relative; overflow: hidden; aspect-ratio: 600 / 1100; border: 1px solid var(--linha-forte); background: var(--fuligem); }
 .antes-depois img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; user-select: none; -webkit-user-drag: none; }
 .antes-depois__antes { z-index: 1; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
-.antes-depois__linha { position: absolute; top: 0; bottom: 0; left: var(--pos); z-index: 2; width: 2px; margin-left: -1px; background: var(--osso); pointer-events: none; box-shadow: 0 0 18px rgba(12, 11, 10, .6); }
-.antes-depois__linha::after {
-  content: '\2194'; position: absolute; top: 50%; left: 50%; width: 46px; height: 46px; transform: translate(-50%, -50%);
-  display: grid; place-items: center; background: var(--sangue); color: var(--osso); font: 500 22px/1 var(--cond); border: 1.5px solid var(--osso);
-  transition: transform .35s var(--ease);
+.antes-depois__antes { transition: clip-path .5s var(--ease); }
+.antes-depois.arrastando .antes-depois__antes, .antes-depois.arrastando .antes-depois__linha { transition: none; }
+.antes-depois__linha {
+  position: absolute; top: 0; bottom: 0; left: var(--pos); z-index: 2; width: 1px; pointer-events: none;
+  background: linear-gradient(180deg, rgba(236, 228, 214, 0), rgba(236, 228, 214, .95) 12%, rgba(236, 228, 214, .95) 88%, rgba(236, 228, 214, 0));
+  box-shadow: 0 0 0 1px rgba(12, 11, 10, .25), 0 0 22px rgba(12, 11, 10, .7);
+  transition: left .5s var(--ease);
 }
-.antes-depois:hover .antes-depois__linha::after { transform: translate(-50%, -50%) scale(1.08); }
+/* alça: losango-quadrado vermelho com as duas setas em SVG, centrado de verdade na linha */
+.antes-depois__alca {
+  position: absolute; top: 50%; left: 50%; width: 52px; height: 52px; transform: translate(-50%, -50%);
+  display: grid; place-items: center; color: var(--osso);
+  background: rgba(12, 11, 10, .55); border: 1px solid rgba(236, 228, 214, .85);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .45), inset 0 0 0 3px rgba(204, 42, 31, .0);
+  transition: transform .4s var(--ease), background-color .3s var(--ease), border-color .3s var(--ease);
+  pointer-events: auto; cursor: ew-resize; touch-action: none;
+}
+.antes-depois__alca svg { width: 22px; height: 22px; display: block; }
+.antes-depois:hover .antes-depois__alca, .antes-depois.arrastando .antes-depois__alca { background: var(--sangue); border-color: var(--sangue); transform: translate(-50%, -50%) scale(1.06); }
 .antes-depois__rot {
   position: absolute; top: 14px; z-index: 3; padding: 6px 11px 5px; pointer-events: none;
   background: rgba(12, 11, 10, .8); border: 1px solid var(--linha-forte);
@@ -503,7 +516,9 @@ p { margin: 0 0 1em; }
 }
 .antes-depois__rot--a { left: 14px; }
 .antes-depois__rot--d { right: 14px; color: var(--osso); border-color: var(--sangue); }
-.antes-depois__controle { position: absolute; left: 0; top: 0; z-index: 4; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
+.antes-depois__controle { position: absolute; left: 0; bottom: 0; z-index: 0; width: 100%; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+.antes-depois__palco { cursor: ew-resize; touch-action: pan-y; }
+.antes-depois__rot { transition: opacity .4s var(--ease); }
 .antes-depois:has(.antes-depois__controle:focus-visible) .antes-depois__palco { outline: 2px solid var(--sangue); outline-offset: 4px; }
 .antes-depois figcaption { margin-top: 12px; text-align: center; font: 500 13px/1 var(--cond); letter-spacing: .14em; text-transform: uppercase; color: var(--cinza); }
 
@@ -674,7 +689,10 @@ p { margin: 0 0 1em; }
 @media (max-width: 860px) {
   .historia, .cobertura, .tattoo-week, .estudio, .contato, .processo-topo { grid-template-columns: minmax(0, 1fr); }
   .pilares { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .coberturas-grade { grid-template-columns: minmax(0, 1fr); }
+  .coberturas-grade { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .coberturas-grade .rot-a, .coberturas-grade .rot-d { top: 6px; padding: 3px 6px 2px; font-size: 9.5px; letter-spacing: .1em; }
+  .coberturas-grade .rot-a { left: 6px; }
+  .coberturas-grade .rot-d { right: 6px; }
   .processo-texto { columns: 1; }
   .tattoo-week .foto-moldura { max-width: 440px; }
   .historia .foto-moldura { max-width: 440px; }
