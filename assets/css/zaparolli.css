@@ -72,7 +72,7 @@ p { margin: 0 0 1em; }
   color: var(--osso);
   text-wrap: balance;
 }
-.titulo .desgaste { display: inline; -webkit-mask-image: url(../img/desgaste-titulo.png); mask-image: url(../img/desgaste-titulo.png); -webkit-mask-size: 900px auto; mask-size: 900px auto; }
+.titulo .desgaste { display: inline; -webkit-mask-image: url(../img/titulo-desgaste.webp); mask-image: url(../img/titulo-desgaste.webp); -webkit-mask-size: 760px auto; mask-size: 760px auto; -webkit-mask-repeat: repeat; mask-repeat: repeat; }
 .titulo sup.contagem {
   font: 500 clamp(15px, 1.6vw, 20px)/1 var(--cond);
   letter-spacing: .04em;
