@@ -91,7 +91,6 @@ PORTFOLIO = [
 # fotos de apoio: nome -> (post_foto, recorte (l, t, r, b) relativo ou None, proporção, larguras)
 APOIO = {
     'tattoo-week': ('034_0', None, (4, 5), (640, 1080)),
-    'cobertura-antes-depois': ('048_0', None, (1, 1), (640, 1200)),
     'estudio-recepcao': ('210_0', None, (4, 5), (640, 1080)),
     'estudio-por-do-sol': ('210_1', None, (4, 5), (640, 1080)),
     'costas-5-dias': ('014_7', None, (4, 5), (640, 1080)),
@@ -181,6 +180,12 @@ def main():
     salvar(arte, 'hero-arte', (720, 1020), q=90)
     w, h = arte.size
     salvar(arte.crop((round(w * .1), round(h * .13), round(w * .95), round(h * .98))), 'hero-arte-m', (720, 860), q=90)
+
+    # antes e depois da cobertura (post 048, as duas fotos lado a lado): separa as metades
+    # no mesmo enquadramento, com a lua e o corvo alinhados, para o comparador deslizante
+    ad = abrir('048_0')
+    for nome, caixa in (('cobertura-antes', (0, 190, 636, 1250)), ('cobertura-depois', (772, 50, 1408, 1110))):
+        salvar(ad.crop(caixa), nome, (480, 636), q=88)
 
     # logo oficial ZAPAROLLI enviado pelo cliente (23/10): só recorta a sobra transparente
     logo = Image.open(os.path.join(REF, 'logo-cliente', 'logo-original.png')).convert('RGBA')

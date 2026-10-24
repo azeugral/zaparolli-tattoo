@@ -484,14 +484,29 @@ p { margin: 0 0 1em; }
 .etapas span { color: var(--cinza); font-size: 15.5px; }
 .cobertura .citacao { margin: 6px 0 24px; }
 .cobertura .btn { margin-top: 8px; }
-.antes-depois { margin: 0; position: relative; border: 1px solid var(--linha); padding: 10px; background: var(--carvao); }
-.antes-depois img { width: 100%; aspect-ratio: 1; object-fit: cover; }
-.antes-depois figcaption { position: absolute; left: 10px; right: 10px; bottom: 10px; display: grid; grid-template-columns: 1fr 1fr; }
-.antes-depois figcaption span {
-  justify-self: center; margin-bottom: 14px;
-  font-family: var(--larga); font-stretch: 125%; font-weight: 900; font-size: clamp(14px, 1.5vw, 19px); text-transform: uppercase;
-  color: var(--osso); background: rgba(12, 11, 10, .78); border: 1.5px solid var(--osso); padding: 6px 12px 5px;
+/* antes e depois no esquema da WRM: duas fotos sobrepostas, o controle (range) move a divisa */
+.antes-depois { position: relative; margin: 0 auto; width: 100%; max-width: 440px; justify-self: center; }
+.antes-depois .antes-depois__palco, .antes-depois { --pos: 50%; }
+.antes-depois img { display: block; width: 100%; aspect-ratio: 636 / 1060; object-fit: cover; pointer-events: none; user-select: none; -webkit-user-drag: none; }
+.antes-depois__depois { position: relative; border: 1px solid var(--linha-forte); }
+.antes-depois__antes { position: absolute; left: 0; top: 0; z-index: 1; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.antes-depois__linha { position: absolute; top: 0; height: calc(100% - 34px); left: var(--pos); z-index: 2; width: 2px; margin-left: -1px; background: var(--osso); pointer-events: none; box-shadow: 0 0 18px rgba(12, 11, 10, .6); }
+.antes-depois__linha::after {
+  content: '\2194'; position: absolute; top: 50%; left: 50%; width: 46px; height: 46px; transform: translate(-50%, -50%);
+  display: grid; place-items: center; background: var(--sangue); color: var(--osso); font: 500 22px/1 var(--cond); border: 1.5px solid var(--osso);
+  transition: transform .35s var(--ease);
 }
+.antes-depois:hover .antes-depois__linha::after { transform: translate(-50%, -50%) scale(1.08); }
+.antes-depois__rot {
+  position: absolute; top: 14px; z-index: 3; padding: 6px 11px 5px; pointer-events: none;
+  background: rgba(12, 11, 10, .8); border: 1px solid var(--linha-forte);
+  font: 500 13px/1 var(--cond); letter-spacing: .14em; text-transform: uppercase; color: var(--osso-2);
+}
+.antes-depois__rot--a { left: 14px; }
+.antes-depois__rot--d { right: 14px; color: var(--osso); border-color: var(--sangue); }
+.antes-depois__controle { position: absolute; left: 0; top: 0; z-index: 4; width: 100%; height: calc(100% - 34px); margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
+.antes-depois:has(.antes-depois__controle:focus-visible) .antes-depois__depois { outline: 2px solid var(--sangue); outline-offset: 4px; }
+.antes-depois figcaption { margin-top: 12px; text-align: center; font: 500 13px/1 var(--cond); letter-spacing: .14em; text-transform: uppercase; color: var(--cinza); }
 
 .coberturas-feitas { margin-top: clamp(48px, 6vw, 80px); }
 .coberturas-cab { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; margin-bottom: 22px; padding-top: 26px; border-top: 1px solid var(--linha-forte); }
@@ -767,3 +782,13 @@ p { margin: 0 0 1em; }
   .descer { margin-top: .6vh; height: 3vh; }
   .descer svg { height: 100%; }
 }
+
+/* toda imagem do site abre em tela cheia (24/10): lupa, leve zoom e zoom de entrada na tela cheia */
+.amplia { cursor: zoom-in; overflow: hidden; }
+.amplia img { transition: transform 1.1s var(--ease), filter .6s var(--ease); }
+.amplia:hover img, .amplia:focus-visible img { transform: scale(1.045); }
+.amplia:active img { transform: scale(1.02); transition-duration: .25s; }
+.luz-palco img { transform: scale(.94); transition: opacity .35s var(--ease), transform .55s var(--ease); }
+.luz.aberta .luz-palco img { transform: none; }
+.luz.unica .nav { display: none; }
+.luz.sem-zap #luz-zap { display: none; }

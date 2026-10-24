@@ -138,31 +138,32 @@
     const inicial = new URLSearchParams(location.search).get('f');
     filtrar(CATS[inicial] ? inicial : 'todos');
     $$('.obra', galeria).forEach((b, i) => { b.style.transitionDelay = (i % 4) * 70 + 'ms'; observar(b); });
-    galeria.addEventListener('click', e => { const b = e.target.closest('.obra'); if (b) abrirLuz(visiveis.indexOf(b)); });
   }
 
-  /* tela cheia */
+  /* tela cheia: serve ao portfólio e a qualquer imagem do site.
+     `lista` é [{src, alt, cat, zap}]; o portfólio monta a lista dos filtros visíveis,
+     as outras imagens usam as fotos da mesma seção. */
   const luz = $('#luz'), luzImg = $('#luz-img'), luzLeg = $('#luz-leg'), luzZap = $('#luz-zap');
-  let li = 0, ultimoFoco = null, luzTimer;
+  let lista = [], li = 0, ultimoFoco = null, luzTimer;
   function pintarLuz() {
-    const b = visiveis[li]; if (!b) return;
-    const o = obras[+b.dataset.i];
+    const o = lista[li]; if (!o) return;
     luzImg.style.opacity = 0;
-    const src = `assets/obras/${o.f}-1080.webp`;
-    const tmp = new Image(); tmp.src = src;
-    const mostrar = () => { luzImg.src = src; luzImg.alt = o.t; luzImg.style.opacity = 1; };
+    const tmp = new Image(); tmp.src = o.src;
+    const mostrar = () => { luzImg.src = o.src; luzImg.alt = o.alt; luzImg.style.opacity = 1; };
     tmp.decode ? tmp.decode().then(mostrar, mostrar) : mostrar();
-    luzLeg.innerHTML = `<small>${CATS[o.c]}</small>${o.t}`;
-    if (luzZap) {
-      luzZap.href = zapLink(`Olá, Zapa! Vim pelo site e curti o trabalho "${o.t}". Quero um orçamento para algo nessa linha.`);
+    luzLeg.innerHTML = o.cat ? `<small>${o.cat}</small>${o.alt}` : o.alt;
+    luz.classList.toggle('unica', lista.length < 2);
+    luz.classList.toggle('sem-zap', !o.zap);
+    if (luzZap && o.zap) {
+      luzZap.href = zapLink(`Olá, Zapa! Vim pelo site e curti o trabalho "${o.alt}". Quero um orçamento para algo nessa linha.`);
       luzZap.target = '_blank'; luzZap.rel = 'noopener';
     }
   }
-  function abrirLuz(i) {
-    if (!luz || i < 0) return;
+  function abrirLuz(nova, i) {
+    if (!luz || i < 0 || !nova.length) return;
     clearTimeout(luzTimer);
     ultimoFoco = document.activeElement;
-    li = i; pintarLuz();
+    lista = nova; li = i; pintarLuz();
     luz.hidden = false;
     requestAnimationFrame(() => requestAnimationFrame(() => luz.classList.add('aberta')));
     luz.setAttribute('aria-hidden', 'false');
@@ -175,7 +176,41 @@
     document.documentElement.style.overflow = '';
     ultimoFoco && ultimoFoco.focus({ preventScroll: true });
   }
-  function passo(d) { li = (li + d + visiveis.length) % visiveis.length; pintarLuz(); }
+  function passo(d) { if (lista.length < 2) return; li = (li + d + lista.length) % lista.length; pintarLuz(); }
+  if (galeria && obras.length) {
+    galeria.addEventListener('click', e => {
+      const b = e.target.closest('.obra'); if (!b) return;
+      const itens = visiveis.map(v => { const o = obras[+v.dataset.i]; return { src: `assets/obras/${o.f}-1080.webp`, alt: o.t, cat: CATS[o.c], zap: true }; });
+      abrirLuz(itens, visiveis.indexOf(b));
+    });
+  }
+  /* as outras imagens: maior versão do srcset; tatuagens (pasta obras) levam o botão do WhatsApp */
+  const maior = img => {
+    const ss = img.getAttribute('srcset');
+    if (!ss) return (img.getAttribute('src') || '').replace(/(\/obras\/z\d+)-640\.webp$/, '$1-1080.webp');
+    return ss.split(',').map(x => x.trim().split(/\s+/)).sort((a, b) => parseInt(b[1]) - parseInt(a[1]))[0][0];
+  };
+  const alvos = $$('main img').filter(img => !img.closest('.hero, .obra, .antes-depois, .nome, .gigante, picture'));
+  alvos.forEach(img => {
+    const caixa = img.parentElement;
+    caixa.classList.add('amplia');
+    caixa.setAttribute('role', 'button'); caixa.tabIndex = 0;
+    caixa.setAttribute('aria-label', 'Ampliar: ' + (img.alt || 'foto'));
+    const abrir = () => {
+      const sec = img.closest('section') || document.body;
+      const grupo = alvos.filter(x => (x.closest('section') || document.body) === sec);
+      const itens = grupo.map(x => {
+        const fonte = maior(x);
+        const fig = x.closest('figure'); const leg = fig && $('figcaption', fig);
+        const titulo = $('.de', x.closest('article') || document.createElement('i'));
+        const alt = x.alt || (titulo && titulo.textContent) || (leg && leg.textContent) || '';
+        return { src: fonte, alt: alt, zap: /\/obras\//.test(fonte) };
+      });
+      abrirLuz(itens, grupo.indexOf(img));
+    };
+    caixa.addEventListener('click', e => { if (!e.target.closest('a, button:not(.amplia)')) abrir(); });
+    caixa.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(); } });
+  });
   if (luz) {
     $('.fechar-luz', luz).addEventListener('click', fecharLuz);
     $('.ant', luz).addEventListener('click', () => passo(-1));
@@ -197,6 +232,14 @@
       x0 = y0 = null;
     });
   }
+
+  /* antes e depois: o controle (range) move a divisa, como no site da WRM */
+  $$('[data-comparar]').forEach(fig => {
+    const ctl = $('input', fig);
+    const pos = () => fig.style.setProperty('--pos', `${ctl.value}%`);
+    ctl.addEventListener('input', pos);
+    pos();
+  });
 
   /* agendamento -> mensagem pronta no WhatsApp */
   const form = $('#agendar');
