@@ -56,6 +56,11 @@ window.OBRAS = [
 "t": "Viking de tapa-olho sobre o braço fechado"
 },
 {
+"f": "c-noiva-cadaver",
+"c": "cob",
+"t": "Noiva Cadáver e casa assombrada sobre o braço de anime"
+},
+{
 "f": "z028",
 "c": "fech",
 "t": "30 horas em 4 dias seguidos"
@@ -74,11 +79,6 @@ window.OBRAS = [
 "f": "z009",
 "c": "dark",
 "t": "Vivendo dentro da escuridão"
-},
-{
-"f": "z191",
-"c": "fech",
-"t": "Costas cicatrizadas"
 },
 {
 "f": "z064",
@@ -196,19 +196,9 @@ window.OBRAS = [
 "t": "O mal triunfou"
 },
 {
-"f": "z066",
-"c": "fech",
-"t": "Fechamento cicatrizado"
-},
-{
 "f": "z068",
 "c": "dark",
 "t": "O pavor no olhar"
-},
-{
-"f": "z072",
-"c": "fech",
-"t": "Braço novo com o ceifador"
 },
 {
 "f": "z073",
@@ -226,63 +216,8 @@ window.OBRAS = [
 "t": "Jack Skellington"
 },
 {
-"f": "z112",
-"c": "fech",
-"t": "Fechamento com máscara"
-},
-{
-"f": "z117",
-"c": "dark",
-"t": "Refazer-se dos cacos"
-},
-{
-"f": "z118",
-"c": "dark",
-"t": "O ponto final"
-},
-{
-"f": "z134",
-"c": "fech",
-"t": "Batalhas internas"
-},
-{
-"f": "z139",
-"c": "dark",
-"t": "Aceitar a morte"
-},
-{
-"f": "z143",
-"c": "dark",
-"t": "Pennywise"
-},
-{
-"f": "z149",
-"c": "dark",
-"t": "Caveira na mão"
-},
-{
 "f": "z162",
 "c": "fech",
 "t": "Piratas do Caribe"
-},
-{
-"f": "z164",
-"c": "dark",
-"t": "Ghostface"
-},
-{
-"f": "z184",
-"c": "fech",
-"t": "Peito fechado"
-},
-{
-"f": "z222",
-"c": "fech",
-"t": "Costas em 5 sábados"
-},
-{
-"f": "z252",
-"c": "fech",
-"t": "A guerra entre o bem e o mal"
 }
 ];

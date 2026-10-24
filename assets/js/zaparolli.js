@@ -112,7 +112,7 @@
     const limite = +galeria.dataset.limite || Infinity;
     galeria.innerHTML = obras.map((o, i) => `<button class="obra" type="button" data-c="${o.c}" data-i="${i}" aria-label="Ampliar: ${o.t}">
       <span class="moldura"><img src="assets/obras/${o.f}-640.webp" srcset="assets/obras/${o.f}-640.webp 640w, assets/obras/${o.f}-1080.webp 1080w" sizes="(max-width: 640px) 48vw, (max-width: 1100px) 32vw, 300px" alt="${o.t}" loading="lazy" decoding="async" width="640" height="800" onload="this.classList.add('carregou')"></span>
-      <span class="leg"><small>${CATS[o.c]}</small><span>${o.t}</span></span></button>`).join('');
+      <span class="leg"><small>${CATS[o.c]}</small></span></button>`).join('');
     const filtros = $('.filtros');
     filtros.innerHTML = Object.entries(CATS).map(([k, v], i) =>
       `<button type="button" data-f="${k}" aria-pressed="${i === 0}">${v}</button>`).join('');
@@ -151,11 +151,11 @@
     const tmp = new Image(); tmp.src = o.src;
     const mostrar = () => { luzImg.src = o.src; luzImg.alt = o.alt; luzImg.style.opacity = 1; };
     tmp.decode ? tmp.decode().then(mostrar, mostrar) : mostrar();
-    luzLeg.innerHTML = o.cat ? `<small>${o.cat}</small>${o.alt}` : o.alt;
+    luzLeg.innerHTML = o.cat ? `<small>${o.cat}</small>` : o.alt;
     luz.classList.toggle('unica', lista.length < 2);
     luz.classList.toggle('sem-zap', !o.zap);
     if (luzZap && o.zap) {
-      luzZap.href = zapLink(`Olá, Zapa! Vim pelo site e curti o trabalho "${o.alt}". Quero um orçamento para algo nessa linha.`);
+      luzZap.href = zapLink(`Olá, Zapa! Vim pelo site e curti um trabalho de ${(o.cat || 'tatuagem').toLowerCase()} do portfólio. Quero um orçamento para algo nessa linha.`);
       luzZap.target = '_blank'; luzZap.rel = 'noopener';
     }
   }
@@ -180,7 +180,7 @@
   if (galeria && obras.length) {
     galeria.addEventListener('click', e => {
       const b = e.target.closest('.obra'); if (!b) return;
-      const itens = visiveis.map(v => { const o = obras[+v.dataset.i]; return { src: `assets/obras/${o.f}-1080.webp`, alt: o.t, cat: CATS[o.c], zap: true }; });
+      const itens = visiveis.map(v => { const o = obras[+v.dataset.i]; return { src: `assets/obras/${o.f}-1080.webp`, alt: o.t, cat: CATS[o.c], leg: '', zap: true }; });
       abrirLuz(itens, visiveis.indexOf(b));
     });
   }

@@ -26,7 +26,6 @@ PORTFOLIO = [
     (1, 0, 'dark', 'Entre túmulos e sombras', .45),
     (6, 0, 'dark', 'Onde existe instinto', .45),
     (9, 0, 'dark', 'Vivendo dentro da escuridão', .45),
-    (191, 0, 'fech', 'Costas cicatrizadas', .45),
     (64, 0, 'dark', 'O abraço do mal', .45),
     (83, 0, 'dark', 'Médico da peste', .45),
     (77, 0, 'fech', 'Máscara Hannya', .45),
@@ -50,24 +49,11 @@ PORTFOLIO = [
     (56, 0, 'real', 'Passagem bíblica', .45),
     (59, 0, 'dark', 'Dez anos de espera', .45),
     (65, 0, 'dark', 'O mal triunfou', .45),
-    (66, 0, 'fech', 'Fechamento cicatrizado', .45),
     (68, 0, 'dark', 'O pavor no olhar', .45),
-    (72, 0, 'fech', 'Braço novo com o ceifador', .45),
     (73, 0, 'dark', 'Nas sombras das velas', .45),
     (75, 0, 'real', 'Caveira Harley-Davidson', .45),
     (92, 0, 'dark', 'Jack Skellington', .45),
-    (112, 0, 'fech', 'Fechamento com máscara', .45),
-    (117, 0, 'dark', 'Refazer-se dos cacos', .45),
-    (118, 0, 'dark', 'O ponto final', .45),
-    (134, 0, 'fech', 'Batalhas internas', .45),
-    (139, 0, 'dark', 'Aceitar a morte', .45),
-    (143, 0, 'dark', 'Pennywise', .45),
-    (149, 0, 'dark', 'Caveira na mão', .45),
     (162, 0, 'fech', 'Piratas do Caribe', .45),
-    (164, 0, 'dark', 'Ghostface', .45),
-    (184, 0, 'fech', 'Peito fechado', .45),
-    (222, 0, 'fech', 'Costas em 5 sábados', .45),
-    (252, 0, 'fech', 'A guerra entre o bem e o mal', .45),
 ]
 
 # fotos de apoio: nome -> (post_foto, recorte (l, t, r, b) relativo ou None, proporção, larguras)
@@ -132,7 +118,8 @@ def main():
     # na tela cheia (1080), a foto inteira com o antes e o depois lado a lado
     COBS = [('medico-peste', 'Médico da peste sobre a carpa colorida'), ('mascara-gas', 'Máscara de gás sobre o desenho antigo'),
             ('espartano-corvo', 'Espartano e corvo sobre o dragão colorido'), ('vampira', 'Vampira com vela sobre o gato'),
-            ('viking', 'Viking de tapa-olho sobre o braço fechado')]
+            ('viking', 'Viking de tapa-olho sobre o braço fechado'),
+            ('noiva-cadaver', 'Noiva Cadáver e casa assombrada sobre o braço de anime')]
     pos = next(i for i, d in enumerate(dados) if d['c'] == 'cob') + 1
     for nome, leg in reversed(COBS):
         im = Image.open(os.path.join(REF, 'coberturas-cliente', nome + '.jpg')).convert('RGB')
