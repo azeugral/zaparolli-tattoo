@@ -164,10 +164,20 @@ def main():
     # da referência do cliente (preto, cinza quente e creme); grão fino para não formar degraus
     arte = abrir('014_9').crop((20, 18, 1040, 1424))
     arte = ImageOps.grayscale(arte)
-    arte = ImageOps.autocontrast(arte, cutoff=(.6, .3))
-    arte = ImageEnhance.Contrast(arte).enhance(1.08)
-    arte = ImageOps.colorize(arte, black=(9, 8, 7), mid=(120, 112, 102), white=(238, 229, 214))
-    arte = grao(arte, 5, 3)
+    arte = ImageOps.autocontrast(arte, cutoff=(1.5, .3))
+    # profundidade como na tatuagem original (24/10): sombras afundadas no preto puro,
+    # meio-tons mais baixos e os brilhos do osso preservados (curva só nas sombras + contraste local)
+    lut = []
+    for v in range(256):
+        x = max(0, (v / 255 - .05) / .95)
+        # abaixo de 24%: afunda no preto (expoente 1,8); acima: segue linear até o branco
+        y = .24 * (x / .24) ** 1.8 if x < .24 else .24 + (x - .24) * 1.0
+        lut.append(max(0, min(255, round(y * 255))))
+    arte = arte.point(lut)
+    # contraste local: separa o osso das sombras, dá volume como na foto da sessão
+    arte = arte.filter(ImageFilter.UnsharpMask(radius=38, percent=55, threshold=0))
+    arte = ImageOps.colorize(arte, black=(5, 4, 4), mid=(118, 110, 100), white=(242, 233, 218))
+    arte = grao(arte, 3, 3)
     salvar(arte, 'hero-arte', (720, 1020), q=90)
     w, h = arte.size
     salvar(arte.crop((round(w * .1), round(h * .13), round(w * .95), round(h * .98))), 'hero-arte-m', (720, 860), q=90)
