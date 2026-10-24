@@ -72,7 +72,7 @@ p { margin: 0 0 1em; }
   color: var(--osso);
   text-wrap: balance;
 }
-.titulo .desgaste { display: inline; -webkit-mask-size: 860px auto; mask-size: 860px auto; }
+.titulo .desgaste { display: inline; -webkit-mask-image: url(../img/desgaste-titulo.png); mask-image: url(../img/desgaste-titulo.png); -webkit-mask-size: 900px auto; mask-size: 900px auto; }
 .titulo sup.contagem {
   font: 500 clamp(15px, 1.6vw, 20px)/1 var(--cond);
   letter-spacing: .04em;
@@ -832,3 +832,33 @@ p { margin: 0 0 1em; }
 .estudio-galeria figure { margin: 0; border: 1px solid var(--linha); }
 .estudio-galeria img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
 @media (max-width: 860px) { .estudio-galeria ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } }
+
+/* celulares baixos (Safari com barras, Androids menores, navegador dentro de apps): o topo
+   nunca corta; primeiro compacta, depois recolhe a seta e os detalhes da coluna lateral.
+   Em altura mínima absurda ele cresce em vez de cortar. (24/10) */
+@media (max-width: 860px) {
+  .hero { height: auto; min-height: 100vh; min-height: 100svh; }
+}
+@media (max-width: 860px) and (max-height: 740px) {
+  .hero { padding-top: calc(64px + env(safe-area-inset-top)); padding-bottom: 1.6vh; }
+  .descer { display: none; }
+  .cruz-a { height: 4.6vh; }
+  .cruz-b { height: 5.4vh; margin-top: .6vh; }
+  .hero-acoes .btn { min-height: clamp(42px, 6.2vh, 52px); }
+}
+@media (max-width: 860px) and (max-height: 660px) {
+  .cruz-b, .hero-estilos { display: none; }
+  .hero-lado { gap: .8vh; }
+  .etiquetas { margin-top: 1.2vh; padding-bottom: 1vh; }
+  .hero-acoes { margin-top: 1.4vh; gap: 1vh; }
+  .hero-info { margin-top: 1.4vh; }
+}
+@media (max-width: 860px) and (max-height: 580px) {
+  .hero-lado { display: none; }
+}
+@media (min-width: 861px) and (max-height: 700px) {
+  .hero { height: auto; min-height: 100vh; }
+  .descer { display: none; }
+  .cruz-b { display: none; }
+}
+.hero-base { margin-top: auto; }
