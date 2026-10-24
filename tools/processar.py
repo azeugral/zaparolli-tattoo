@@ -91,8 +91,6 @@ PORTFOLIO = [
 # fotos de apoio: nome -> (post_foto, recorte (l, t, r, b) relativo ou None, proporção, larguras)
 APOIO = {
     'tattoo-week': ('034_0', None, (4, 5), (640, 1080)),
-    'estudio-recepcao': ('210_0', None, (4, 5), (640, 1080)),
-    'estudio-por-do-sol': ('210_1', None, (4, 5), (640, 1080)),
     'costas-5-dias': ('014_7', None, (4, 5), (640, 1080)),
 }
 
@@ -195,6 +193,15 @@ def main():
         lado = min(im.size)
         im = ImageOps.fit(im, (lado, lado), Image.LANCZOS, centering=(.5, .5))
         salvar(im, nome, (640, 1080), pasta=os.path.join(IMG, 'cob'), q=86)
+
+    # fotos do estúdio enviadas pelo cliente (24/10), convertidas de HEIC em ../_ref/estudio-cliente/jpg
+    EST = os.path.join(REF, 'estudio-cliente', 'jpg')
+    os.makedirs(os.path.join(IMG, 'estudio'), exist_ok=True)
+    for nome, foco in (('IMG_6290', .55), ('IMG_6300', .5), ('IMG_6286', .5), ('IMG_6287', .55), ('IMG_6288', .5), ('IMG_6291', .45),
+                       ('IMG_6295', .5), ('IMG_6297', .45), ('IMG_6299', .5), ('IMG_6302', .5)):
+        im = Image.open(os.path.join(EST, nome + '.jpg')).convert('RGB')
+        im = ImageOps.fit(im, (im.width, round(im.width * 1.25)) if im.width * 1.25 <= im.height else (round(im.height * .8), im.height), Image.LANCZOS, centering=(.5, foco))
+        salvar(im, nome.lower().replace('img_', 'est-'), (640, 1080), pasta=os.path.join(IMG, 'estudio'), q=86)
 
     # logo oficial ZAPAROLLI enviado pelo cliente (23/10): só recorta a sobra transparente
     logo = Image.open(os.path.join(REF, 'logo-cliente', 'logo-original.png')).convert('RGBA')

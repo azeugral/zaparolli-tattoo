@@ -8,7 +8,7 @@ Versão 1 (22/10/2026), no mesmo esquema do site do Fernando Fernandes, com a id
 - **Tipos**: Archivo expandida 900 com desgaste (a letra larga e grossa dos fixados), também nos chapéus de seção em caixa de contorno, e Oswald nos rótulos condensados. A fonte arranhada dos destaques saiu na v2 (22/10), a pedido.
 - **Paleta** (pedido do cliente em 22/10): branco #f2f2f0, cinzas, preto #0b0b0b e vermelho #d42a1e. O meio-tom do hero tem pontos brancos e cinza na caveira e fumaça em pontos vermelhos; botões principais, filtros ativos e detalhes do hero em vermelho. Fotos de apoio em preto e cinza com grão. O portfólio fica com a cor original e sem contagens (pedido em 22/10).
 - **Portfólio** em grade rígida 4:5 com filtros (dark art, realismo, fechamentos, coberturas) e tela cheia (sem numeração) com gesto e botão "Quero algo assim" já com o nome da obra no WhatsApp. 70 obras.
-- Seções: A origem (antes "História"; texto do próprio Thiago, enviado em 22/10, com frases em vermelho; ao lado, o reel fixado "Lápides e árvores secas" (DM8o1YERQQ5) narrado por ele, em `assets/video/historia.mp4` 576×1024, mudo em loop com botão para ouvir com som), Processo criativo (texto dele; título + frase em duas colunas, 4 pilares em linha, texto em colunas e fecho), Portfólio, Coberturas ("Coberturas | Cover-up", texto do Zapa enviado em 24/10 com citação, com 4 coberturas e link para portfolio.html?f=cob), Gente que cruza o mapa, Tattoo Week (só ela, sem a lista de prêmios), Como agendar + formulário de agendamento (vira mensagem pronta no WhatsApp), Estúdio e Contato.
+- Seções: A origem (antes "História"; texto do próprio Thiago, enviado em 22/10, com frases em vermelho; ao lado, o reel fixado "Lápides e árvores secas" (DM8o1YERQQ5) narrado por ele, em `assets/video/historia.mp4` 576×1024, mudo em loop com botão para ouvir com som), Processo criativo (texto dele; título + frase em duas colunas, 4 pilares em linha, texto em colunas e fecho), Portfólio, Coberturas ("Coberturas | Cover-up", texto do Zapa enviado em 24/10 com citação, com 4 coberturas e link para portfolio.html?f=cob), Gente que cruza o mapa, Tattoo Week (só ela, sem a lista de prêmios), Como agendar + formulário de agendamento (vira mensagem pronta no WhatsApp), Estúdio (fotos do cliente de 24/10, originais HEIC/JPG em ../_ref/estudio-cliente, com a galeria "Por dentro do estúdio") e Contato.
 
 Páginas: `index.html`, `portfolio.html`, `404.html`.
 
@@ -25,7 +25,7 @@ Só o Instagram dele (extraído em 22/10/2026): bio, 674 legendas, fotos e os de
 
 ## CONFIRMAR antes do domínio
 
-1. **Estúdio**: o texto (prédio comercial com vista para o mar, um cliente por dia, alvará sanitário) vem de um post de março/2022. Continua igual? O site não mostra endereço, só "privado, em São José; o endereço vai junto com o agendamento".
+1. **Estúdio**: as fotos são as que o cliente mandou em 24/10; o texto (prédio comercial com vista para o mar, um cliente por dia, alvará sanitário) ainda vem de um post de março/2022. Continua igual? O site não mostra endereço, só "privado, em São José; o endereço vai junto com o agendamento".
 2. **Prêmios**: nos números da História aparece "15 prêmios em convenções, nos estilos realismo, dark art e cobertura" (informado pelo cliente em 22/10). Fora isso, só a Tattoo Week tem destaque. Ele faz só cobertura, nada de "reforma".
 3. **Trajetória**: o texto dele fala em 12 anos; o site usa "12 anos".
 4. **Relatos** (Califórnia, Nicole de Brusque, Natan): tirados das legendas. Os clientes topam aparecer pelo primeiro nome?

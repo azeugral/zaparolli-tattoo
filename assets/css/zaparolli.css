@@ -816,3 +816,11 @@ p { margin: 0 0 1em; }
 .luz.aberta .luz-palco img { transform: none; }
 .luz.unica .nav { display: none; }
 .luz.sem-zap #luz-zap { display: none; }
+
+/* galeria do estúdio (fotos do cliente, 24/10) */
+.estudio-galeria { margin-top: clamp(48px, 6vw, 80px); padding-top: 26px; border-top: 1px solid var(--linha-forte); }
+.estudio-galeria h3 { margin: 0 0 22px; font-family: var(--larga); font-stretch: 125%; font-weight: 900; font-size: clamp(20px, 2.2vw, 28px); text-transform: uppercase; color: var(--osso); }
+.estudio-galeria ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(10px, 1.4vw, 18px); }
+.estudio-galeria figure { margin: 0; border: 1px solid var(--linha); }
+.estudio-galeria img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+@media (max-width: 860px) { .estudio-galeria ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } }
