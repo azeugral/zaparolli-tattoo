@@ -106,6 +106,7 @@
     : null;
   const observar = el => io ? io.observe(el) : el.classList.add('visto');
   $$('.surge').forEach(observar);
+  $$('.orn').forEach(observar);
 
   /* vídeo da história: toca mudo (tem legenda) só quando está na tela; o botão liga o som e volta ao início */
   const vh = $('#video-historia'), somBtn = $('.som');
