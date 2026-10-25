@@ -31,7 +31,7 @@ Só o Instagram dele (extraído em 22/10/2026): bio, 674 legendas, fotos e os de
 
 ## Reorganização e otimização (24/10)
 
-- Home: faixa de autoridade (Tattoo Week, 12 anos, 15 prêmios, 100% autoral) logo abaixo do topo e faixa de agendamento depois do portfólio. JSON-LD de TattooParlor completo.
+- Home: faixa de agendamento depois do portfólio (a faixa corrida e a de autoridade abaixo do topo saíram a pedido em 24/10). JSON-LD de TattooParlor completo.
 - `coberturas.html` (gerada por `tools/gerar_coberturas.py`): comparador, passo a passo da cobertura e os 6 antes e depois; o menu e o botão da home levam a ela.
 - Otimização: fontes no próprio site, vídeo da História 20% menor (540×960), shaders e vídeos do meio-tom e do xerox aposentados em `../_ref/aposentado` (−10 MB no repositório). `sitemap.xml` pronto; trocar a base quando entrar o domínio e tirar o `noindex` e o `Disallow` do robots.
 
