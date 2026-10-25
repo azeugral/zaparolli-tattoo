@@ -23,7 +23,15 @@ Só o Instagram dele (extraído em 22/10/2026): bio, 674 legendas, fotos e os de
 
 - `tools/gerar_og.py` gera o `og.jpg` (prévia do link no WhatsApp/Instagram) com o meio-tom do hero e a tipografia do site; precisa do servidor local `python -m http.server 8811` na pasta do projeto. As metatags usam a URL absoluta do Pages: trocar ao mudar de domínio.
 
+## Fotos em alta e jurídico (24/10)
+
+- Fotos em alta enviadas pelo cliente em `../_ref/hq-cliente`: trocam as do Instagram no portfólio e no topo (`HQ` em `tools/processar.py`, casadas por ORB com `../_ref/casar.py`) e entram 3 obras novas (`NOVAS`). As 5 coberturas também foram trocadas pelas versões em alta (as antigas ficaram em `../_ref/coberturas-cliente/baixa`).
+- `privacidade.html` e `termos.html` são gerados por `tools/gerar_legais.py` (textos e data de vigência lá dentro). Aviso de cookies em `assets/js/zaparolli.js` (chave `zap-consent` no localStorage).
+- Fontes hospedadas no próprio site (`assets/fontes`, `assets/css/fontes.css`): nenhuma requisição a terceiros ao abrir as páginas.
+
 ## CONFIRMAR antes do domínio
+
+0. **Jurídico**: o Zapa tem CNPJ ou atende como pessoa física? Tem e-mail para pedidos de dados (LGPD)? Política de atendimento a menores? Com isso os textos de privacidade e termos ficam completos. Vale uma revisão de advogado antes de ir ao domínio.
 
 1. **Estúdio**: as fotos são as que o cliente mandou em 24/10; o texto (prédio comercial com vista para o mar, um cliente por dia, alvará sanitário) ainda vem de um post de março/2022. Continua igual? O site não mostra endereço, só "privado, em São José; o endereço vai junto com o agendamento".
 2. **Prêmios**: nos números da História aparece "15 prêmios em convenções, nos estilos realismo, dark art e cobertura" (informado pelo cliente em 22/10). Fora isso, só a Tattoo Week tem destaque. Ele faz só cobertura, nada de "reforma".

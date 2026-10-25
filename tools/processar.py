@@ -63,6 +63,19 @@ APOIO = {
 }
 
 
+# fotos em alta enviadas pelo cliente (24/10, ../_ref/hq-cliente), no lugar das do Instagram
+HQ = {'014_9': 'IMG_6314.jpg.jpeg', '051_0': 'IMG_2159.JPG.jpeg', '077_0': 'IMG_2160.JPG.jpeg', '028_0': 'IMG_2161.JPG.jpeg',
+      '053_0': 'IMG_3330 2.JPG.jpeg', '065_0': 'IMG_3334.JPG.jpeg', '073_0': 'IMG_3335 2.JPG.jpeg', '031_0': 'IMG_8896.JPG.jpeg'}
+# obras novas, só em alta: (arquivo, categoria, legenda, foco do recorte, depois de qual post entra)
+NOVAS = [('IMG_6313.jpg.jpeg', 'fech', 'Costas com o ceifador e a casa', .4, 14),
+         ('IMG_5374.jpg.jpeg', 'dark', 'Médico da peste, cicatrizado', .4, 83),
+         ('IMG_3337 2.JPG.jpeg', 'real', 'Kratos', .45, 20)]
+
+
+def abrir_hq(arquivo):
+    return ImageOps.exif_transpose(Image.open(os.path.join(REF, 'hq-cliente', arquivo))).convert('RGB')
+
+
 def abrir(nome):
     return Image.open(os.path.join(IG, nome + '.jpg')).convert('RGB')
 
@@ -107,9 +120,24 @@ def main():
         os.makedirs(p, exist_ok=True)
 
     dados = []
+    fila = []
     for post, k, cat, leg, foco in PORTFOLIO:
-        im = recortar(abrir(f'{post:03d}_{k}'), (4, 5), foco)
-        f = f'z{post:03d}'
+        fila.append((f'{post:03d}_{k}', cat, leg, foco, f'z{post:03d}'))
+        for arq, ncat, nleg, nfoco, depois in NOVAS:
+            if depois == post:
+                fila.append((None, ncat, nleg, nfoco, 'n' + arq.split('.')[0].replace(' ', '').lower().replace('img_', ''), arq))
+    for item in fila:
+        orig, cat, leg, foco, f = item[:5]
+        if orig is None:
+            origem = abrir_hq(item[5])
+        elif orig in HQ:
+            origem = abrir_hq(HQ[orig])
+        else:
+            origem = abrir(orig)
+        # a foto das costas em alta é de corpo inteiro: no portfólio, o recorte fecha na tatuagem
+        if orig == '014_9':
+            origem = origem.crop((round(origem.width * .05), round(origem.height * .08), round(origem.width * .93), round(origem.height * .96)))
+        im = recortar(origem, (4, 5), foco)
         im.resize((640, 800), Image.LANCZOS).save(os.path.join(OBRAS, f + '-640.webp'), 'WEBP', quality=86, method=6)
         larg = min(1080, im.width)
         im.resize((larg, round(larg * 1.25)), Image.LANCZOS).save(os.path.join(OBRAS, f + '-1080.webp'), 'WEBP', quality=88, method=6)
@@ -141,7 +169,8 @@ def main():
 
     # arte do hero (v7): as costas de 5 dias, sem a borda vermelha do post, no tom quente
     # da referência do cliente (preto, cinza quente e creme); grão fino para não formar degraus
-    arte = abrir('014_9').crop((20, 18, 1040, 1424))
+    alta = abrir_hq(HQ['014_9'])
+    arte = alta.crop((round(alta.width * .06), round(alta.height * .1), round(alta.width * .9), round(alta.height * .93)))
     arte = ImageOps.grayscale(arte)
     arte = ImageOps.autocontrast(arte, cutoff=(1.5, .3))
     # profundidade como na tatuagem original (24/10): sombras afundadas no preto puro,
@@ -166,8 +195,8 @@ def main():
     COB = os.path.join(REF, 'coberturas-cliente')
     # médico da peste: metades separadas, ombro e contorno do braço alinhados, para o comparador
     peste = Image.open(os.path.join(COB, 'medico-peste.jpg')).convert('RGB')
-    for nome, caixa in (('cobertura-antes', (10, 90, 610, 1190)), ('cobertura-depois', (670, 90, 1270, 1190))):
-        salvar(peste.crop(caixa), nome, (480, 600), q=88)
+    for nome, caixa in (('cobertura-antes', (16, 144, 975, 1903)), ('cobertura-depois', (1071, 144, 2030, 1903))):
+        salvar(peste.crop(caixa), nome, (480, 600, 900), q=88)
     # as outras quatro entram inteiras (antes | depois), em quadrado
     os.makedirs(os.path.join(IMG, 'cob'), exist_ok=True)
     for nome in ('mascara-gas', 'espartano-corvo', 'vampira', 'viking'):

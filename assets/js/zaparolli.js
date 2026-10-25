@@ -5,6 +5,34 @@
   const reduz = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const zapLink = msg => `https://wa.me/${ZAP}?text=${encodeURIComponent(msg)}`;
 
+  /* aviso de cookies (LGPD). O site não usa cookies de rastreamento; o aviso registra a escolha
+     no localStorage ('zap-consent': 'todos' | 'essenciais'). Se um dia entrar uma ferramenta de
+     estatística, ela só deve carregar quando a escolha for 'todos' (ver window.zapConsent). */
+  const CHAVE = 'zap-consent';
+  const lerConsent = () => { try { return localStorage.getItem(CHAVE); } catch (e) { return null; } };
+  window.zapConsent = lerConsent;
+  function avisoCookies(forcar) {
+    if (!forcar && lerConsent()) return;
+    let el = $('.cookies');
+    if (!el) {
+      el = document.createElement('section');
+      el.className = 'cookies'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-live', 'polite'); el.setAttribute('aria-label', 'Aviso de cookies');
+      el.innerHTML = `<h2>Privacidade</h2><p>Este site não usa cookies de rastreamento nem de publicidade. Guardamos apenas a sua escolha neste aviso. Saiba mais na <a href="privacidade.html">Política de Privacidade</a>.</p>
+        <div class="cookies-acoes"><button type="button" class="btn claro" data-c="todos">Aceitar</button><button type="button" class="btn" data-c="essenciais">Só o essencial</button></div>`;
+      document.body.appendChild(el);
+      el.addEventListener('click', e => {
+        const b = e.target.closest('[data-c]'); if (!b) return;
+        try { localStorage.setItem(CHAVE, b.dataset.c); } catch (err) {}
+        el.classList.remove('aberto'); document.body.classList.remove('com-cookies');
+        setTimeout(() => el.remove(), 450);
+      });
+    }
+    document.body.classList.add('com-cookies');
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('aberto')));
+  }
+  setTimeout(() => avisoCookies(false), 1200);
+  document.addEventListener('click', e => { const a = e.target.closest('[data-preferencias]'); if (a) { e.preventDefault(); avisoCookies(true); } });
+
   const ano = $('#ano');
   if (ano) ano.textContent = new Date().getFullYear();
 

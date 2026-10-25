@@ -6,6 +6,11 @@ window.OBRAS = [
 "t": "Costas em 5 dias, guest em SP"
 },
 {
+"f": "n6313",
+"c": "fech",
+"t": "Costas com o ceifador e a casa"
+},
+{
 "f": "z011",
 "c": "dark",
 "t": "Collab com Gus Tattoo"
@@ -91,6 +96,11 @@ window.OBRAS = [
 "t": "Médico da peste"
 },
 {
+"f": "n5374",
+"c": "dark",
+"t": "Médico da peste, cicatrizado"
+},
+{
 "f": "z077",
 "c": "fech",
 "t": "Máscara Hannya"
@@ -109,6 +119,11 @@ window.OBRAS = [
 "f": "z020",
 "c": "real",
 "t": "Caveira e capacete"
+},
+{
+"f": "n33372",
+"c": "real",
+"t": "Kratos"
 },
 {
 "f": "z026",
