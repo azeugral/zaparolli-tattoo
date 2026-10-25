@@ -63,9 +63,6 @@
     zap && zap.classList.toggle('visivel', (!hero || y > limite) && !formaVista);
     yAnt = y;
   }
-  /* ornamentos fixos: escondidos enquanto o topo (a arte principal) ocupa a tela */
-  function ornTopo() { if (hero) document.body.classList.toggle('no-topo', scrollY < hero.offsetHeight * .6); }
-  addEventListener('scroll', ornTopo, { passive: true }); ornTopo();
   addEventListener('scroll', rolar, { passive: true });
 
   /* link ativo no menu */
@@ -221,7 +218,7 @@
     if (!ss) return (img.getAttribute('src') || '').replace(/(\/obras\/z\d+)-640\.webp$/, '$1-1080.webp');
     return ss.split(',').map(x => x.trim().split(/\s+/)).sort((a, b) => parseInt(b[1]) - parseInt(a[1]))[0][0];
   };
-  const alvos = $$('main img').filter(img => !img.closest('.hero, .obra, .antes-depois, .nome, .gigante, picture'));
+  const alvos = $$('main img').filter(img => !img.classList.contains('orn') && !img.closest('.hero, .obra, .antes-depois, .nome, .gigante, picture'));
   alvos.forEach(img => {
     const caixa = img.parentElement;
     caixa.classList.add('amplia');
