@@ -63,6 +63,9 @@
     zap && zap.classList.toggle('visivel', (!hero || y > limite) && !formaVista);
     yAnt = y;
   }
+  /* ornamentos fixos: escondidos enquanto o topo (a arte principal) ocupa a tela */
+  function ornTopo() { if (hero) document.body.classList.toggle('no-topo', scrollY < hero.offsetHeight * .6); }
+  addEventListener('scroll', ornTopo, { passive: true }); ornTopo();
   addEventListener('scroll', rolar, { passive: true });
 
   /* link ativo no menu */
@@ -106,7 +109,6 @@
     : null;
   const observar = el => io ? io.observe(el) : el.classList.add('visto');
   $$('.surge').forEach(observar);
-  $$('.orn').forEach(observar);
 
   /* vídeo da história: toca mudo (tem legenda) só quando está na tela; o botão liga o som e volta ao início */
   const vh = $('#video-historia'), somBtn = $('.som');

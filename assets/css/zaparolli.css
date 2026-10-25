@@ -944,24 +944,17 @@ body.com-cookies .zap { opacity: 0; pointer-events: none; }
 .cob-etapas .passos { margin-top: 10px; }
 .pagina-topo .cobertura .titulo { font-size: clamp(30px, 4.4vw, 62px); }
 
-/* ornamentos laterais (25/10): ilustrações dark art nas bordas das seções, sutis, atrás do conteúdo */
-.secao { overflow: clip; }
-.orn { position: absolute; z-index: 0; pointer-events: none; user-select: none; height: auto; opacity: 0; transition: opacity 1.6s var(--ease); }
-.orn.visto { opacity: var(--o, .5); }
-.orn--galho-esq { left: 0; top: 4%; width: clamp(200px, 19vw, 380px); --o: .55; -webkit-mask-image: linear-gradient(90deg, #000 55%, transparent); mask-image: linear-gradient(90deg, #000 55%, transparent); }
-.orn--galho-dir { right: 0; top: 6%; width: clamp(200px, 19vw, 360px); transform: scaleX(-1); --o: .45; -webkit-mask-image: linear-gradient(90deg, #000 55%, transparent); mask-image: linear-gradient(90deg, #000 55%, transparent); }
-.orn--lua-dir { right: 3vw; top: 4%; width: clamp(150px, 15vw, 280px); --o: .38; }
-.orn--lua-esq { left: 3vw; top: 5%; width: clamp(140px, 13vw, 240px); --o: .3; }
-.orn--topo-dir { right: 0; top: 0; width: clamp(200px, 20vw, 380px); --o: .42; -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent); mask-image: linear-gradient(180deg, #000 45%, transparent); }
-.orn--topo-esq { left: 0; top: 0; width: clamp(200px, 18vw, 340px); transform: scaleX(-1); --o: .36; -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent); mask-image: linear-gradient(180deg, #000 45%, transparent); }
-.orn--cruz-dir { right: 0; bottom: 0; width: clamp(180px, 16vw, 320px); --o: .42; -webkit-mask-image: linear-gradient(0deg, #000 70%, transparent); mask-image: linear-gradient(0deg, #000 70%, transparent); }
-.orn--cruz-esq { left: 0; bottom: 0; width: clamp(170px, 14vw, 280px); transform: scaleX(-1); --o: .34; -webkit-mask-image: linear-gradient(0deg, #000 70%, transparent); mask-image: linear-gradient(0deg, #000 70%, transparent); }
-/* telas médias: menores e mais apagados para não brigar com o texto */
-@media (max-width: 1280px) { .orn { --o: .26 !important; } }
-/* celular: só alguns, pequenos, bem no canto */
+/* ornamentos fixos na tela (25/10): uma camada só, parada enquanto a página rola, por cima do fundo
+   das seções e por baixo do conteúdo (.wrap tem z-index 1). Na home só aparece depois do topo. */
+.orn-fixo { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; opacity: 1; transition: opacity 1s var(--ease); }
+body.no-topo .orn-fixo { opacity: 0; }
+.orn-f { position: absolute; height: auto; user-select: none; }
+.orn-f--galho { left: 0; top: 10vh; width: clamp(200px, 19vw, 380px); opacity: .5; -webkit-mask-image: linear-gradient(90deg, #000 55%, transparent); mask-image: linear-gradient(90deg, #000 55%, transparent); }
+.orn-f--lua { right: 4vw; top: 9vh; width: clamp(140px, 13vw, 250px); opacity: .34; }
+.orn-f--cruz { right: 0; bottom: 0; width: clamp(170px, 15vw, 300px); opacity: .4; -webkit-mask-image: linear-gradient(0deg, #000 70%, transparent); mask-image: linear-gradient(0deg, #000 70%, transparent); }
+@media (max-width: 1280px) { .orn-f { opacity: .24 !important; } }
 @media (max-width: 860px) {
-  .orn { width: 38vw !important; --o: .2 !important; }
-  .orn--lua-dir, .orn--lua-esq { width: 30vw !important; }
-  #feedback .orn, #como-agendar .orn, #estudio .orn { display: none; }
+  .orn-f--galho { width: 34vw; opacity: .16 !important; top: 12vh; }
+  .orn-f--lua { width: 26vw; opacity: .18 !important; right: 3vw; top: 10vh; }
+  .orn-f--cruz { width: 32vw; opacity: .16 !important; }
 }
-@media (prefers-reduced-motion: reduce) { .orn { transition: none; } }
