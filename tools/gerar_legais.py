@@ -88,26 +88,40 @@ TERMOS = f'''
   <li>O resultado de uma tatuagem depende também da pele, da cicatrização e dos cuidados de cada pessoa. Fotos do portfólio mostram trabalhos já feitos e não são promessa de resultado idêntico.</li>
 </ul>
 
-<h2>3. Direitos autorais</h2>
+<h2>3. Sinal, remarcação e cancelamento</h2>
+<ul>
+  <li>A reserva de uma data pode exigir o pagamento de um sinal. O valor, o prazo e as regras de remarcação e cancelamento são informados <strong>antes</strong> de qualquer pagamento, e só valem depois que você concorda com eles.</li>
+  <li>Pedidos de remarcação devem ser feitos com antecedência, pelo WhatsApp, para que o horário possa ser oferecido a outra pessoa.</li>
+  <li>Os seus direitos como consumidor, previstos no Código de Defesa do Consumidor, são sempre respeitados.</li>
+</ul>
+
+<h2>4. Saúde e cuidados</h2>
+<ul>
+  <li>Informe ao tatuador, antes da sessão, condições de saúde, alergias, uso de medicamentos, gravidez ou qualquer situação que possa interferir no procedimento.</li>
+  <li>O estúdio segue as normas sanitárias aplicáveis, com material descartável e esterilização adequada.</li>
+  <li>Os cuidados depois da sessão são passados pelo tatuador e são essenciais para uma boa cicatrização.</li>
+</ul>
+
+<h2>5. Direitos autorais</h2>
 <p>Todas as artes, desenhos, fotos, textos e a marca Zaparolli exibidos no site são de autoria de Thiago Zaparolli ou usados com autorização, e são protegidos pela Lei de Direitos Autorais (Lei nº 9.610/1998). Não é permitido copiar, reproduzir, tatuar, revender ou usar esse material, total ou parcialmente, sem autorização por escrito. Os projetos são autorais e feitos sob medida para cada cliente.</p>
 <p>Fotos de clientes só aparecem com autorização deles. Se você aparece em alguma foto e quer que ela saia, peça pelo WhatsApp e ela será retirada.</p>
 
-<h2>4. Uso adequado</h2>
+<h2>6. Uso adequado</h2>
 <p>Ao usar o site, você se compromete a não tentar prejudicar o seu funcionamento, não usar o conteúdo para fins ilegais e não se passar por outra pessoa nos contatos com o estúdio.</p>
 
-<h2>5. Links para outros serviços</h2>
+<h2>7. Links para outros serviços</h2>
 <p>O site tem links para o WhatsApp e o Instagram. Esses serviços têm termos e políticas próprios, que não são controlados pelo estúdio.</p>
 
-<h2>6. Responsabilidade</h2>
+<h2>8. Responsabilidade</h2>
 <p>O estúdio se esforça para manter o site correto e no ar, mas não garante que ele esteja livre de erros ou sempre disponível. O site não substitui a conversa com o tatuador, especialmente sobre saúde, cuidados e contraindicações.</p>
 
-<h2>7. Privacidade</h2>
+<h2>9. Privacidade</h2>
 <p>O tratamento de dados pessoais está descrito na <a href="privacidade.html">Política de Privacidade</a>.</p>
 
-<h2>8. Lei e foro</h2>
+<h2>10. Lei e foro</h2>
 <p>Estes termos seguem as leis do Brasil, incluindo o Código de Defesa do Consumidor. Fica eleito o foro do domicílio do consumidor para resolver eventuais conflitos.</p>
 
-<h2>9. Contato</h2>
+<h2>11. Contato</h2>
 <p>Dúvidas sobre estes termos: WhatsApp <a href="{ZAP_LINK}" target="_blank" rel="noopener">{ZAP}</a>.</p>
 '''
 

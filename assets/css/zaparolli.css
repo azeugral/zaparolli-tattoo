@@ -906,3 +906,40 @@ p { margin: 0 0 1em; }
 .cookies-acoes .btn { min-height: 46px; padding: 0 18px; font-size: 13px; flex: 1 1 auto; }
 @media (max-width: 640px) { .cookies { left: 10px; right: 10px; padding: 16px 16px 14px; } .cookies-acoes .btn { flex: 1 1 100%; } }
 body.com-cookies .zap { opacity: 0; pointer-events: none; }
+
+/* faixa de autoridade (24/10): Tattoo Week e números logo abaixo do topo */
+.autoridade { border-bottom: 1px solid var(--linha); background: var(--carvao); }
+.autoridade .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 40px; padding-top: 26px; padding-bottom: 26px; }
+.selo-tw { display: flex; align-items: center; gap: 16px; text-decoration: none; color: var(--osso); }
+.selo-tw__ic { display: grid; place-items: center; width: 46px; height: 46px; flex: none; border: 1.5px solid var(--sangue); color: var(--sangue); font-size: 18px; transition: background-color .35s var(--ease), color .35s var(--ease); }
+.selo-tw:hover .selo-tw__ic { background: var(--sangue); color: var(--osso); }
+.selo-tw b { display: block; font-family: var(--larga); font-stretch: 115%; font-weight: 800; font-size: clamp(14px, 1.4vw, 17px); text-transform: uppercase; letter-spacing: .02em; }
+.selo-tw span:last-child { font: 400 13px/1.4 var(--cond); letter-spacing: .12em; text-transform: uppercase; color: var(--cinza); }
+.autoridade-num { list-style: none; margin: 0; padding: 0; display: flex; gap: 0; }
+.autoridade-num li { padding: 0 clamp(16px, 2.4vw, 32px); border-left: 1px solid var(--linha); font: 400 12.5px/1.3 var(--cond); letter-spacing: .12em; text-transform: uppercase; color: var(--cinza); }
+.autoridade-num li:first-child { border-left: 0; padding-left: 0; }
+.autoridade-num b { display: block; font-family: var(--larga); font-stretch: 125%; font-weight: 900; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.05; color: var(--osso); letter-spacing: 0; }
+@media (max-width: 860px) {
+  .autoridade .wrap { flex-direction: column; align-items: stretch; }
+  .autoridade-num { justify-content: space-between; }
+  .autoridade-num li { padding: 0 10px; flex: 1; text-align: center; font-size: 11px; }
+  .autoridade-num li:first-child { padding-left: 0; }
+}
+
+/* faixa de agendamento depois do portfólio */
+.cta-faixa { border-block: 1px solid var(--linha); background: var(--fuligem); }
+.cta-faixa .wrap { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 24px 48px; align-items: center; padding-top: clamp(40px, 5vw, 64px); padding-bottom: clamp(40px, 5vw, 64px); }
+.cta-faixa__tit { margin: 0 0 10px; font-family: var(--larga); font-stretch: 125%; font-weight: 900; font-size: clamp(24px, 3vw, 40px); line-height: 1; text-transform: uppercase; color: var(--osso); }
+.cta-faixa__tit .desgaste { -webkit-mask-image: url(../img/titulo-desgaste.webp); mask-image: url(../img/titulo-desgaste.webp); -webkit-mask-size: 900px auto; mask-size: 900px auto; }
+.cta-faixa__txt p:last-child { margin: 0; color: var(--cinza); }
+.cta-faixa__acoes { display: flex; flex-direction: column; gap: 12px; }
+.cta-faixa__acoes .btn { justify-content: space-between; }
+@media (max-width: 860px) { .cta-faixa .wrap { grid-template-columns: minmax(0, 1fr); } }
+
+/* página de coberturas */
+.coberturas-pagina { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: clamp(16px, 2.4vw, 30px) !important; }
+.coberturas-pagina .cob-leg { margin: 12px 2px 0; font-size: 15px; color: var(--cinza); }
+.coberturas-pagina .cob-leg b { color: var(--osso); font-weight: 600; }
+@media (max-width: 640px) { .coberturas-pagina { grid-template-columns: minmax(0, 1fr) !important; } }
+.cob-etapas .passos { margin-top: 10px; }
+.pagina-topo .cobertura .titulo { font-size: clamp(30px, 4.4vw, 62px); }

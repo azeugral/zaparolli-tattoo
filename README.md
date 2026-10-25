@@ -29,6 +29,12 @@ Só o Instagram dele (extraído em 22/10/2026): bio, 674 legendas, fotos e os de
 - `privacidade.html` e `termos.html` são gerados por `tools/gerar_legais.py` (textos e data de vigência lá dentro). Aviso de cookies em `assets/js/zaparolli.js` (chave `zap-consent` no localStorage).
 - Fontes hospedadas no próprio site (`assets/fontes`, `assets/css/fontes.css`): nenhuma requisição a terceiros ao abrir as páginas.
 
+## Reorganização e otimização (24/10)
+
+- Home: faixa de autoridade (Tattoo Week, 12 anos, 15 prêmios, 100% autoral) logo abaixo do topo e faixa de agendamento depois do portfólio. JSON-LD de TattooParlor completo.
+- `coberturas.html` (gerada por `tools/gerar_coberturas.py`): comparador, passo a passo da cobertura e os 6 antes e depois; o menu e o botão da home levam a ela.
+- Otimização: fontes no próprio site, vídeo da História 20% menor (540×960), shaders e vídeos do meio-tom e do xerox aposentados em `../_ref/aposentado` (−10 MB no repositório). `sitemap.xml` pronto; trocar a base quando entrar o domínio e tirar o `noindex` e o `Disallow` do robots.
+
 ## CONFIRMAR antes do domínio
 
 0. **Jurídico**: o Zapa tem CNPJ ou atende como pessoa física? Tem e-mail para pedidos de dados (LGPD)? Política de atendimento a menores? Com isso os textos de privacidade e termos ficam completos. Vale uma revisão de advogado antes de ir ao domínio.

@@ -1,7 +1,7 @@
 """Gera as imagens do site a partir de ../_ref/ig (Instagram @zaparollitattoo, 22/10/2026).
 - portfólio em assets/obras (640 e 1080 px, recorte 4:5) + assets/js/obras.js
 - fotos de apoio em assets/img (tom sépia e grão, como nos posts dele)
-- fonte do meio-tom do hero, textura de desgaste dos títulos, favicons e og.jpg
+- arte do topo, coberturas, estúdio, logo, textura de desgaste, favicons e og.jpg
 Uso: python tools/processar.py"""
 import os, json, random
 import numpy as np
@@ -59,7 +59,6 @@ PORTFOLIO = [
 # fotos de apoio: nome -> (post_foto, recorte (l, t, r, b) relativo ou None, proporção, larguras)
 APOIO = {
     'tattoo-week': ('034_0', None, (4, 5), (640, 1080)),
-    'costas-5-dias': ('014_7', None, (4, 5), (640, 1080)),
 }
 
 
@@ -199,8 +198,8 @@ def main():
         salvar(peste.crop(caixa), nome, (480, 600, 900), q=88)
     # as outras quatro entram inteiras (antes | depois), em quadrado
     os.makedirs(os.path.join(IMG, 'cob'), exist_ok=True)
-    for nome in ('mascara-gas', 'espartano-corvo', 'vampira', 'viking'):
-        im = Image.open(os.path.join(COB, nome + '.jpg')).convert('RGB')
+    for nome in ('mascara-gas', 'espartano-corvo', 'vampira', 'viking', 'noiva-cadaver', 'corvo'):
+        im = (abrir('048_0') if nome == 'corvo' else Image.open(os.path.join(COB, nome + '.jpg'))).convert('RGB')
         lado = min(im.size)
         im = ImageOps.fit(im, (lado, lado), Image.LANCZOS, centering=(.5, .5))
         salvar(im, nome, (640, 1080), pasta=os.path.join(IMG, 'cob'), q=86)
@@ -221,12 +220,6 @@ def main():
     logo.resize((1200, round(logo.height * 1200 / logo.width)), Image.LANCZOS).save(os.path.join(IMG, 'logo-zaparolli-1200.webp'), 'WEBP', quality=90, method=6)
     print('logo', logo.size)
 
-    # fonte do meio-tom do hero: as costas de 5 dias, em cinza com contraste puxado
-    hf = ImageOps.grayscale(abrir('014_9'))
-    hf = ImageOps.autocontrast(hf, cutoff=1)
-    hf = ImageEnhance.Contrast(hf).enhance(1.25)
-    hf = hf.filter(ImageFilter.GaussianBlur(1.2))
-    hf.save(os.path.join(IMG, 'meio-tom-fonte.jpg'), quality=86)
 
     # textura de desgaste dos títulos (máscara: branco = tinta, transparente = falha)
     W, H = 1200, 300

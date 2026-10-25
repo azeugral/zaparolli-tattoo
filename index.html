@@ -29,14 +29,46 @@
 <link rel="stylesheet" href="assets/css/zaparolli.css">
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "TattooParlor",
-  "name": "Zaparolli Tattoo",
-  "founder": {"@type": "Person", "name": "Thiago Zaparolli"},
-  "image": "og.jpg",
-  "telephone": "+55 48 99810-0176",
-  "address": {"@type": "PostalAddress", "addressLocality": "São José", "addressRegion": "SC", "addressCountry": "BR"},
-  "sameAs": ["https://www.instagram.com/zaparollitattoo/"]
+ "@context": "https://schema.org",
+ "@type": "TattooParlor",
+ "name": "Zaparolli Tattoo",
+ "alternateName": "Thiago Zaparolli",
+ "description": "Tatuador de dark art e realismo preto e cinza, especialista em coberturas (cover-up), com estúdio privado em São José, SC. Jurado da Tattoo Week 2025.",
+ "url": "https://azeugral.github.io/zaparolli-tattoo/",
+ "image": "https://azeugral.github.io/zaparolli-tattoo/og.jpg",
+ "logo": "https://azeugral.github.io/zaparolli-tattoo/assets/img/logo-zaparolli-1200.webp",
+ "telephone": "+55 48 99810-0176",
+ "priceRange": "$$",
+ "address": {
+  "@type": "PostalAddress",
+  "addressLocality": "São José",
+  "addressRegion": "SC",
+  "addressCountry": "BR"
+ },
+ "areaServed": [
+  "São José",
+  "Florianópolis",
+  "Grande Florianópolis",
+  "Santa Catarina"
+ ],
+ "founder": {
+  "@type": "Person",
+  "name": "Thiago Zaparolli",
+  "jobTitle": "Tatuador",
+  "sameAs": [
+   "https://www.instagram.com/zaparollitattoo/"
+  ]
+ },
+ "knowsAbout": [
+  "Dark art",
+  "Realismo preto e cinza",
+  "Cobertura de tatuagem",
+  "Cover-up",
+  "Fechamento"
+ ],
+ "sameAs": [
+  "https://www.instagram.com/zaparollitattoo/"
+ ]
 }
 </script>
 </head>
@@ -72,7 +104,8 @@
     <li><a href="#historia">A origem</a></li>
     <li><a href="#processo">Processo criativo</a></li>
     <li><a href="#portfolio">Portfólio</a></li>
-    <li><a href="#coberturas">Coberturas</a></li>
+    <li><a href="coberturas.html">Coberturas</a></li>
+    <li><a href="portfolio.html">Portfólio completo</a></li>
     <li><a href="#tattoo-week">Tattoo Week</a></li>
     <li><a href="#como-agendar">Como agendar</a></li>
     <li><a href="#estudio">Estúdio</a></li>
@@ -138,6 +171,18 @@
     <span>Dark art</span><i></i><span>Coberturas</span><i></i><span>Realismo preto e cinza</span><i></i><span>Projetos autorais</span><i></i><span>Fechamentos</span><i></i>
   </div>
 </div>
+
+<!-- AUTORIDADE -->
+<section class="autoridade" aria-label="Destaques">
+  <div class="wrap">
+    <a class="selo-tw" href="#tattoo-week"><span class="selo-tw__ic" aria-hidden="true">✕</span><span><b>Jurado na Tattoo Week 2025</b>O maior evento de tatuagem do mundo</span></a>
+    <ul class="autoridade-num">
+      <li><b>12</b>anos de trajetória</li>
+      <li><b>15</b>prêmios em convenções</li>
+      <li><b>100%</b>projetos autorais</li>
+    </ul>
+  </div>
+</section>
 
 <!-- HISTÓRIA -->
 <section class="secao pontos" id="historia">
@@ -221,6 +266,21 @@
   </div>
 </section>
 
+<!-- CHAMADA PARA AGENDAR -->
+<section class="cta-faixa" aria-label="Agendar">
+  <div class="wrap">
+    <div class="cta-faixa__txt surge">
+      <p class="chapeu">Agenda</p>
+      <p class="cta-faixa__tit"><span class="desgaste">Sua ideia, desenhada para o seu corpo</span></p>
+      <p>Mande a referência, a foto do local e o tamanho. O orçamento é feito pelo WhatsApp.</p>
+    </div>
+    <div class="cta-faixa__acoes surge">
+      <a class="btn claro" href="#agendar">Agendar orçamento<span class="seta" aria-hidden="true">→</span></a>
+      <a class="btn" href="https://wa.me/5548998100176?text=Ol%C3%A1%2C%20Zapa!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">Chamar no WhatsApp<span class="seta" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
 <!-- COBERTURAS -->
 <section class="secao pontos" id="coberturas">
   <div class="wrap">
@@ -236,8 +296,8 @@
       </div>
       <figure class="antes-depois surge" data-comparar style="--pos: 50%">
         <div class="antes-depois__palco">
-          <img class="antes-depois__antes" src="assets/img/cobertura-antes-600.webp" srcset="assets/img/cobertura-antes-480.webp 480w, assets/img/cobertura-antes-600.webp 600w" sizes="(max-width: 860px) 92vw, 440px" alt="Antes: carpa colorida antiga no ombro" width="600" height="1100" loading="lazy" decoding="async">
-          <img class="antes-depois__depois" src="assets/img/cobertura-depois-600.webp" srcset="assets/img/cobertura-depois-480.webp 480w, assets/img/cobertura-depois-600.webp 600w" sizes="(max-width: 860px) 92vw, 440px" alt="Depois: médico da peste num cemitério, em preto e cinza, cobrindo toda a carpa" width="600" height="1100" loading="lazy" decoding="async">
+          <img class="antes-depois__antes" src="assets/img/cobertura-antes-600.webp" srcset="assets/img/cobertura-antes-480.webp 480w, assets/img/cobertura-antes-600.webp 600w, assets/img/cobertura-antes-900.webp 900w" sizes="(max-width: 860px) 92vw, 440px" alt="Antes: carpa colorida antiga no ombro" width="600" height="1100" loading="lazy" decoding="async">
+          <img class="antes-depois__depois" src="assets/img/cobertura-depois-600.webp" srcset="assets/img/cobertura-depois-480.webp 480w, assets/img/cobertura-depois-600.webp 600w, assets/img/cobertura-depois-900.webp 900w" sizes="(max-width: 860px) 92vw, 440px" alt="Depois: médico da peste num cemitério, em preto e cinza, cobrindo toda a carpa" width="600" height="1100" loading="lazy" decoding="async">
           <span class="antes-depois__rot antes-depois__rot--a" aria-hidden="true">Antes</span>
           <span class="antes-depois__rot antes-depois__rot--d" aria-hidden="true">Depois</span>
           <span class="antes-depois__linha" aria-hidden="true"><span class="antes-depois__alca"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></span>
@@ -250,7 +310,7 @@
     <div class="coberturas-feitas">
       <div class="coberturas-cab surge">
         <h3>Coberturas feitas pelo Zapa</h3>
-        <a class="btn" href="portfolio.html?f=cob">Ver todas as coberturas</a>
+        <a class="btn" href="coberturas.html">Ver todas as coberturas<span class="seta" aria-hidden="true">→</span></a>
       </div>
       <ul class="coberturas-grade">
         <li class="surge"><figure><img src="assets/img/cob/mascara-gas-640.webp" srcset="assets/img/cob/mascara-gas-640.webp 640w, assets/img/cob/mascara-gas-1080.webp 1080w" sizes="(max-width: 860px) 92vw, 600px" alt="Máscara de gás cobrindo um desenho antigo no ombro" loading="lazy" decoding="async" width="640" height="640"><span class="rot-a" aria-hidden="true">Antes</span><span class="rot-d" aria-hidden="true">Depois</span></figure></li>
