@@ -107,29 +107,35 @@
   const observar = el => io ? io.observe(el) : el.classList.add('visto');
   $$('.surge').forEach(observar);
 
-  /* vídeo da história: toca mudo (tem legenda) só quando está na tela; o botão liga o som e volta ao início */
-  const vh = $('#video-historia'), somBtn = $('.som');
-  if (vh) {
-    let comSom = false;
-    const tocar = () => { const p = vh.play(); if (p && p.catch) p.catch(() => {}); };
+  /* vídeos com fala (história e feedbacks): tocam mudos (têm legenda) só quando estão na tela;
+     o botão liga o som e volta ao início, e só um fica com som por vez */
+  const comFala = [];
+  $$('.tela-video').forEach(tela => {
+    const v = $('video', tela), somBtn = $('.som', tela);
+    if (!v) return;
+    const item = { v, comSom: false };
+    const tocar = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+    const mudo = () => {
+      item.comSom = false; v.muted = true; v.loop = true;
+      if (somBtn) { somBtn.setAttribute('aria-pressed', 'false'); $('.txt', somBtn).textContent = 'Ouvir com som'; }
+    };
+    item.mudo = mudo;
+    comFala.push(item);
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(([e]) => {
-        if (e.isIntersecting) { if (vh.preload === 'none') vh.preload = 'auto'; if (!reduz || comSom) tocar(); }
-        else vh.pause();
-      }, { threshold: .35 }).observe(vh);
+        if (e.isIntersecting) { if (v.preload === 'none') v.preload = 'auto'; if (!reduz || item.comSom) tocar(); }
+        else v.pause();
+      }, { threshold: .35 }).observe(v);
     }
     somBtn && somBtn.addEventListener('click', () => {
-      comSom = !comSom;
-      vh.muted = !comSom;
-      if (comSom) { vh.currentTime = 0; vh.loop = false; tocar(); } else vh.loop = true;
-      somBtn.setAttribute('aria-pressed', String(comSom));
-      $('.txt', somBtn).textContent = comSom ? 'Tirar o som' : 'Ouvir com som';
+      if (item.comSom) { mudo(); return; }
+      comFala.forEach(o => { if (o !== item && o.comSom) o.mudo(); });
+      item.comSom = true; v.muted = false; v.currentTime = 0; v.loop = false; tocar();
+      somBtn.setAttribute('aria-pressed', 'true');
+      $('.txt', somBtn).textContent = 'Tirar o som';
     });
-    vh.addEventListener('ended', () => {
-      comSom = false; vh.muted = true; vh.loop = true; tocar();
-      if (somBtn) { somBtn.setAttribute('aria-pressed', 'false'); $('.txt', somBtn).textContent = 'Ouvir com som'; }
-    });
-  }
+    v.addEventListener('ended', () => { mudo(); tocar(); });
+  });
 
   /* portfólio: grade 4:5 com filtros */
   const CATS = { todos: 'Todos', dark: 'Dark art', cob: 'Coberturas', real: 'Realismo', fech: 'Fechamentos' };
