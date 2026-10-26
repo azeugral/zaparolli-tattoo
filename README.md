@@ -39,7 +39,7 @@ Só o Instagram dele (extraído em 22/10/2026): bio, 674 legendas, fotos e os de
 
 0. **Jurídico**: o Zapa tem CNPJ ou atende como pessoa física? Tem e-mail para pedidos de dados (LGPD)? Política de atendimento a menores? Com isso os textos de privacidade e termos ficam completos. Vale uma revisão de advogado antes de ir ao domínio.
 
-1. **Estúdio**: as fotos são as que o cliente mandou em 24/10; o texto (prédio comercial com vista para o mar, um cliente por dia, alvará sanitário) ainda vem de um post de março/2022. Continua igual? O site não mostra endereço, só "privado, em São José; o endereço vai junto com o agendamento".
+1. **Estúdio**: resolvido em 26/10 (fotos e texto do próprio Zapa).
 2. **Prêmios**: nos números da História aparece "15 prêmios em convenções, nos estilos realismo, dark art e cobertura" (informado pelo cliente em 22/10). Fora isso, só a Tattoo Week tem destaque. Ele faz só cobertura, nada de "reforma".
 3. **Trajetória**: o texto dele fala em 12 anos; o site usa "12 anos".
 4. **Relatos** (Califórnia, Nicole de Brusque, Natan): tirados das legendas. Os clientes topam aparecer pelo primeiro nome?

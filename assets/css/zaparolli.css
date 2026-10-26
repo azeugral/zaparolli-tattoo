@@ -962,3 +962,7 @@ body.com-cookies .zap { opacity: 0; pointer-events: none; }
   .orn--lua-dir, .orn--lua-esq { width: 30vw !important; }
   #feedback .orn, #como-agendar .orn, #estudio .orn { display: none; }
 }
+
+/* estúdio com o texto do Zapa (26/10) */
+.estudio .texto p:not(.chapeu):not(.abre):not(.frase):not(.fecho):not(.assina) { color: var(--osso-2); }
+.estudio .texto .frase { margin-top: 4px; }
