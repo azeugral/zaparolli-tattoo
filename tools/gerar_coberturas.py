@@ -88,7 +88,7 @@ def main():
     cab = base[:base.index('<main>')]
     pe = base[base.index('</main>') + len('</main>'):]
     cab = re.sub(r'<title>.*?</title>', '<title>Coberturas · Zaparolli Tattoo · Cover-up em dark art e preto e cinza</title>', cab)
-    cab = re.sub(r'<meta name="description" content="[^"]*">', '<meta name="description" content="Coberturas (cover-up) de Thiago Zaparolli em São José, SC: antes e depois de tatuagens antigas transformadas em dark art e realismo preto e cinza. Avaliação pelo WhatsApp.">', cab)
+    cab = re.sub(r'<meta name="description" content="[^"]*">', '<meta name="description" content="Coberturas (cover-up) de Thiago Zaparolli em São José, SC: tatuagens antigas transformadas em dark art e preto e cinza. Avaliação pelo WhatsApp.">', cab)
     cab = re.sub(r'<meta property="og:title" content="[^"]*">', '<meta property="og:title" content="Coberturas · Zaparolli Tattoo">', cab)
     cab = cab.replace('portfolio.html">', 'coberturas.html">')
     pe = pe.replace('<script src="assets/js/obras.js"></script>\n', '')
