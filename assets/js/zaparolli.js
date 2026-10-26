@@ -107,6 +107,53 @@
   const observar = el => io ? io.observe(el) : el.classList.add('visto');
   $$('.surge').forEach(observar);
 
+  /* fumaça (assets/js/fumaca.js): ao vivo em WebGL no desktop; em telas de toque, o MP4 do mesmo
+     shader (em pé ou deitado). Só anima quando está na tela; com "reduzir movimento" fica um quadro parado. */
+  const toque = matchMedia('(hover: none), (pointer: coarse)').matches;
+  $$('[data-fumaca]').forEach(box => {
+    const cv = $('canvas', box), vid = $('video', box);
+    const ver = cb => 'IntersectionObserver' in window
+      ? new IntersectionObserver(([e]) => cb(e.isIntersecting), { rootMargin: '200px 0px' }).observe(box)
+      : cb(true);
+    if (toque) {
+      if (!vid) return;
+      ver(dentro => {
+        if (dentro) {
+          if (!vid.src) {
+            vid.src = innerWidth > innerHeight ? box.dataset.vDeitado : box.dataset.vPe;
+            vid.addEventListener('playing', () => vid.classList.add('on'), { once: true });
+          }
+          if (!reduz) { const p = vid.play(); if (p && p.catch) p.catch(() => {}); }
+          else vid.addEventListener('loadeddata', () => vid.classList.add('on'), { once: true });
+        } else vid.pause();
+      });
+      return;
+    }
+    if (!cv || !window.fumacaGL) return;
+    let T = null;
+    try { T = fumacaGL(cv, { modo: +box.dataset.fumaca, forca: +box.dataset.forca }); } catch (e) { T = null; }
+    if (!T) return;
+    /* a fumaça é macia: meia resolução já basta; se o quadro passar de ~22 ms, baixa mais */
+    const CICLO = (+box.dataset.ciclo || 24) * 1000;
+    let esc = Math.min(devicePixelRatio || 1, 2) * .5;
+    const ajusta = () => T.tamanho(Math.max(2, Math.round(box.clientWidth * esc)), Math.max(2, Math.round(box.clientHeight * esc)));
+    ajusta(); addEventListener('resize', ajusta);
+    if (reduz) { T.desenhar(1.2); cv.classList.add('on'); return; }
+    let ve = false, ult = 0, soma = 0, n = 0;
+    const t0 = performance.now();
+    const quadro = t => {
+      requestAnimationFrame(quadro);
+      if (!ve || document.hidden) { ult = 0; return; }
+      if (ult) { soma += t - ult; n++; }
+      ult = t;
+      if (n === 40) { if (soma / n > 22 && esc > .3) { esc *= .8; ajusta(); } soma = 0; n = 0; }
+      T.desenhar(((t - t0) % CICLO) / CICLO * 6.283185307179586);
+      cv.classList.add('on');
+    };
+    ver(dentro => { ve = dentro; ult = 0; });
+    requestAnimationFrame(quadro);
+  });
+
   /* vídeos com fala (história e feedbacks): tocam mudos (têm legenda) só quando estão na tela;
      o botão liga o som e volta ao início, e só um fica com som por vez */
   const comFala = [];
