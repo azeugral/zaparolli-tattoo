@@ -13,7 +13,7 @@ BASE = 'http://localhost:8811/site/'
 
 HTML = """<!doctype html><html><head><meta charset="utf-8">
 <base href="%s">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Oswald:wght@400;500&family=Anton&display=swap">
+<link rel="stylesheet" href="assets/css/fontes.css">
 <style>
 :root { --carvao:#0c0b0a; --osso:#ece4d6; --cinza:#9b9287; --sangue:#cc2a1f; }
 * { box-sizing:border-box; margin:0; }

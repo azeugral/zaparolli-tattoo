@@ -1,7 +1,7 @@
 """Gera as imagens do site a partir de ../_ref/ig (Instagram @zaparollitattoo, 22/10/2026).
 - portfólio em assets/obras (640 e 1080 px, recorte 4:5) + assets/js/obras.js
 - fotos de apoio em assets/img (tom sépia e grão, como nos posts dele)
-- arte do topo, coberturas, estúdio, logo, textura de desgaste, favicons e og.jpg
+- arte do topo, coberturas, estúdio, logo, textura de desgaste e favicons (og.jpg: tools/gerar_og.py)
 Uso: python tools/processar.py"""
 import os, json, random
 import numpy as np
@@ -248,17 +248,7 @@ def main():
     fav.resize((180, 180), Image.LANCZOS).save(os.path.join(SITE, 'apple-touch-icon.png'))
     fav.save(os.path.join(SITE, 'favicon.ico'), sizes=[(16, 16), (32, 32), (48, 48)])
 
-    # og.jpg 1200x630
-    og = Image.new('RGB', (1200, 630), (11, 11, 11))
-    foto = grao(sepia(ImageOps.fit(abrir('014_9'), (520, 630), centering=(.5, .45)), .45), 8)
-    og.paste(foto, (680, 0))
-    d = ImageDraw.Draw(og)
-    d.rectangle((54, 196, 640, 318), outline=(242, 242, 240), width=3)
-    d.text((80, 257), 'ZAPAROLLI', font=fonte(84), fill=(242, 242, 240), anchor='lm')
-    d.text((60, 120), 'THIAGO ZAPAROLLI', font=fonte(34, 500, arquivo='Oswald.ttf'), fill=(170, 158, 145))
-    d.text((60, 360), 'DARK ART · PRETO E CINZA · COBERTURAS', font=fonte(30, 500, arquivo='Oswald.ttf'), fill=(212, 42, 30))
-    d.text((60, 410), 'São José, Santa Catarina', font=fonte(30, 400, arquivo='Oswald.ttf'), fill=(170, 158, 145))
-    og.save(os.path.join(SITE, 'og.jpg'), quality=86)
+    # a prévia do link (og.jpg) é feita por tools/gerar_og.py, no visual atual do site
     print(len(dados), 'obras')
 
 
