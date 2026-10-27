@@ -1,4 +1,4 @@
-/* Fumaça realista do hero (lado esquerdo) e do "Como agendar" (versão calma). Tudo no shader,
+/* Fumaça suave do hero (lado esquerdo) e do "Como agendar" (versão calma). Tudo no shader,
    sem imagem: ruído com domínio torcido que SOBE (dois campos defasados meio ciclo, trocados por
    peso triangular, então o quadro da fase 2π é igual ao da fase 0 e o vídeo fecha sem emenda).
    Véus cinza quente, fios claros cor de osso que a fumaça estica e um bafo de brasa vermelha
@@ -17,16 +17,16 @@ float h21(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(
 float ruido(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
   return mix(mix(h21(i),h21(i+vec2(1,0)),f.x),mix(h21(i+vec2(0,1)),h21(i+vec2(1,1)),f.x),f.y);}
 mat2 rot(float a){float c=cos(a),s=sin(a);return mat2(c,-s,s,c);}
-float fbm(vec2 p){float s=0.,a=.5;for(int i=0;i<6;i++){s+=a*ruido(p);p=rot(.55)*p*2.03+vec2(1.7,9.2);a*=.5;}return s;}
+float fbm(vec2 p){float s=0.,a=.5;for(int i=0;i<5;i++){s+=a*ruido(p);p=rot(.55)*p*2.03+vec2(1.7,9.2);a*=.5;}return s;}
 
 /* um campo de fumaça subindo "sobe" unidades; c gira em círculo e torce sem emendar */
 vec3 campo(vec2 p, float sobe, vec2 c){
   vec2 q=p+vec2(0.,-sobe);
-  vec2 w=vec2(fbm(q*.9+c*.35),fbm(q*.9+vec2(5.2,1.3)-c.yx*.35));
-  vec2 w2=vec2(fbm(q+w*1.9+vec2(1.7,9.2)),fbm(q+w*1.9+vec2(8.3,2.8)));
-  float f=fbm(q*1.15+w2*1.7);
+  vec2 w=vec2(fbm(q*.8+c*.18),fbm(q*.8+vec2(5.2,1.3)-c.yx*.18));
+  vec2 w2=vec2(fbm(q+w*1.4+vec2(1.7,9.2)),fbm(q+w*1.4+vec2(8.3,2.8)));
+  float f=fbm(q*1.05+w2*1.3);
   /* fios: onde o ruído torcido cruza o meio, linha fina e comprida */
-  float fio=pow(1.-abs(fbm(q*1.7+w2*2.6+w)*2.-1.),10.);
+  float fio=pow(1.-abs(fbm(q*1.4+w2*1.8+w)*2.-1.),6.);
   return vec3(f,fio,length(w2-w));
 }
 
@@ -40,7 +40,7 @@ void main(){
   /* sobe sem fim: dois campos meio ciclo fora de fase, peso triangular */
   float t=uFase/TAU;
   float fa=fract(t), fb=fract(t+.5);
-  vec3 A=campo(p,fa*1.6,c), B=campo(p+vec2(3.7,1.9),fb*1.6,c);
+  vec3 A=campo(p,fa*.8,c), B=campo(p+vec2(3.7,1.9),fb*.8,c);
   float wa=1.-abs(fa*2.-1.);
   vec3 F=mix(B,A,wa);
 
@@ -58,15 +58,15 @@ void main(){
     zona=clamp(ld*.85+pe*.6,0.,1.)*.9;
   }
 
-  float veu=smoothstep(.34,.84,F.x*(.72+.45*zona)+zona*.12)*zona;
-  float denso=smoothstep(.6,.9,F.x+zona*.1)*veu;
+  float veu=smoothstep(.3,.95,F.x*(.72+.45*zona)+zona*.12)*zona;
+  float denso=smoothstep(.55,.98,F.x+zona*.1)*veu;
   float fio=F.y*smoothstep(.04,.5,veu+zona*.2)*zona;
   /* bolsões escuros onde o fluxo dobra: a fumaça fica pesada, não lisa */
   float bolsao=smoothstep(.38,.12,F.z);
 
   vec3 cinza=vec3(.42,.39,.35), osso=vec3(.93,.89,.84), brasa=vec3(.62,.07,.05);
-  vec3 col=cinza*pow(veu,1.3)*.8+osso*denso*.55+osso*fio*.85;
-  col*=1.-bolsao*.7;
+  vec3 col=cinza*pow(veu,1.2)*.85+osso*denso*.4+osso*fio*.3;
+  col*=1.-bolsao*.35;
   /* bafo de brasa embaixo, só no hero */
   float quente=(1.-uModo)*(1.-smoothstep(.0,.45,c01.y))*(1.-smoothstep(.0,.42,c01.x));
   col+=brasa*quente*(veu*.6+.05)*.45;

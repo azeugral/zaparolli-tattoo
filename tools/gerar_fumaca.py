@@ -12,10 +12,10 @@ VID = os.path.join(SITE, 'assets', 'video')
 FPS = 24
 # nome, largura, altura, modo, força, ciclo em segundos
 VERSOES = [
-    ('fumaca-hero-pe', 720, 1560, 0, 1.6, 24),
-    ('fumaca-hero-deitado', 1280, 720, 0, 1.6, 24),
-    ('fumaca-calma-pe', 720, 1280, 1, .9, 40),
-    ('fumaca-calma-deitado', 1280, 720, 1, .9, 40),
+    ('fumaca-hero-pe', 720, 1560, 0, 1.6, 40),
+    ('fumaca-hero-deitado', 1280, 720, 0, 1.6, 40),
+    ('fumaca-calma-pe', 720, 1280, 1, .8, 64),
+    ('fumaca-calma-deitado', 1280, 720, 1, .8, 64),
 ]
 
 def renderizar(pg, nome, w, h, modo, forca, ciclo):
