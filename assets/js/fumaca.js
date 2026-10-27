@@ -54,11 +54,11 @@ void main(){
     zona=lado*baixo;
   }else if(uModo>1.5){
     /* celular (vira fumaça preta no vídeo invertido): passa por cima da arte, no alto da tela,
-       e some antes do logo e dos botões, que ficam embaixo; carregada no canto esquerdo e
-       rala à direita */
+       e some antes do logo e dos botões, que ficam embaixo (o vídeo sai espelhado: o canto
+       carregado fica à esquerda) */
     float alto=smoothstep(.4,.68,c01.y);
-    float lado=.3+.7*(1.-smoothstep(.15,.8,c01.x));
-    zona=alto*lado;
+    float bordas=.55+.45*smoothstep(.15,.5,abs(c01.x-.5));
+    zona=alto*bordas;
   }else{
     /* calma: rente às laterais e ao pé da seção, centro livre para o conteúdo */
     float ld=1.-smoothstep(.0,.32,min(c01.x,1.-c01.x));
