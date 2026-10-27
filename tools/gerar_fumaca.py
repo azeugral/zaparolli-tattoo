@@ -33,9 +33,11 @@ def renderizar(pg, nome, w, h, modo, forca, ciclo):
         enc.stdin.write(png)
     enc.stdin.close(); enc.wait()
     if modo == 2:
-        # fumaça preta: fundo branco e fumaça escura, para o CSS somar com multiply
+        # fumaça preta: fundo branco e fumaça escura, para o CSS somar com multiply. Faixa limitada
+        # (16-235): o fundo tem que ser 235, que decodifica como branco puro, senão o multiply
+        # escurece o topo inteiro
         preta = os.path.join(VID, nome + '-preta.mp4')
-        subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), '-y', '-loglevel', 'error', '-i', mp4, '-vf', "format=yuv420p,lutyuv=y='clip(255-val*2.2,0,255)':u=128:v=128",
+        subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), '-y', '-loglevel', 'error', '-i', mp4, '-vf', "format=yuv420p,lutyuv=y='clip(235-(val-16)*2.2,16,235)':u=128:v=128",
             '-c:v', 'libx264', '-preset', 'slow', '-crf', '22', '-pix_fmt', 'yuv420p', '-profile:v', 'high', '-movflags', '+faststart', '-an', preta], check=True)
         os.remove(mp4); mp4 = preta
     print(mp4, round(os.path.getsize(mp4) / 1e6, 2), 'MB', flush=True)
