@@ -2,7 +2,7 @@
 
 Site do tatuador **Thiago “Zapa” Zaparolli** (@zaparollitattoo), dark art e realismo preto e cinza, estúdio privado em São José, SC. WhatsApp (48) 99810-0176.
 
-Publicado em https://azeugral.github.io/zaparolli-tattoo/ (com `noindex` até entrar o domínio). Estado em 26/10/2026:
+Domínio: **https://thiagozaparolli.com.br/** (metatags, canonical, JSON-LD, sitemap e robots já apontam para ele; indexação liberada). Enquanto o DNS não estiver pronto, o site segue em https://azeugral.github.io/zaparolli-tattoo/. Estado em 27/10/2026:
 
 - **Topo**: fiel ao mockup do cliente (aprovado em 23/10). Arte das costas (foto em alta `IMG_6314`) parada ao fundo em preto, cinza quente e creme, bordas suavizadas por máscara, fumaça realista e escura subindo pelo lado esquerdo (ver Fumaça abaixo). Nome = logo oficial enviado pelo cliente (original em `../_ref/logo-cliente/logo-original.png`, versões web `assets/img/logo-zaparolli*.webp`), também no rodapé e na prévia do link. Coluna lateral com duas cruzes finas, lema com "autênticas." em vermelho, tags com ✕, botões creme e contorno com seta, linha com estúdio e 12 anos. Cabe exatamente em 100svh no PC e no celular.
 - **Fumaça** (26/10): shader de ruído torcido em `assets/js/fumaca.js`, na versão suave (pouca torção, fios apagados, sobe devagar): véus cinza quente, luz cor de osso e brasa vermelha bem leve embaixo, somados com `mix-blend-mode: screen`. Hero: lado esquerdo, força 1.6, ciclo de 40 s. Como agendar: rente às laterais, força .8, ciclo de 64 s; no celular fica na última tela da seção, atrás da ficha. Desktop roda ao vivo em WebGL (meia resolução, baixa sozinho se pesar); telas de toque tocam os MP4 `assets/video/fumaca-*.mp4`, gerados por `python tools/gerar_fumaca.py` (rodar de novo se mexer no shader ou nos `data-forca`/`data-ciclo`). No celular (tela menor que 600 px, toque) o hero usa fumaça PRETA: `fumaca-hero-celular-preta.mp4` (modo 2 do shader, no alto por cima da arte, invertido pelo `gerar_fumaca.py`) somado com `mix-blend-mode: multiply` (classe `.fumaca--preta`); o Como agendar continua com a fumaça clara. Uma versão de partículas volumétricas foi testada e reprovada; a primeira versão, mais forte, foi achada "líquida demais".
@@ -27,7 +27,7 @@ Só o Instagram dele (extraído em 22/10/2026): bio, 674 legendas, fotos e os de
 - `tools/gerar_coberturas.py` e `tools/gerar_legais.py` geram `coberturas.html`, `privacidade.html` e `termos.html` a partir do cabeçalho da home.
 - O antigo `gerar_video.py` (vídeos do meio-tom) está aposentado em `../_ref/aposentado`.
 
-- `tools/gerar_og.py` gera o `og.jpg` (prévia do link no WhatsApp/Instagram) com a arte do topo, o logo oficial e a tipografia do site; precisa do servidor local `python -m http.server 8811` na pasta do projeto. As metatags usam a URL absoluta do Pages: trocar ao mudar de domínio.
+- `tools/gerar_og.py` gera o `og.jpg` (prévia do link no WhatsApp/Instagram) com a arte do topo, o logo oficial e a tipografia do site; precisa do servidor local `python -m http.server 8811` na pasta do projeto. As metatags usam a URL absoluta do domínio (https://thiagozaparolli.com.br/).
 
 ## Fotos em alta e jurídico (24/10)
 
@@ -39,7 +39,7 @@ Só o Instagram dele (extraído em 22/10/2026): bio, 674 legendas, fotos e os de
 
 - Home: faixa de agendamento depois do portfólio (a faixa corrida e a de autoridade abaixo do topo saíram a pedido em 24/10). JSON-LD de TattooParlor completo.
 - `coberturas.html` (gerada por `tools/gerar_coberturas.py`): comparador, passo a passo da cobertura e os 6 antes e depois; o menu e o botão da home levam a ela.
-- Otimização: fontes no próprio site, vídeo da História 20% menor (540×960), shaders e vídeos do meio-tom e do xerox aposentados em `../_ref/aposentado` (−10 MB no repositório). `sitemap.xml` pronto; trocar a base quando entrar o domínio e tirar o `noindex` e o `Disallow` do robots.
+- Otimização: fontes no próprio site, vídeo da História 20% menor (540×960), shaders e vídeos do meio-tom e do xerox aposentados em `../_ref/aposentado` (−10 MB no repositório). `sitemap.xml` e `robots.txt` no domínio; CSS/JS com `?v=N` (subir o N a cada mudança); máscara dos títulos só com alfa (−45%) e fumaça preta do celular em 1,3 MB.
 
 ## CONFIRMAR antes do domínio
 
@@ -51,4 +51,4 @@ Só o Instagram dele (extraído em 22/10/2026): bio, 674 legendas, fotos e os de
 4. **Relatos** (Califórnia, Nicole de Brusque, Natan): tirados das legendas. Os clientes topam aparecer pelo primeiro nome?
 5. **Atendimento pela equipe** no WhatsApp: veio do destaque de orçamentos (antigo). Continua assim?
 6. **Logo**: no destaque aparece um logo em script "Zaparolli Tattoo". Se ele mandar o arquivo vetorial, dá para usar no topo e no favicon (hoje é um "Z" na Archivo).
-7. Domínio e remoção do `noindex`/`robots.txt` quando for ao ar.
+7. Domínio: repositório pronto. Falta o DNS no registro.br (A para 185.199.108.153, .109, .110 e .111; CNAME `www` para `azeugral.github.io`) e depois ligar o domínio nas configurações do Pages com HTTPS.
