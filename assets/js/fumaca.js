@@ -5,7 +5,8 @@
    embaixo. Desenha sobre preto: a tela entra com mix-blend-mode: screen, então o preto some
    e só a fumaça clareia o que está atrás (no desktop e nos MP4 do toque, que não têm alfa).
    fumacaGL(canvas, {modo, forca}) -> {tamanho(w,h), desenhar(fase)}
-   modo 0 = hero (nasce embaixo à esquerda e some antes da arte); modo 1 = calma (rente às bordas).
+   modo 0 = hero (nasce embaixo à esquerda e some antes da arte); modo 1 = calma (rente às bordas);
+   modo 2 = celular (no alto, por cima da arte; o vídeo é invertido e vira fumaça preta).
    O mesmo arquivo gera os MP4 em tools/gerar_fumaca.py. */
 (function (g) {
   const VS = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
@@ -51,6 +52,12 @@ void main(){
     float lado=1.-smoothstep(.12,.62,c01.x);
     float baixo=mix(.8,1.,smoothstep(.95,.05,c01.y));
     zona=lado*baixo;
+  }else if(uModo>1.5){
+    /* celular (vira fumaça preta no vídeo invertido): passa por cima da arte, no alto da tela,
+       e some antes do logo e dos botões, que ficam embaixo */
+    float alto=smoothstep(.4,.68,c01.y);
+    float bordas=.55+.45*smoothstep(.15,.5,abs(c01.x-.5));
+    zona=alto*bordas;
   }else{
     /* calma: rente às laterais e ao pé da seção, centro livre para o conteúdo */
     float ld=1.-smoothstep(.0,.32,min(c01.x,1.-c01.x));
@@ -68,7 +75,7 @@ void main(){
   vec3 col=cinza*pow(veu,1.2)*.85+osso*denso*.4+osso*fio*.3;
   col*=1.-bolsao*.35;
   /* bafo de brasa embaixo, só no hero */
-  float quente=(1.-uModo)*(1.-smoothstep(.0,.45,c01.y))*(1.-smoothstep(.0,.42,c01.x));
+  float quente=max(0.,1.-uModo)*(1.-smoothstep(.0,.45,c01.y))*(1.-smoothstep(.0,.42,c01.x));
   col+=brasa*quente*(veu*.6+.05)*.45;
   col*=uForca;
 

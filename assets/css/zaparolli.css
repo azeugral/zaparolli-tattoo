@@ -257,6 +257,8 @@ p { margin: 0 0 1em; }
 .fumaca { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; mix-blend-mode: screen; }
 .fumaca canvas, .fumaca video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 2.4s var(--ease); }
 .fumaca .on { opacity: 1; }
+/* celular: fumaça preta no hero (vídeo de fundo branco com fumaça escura; multiply só escurece) */
+.fumaca--preta { mix-blend-mode: multiply; }
 /* a versão calma nasce sem borda: some no topo da caixa */
 .fumaca--calma { -webkit-mask-image: linear-gradient(180deg, transparent, #000 22%); mask-image: linear-gradient(180deg, transparent, #000 22%); }
 /* celular e tablet: no "Como agendar" a fumaça fica só na última tela da seção, atrás da ficha */

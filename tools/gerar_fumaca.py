@@ -2,7 +2,8 @@
 telas de toque: fumaca-hero-pe / fumaca-hero-deitado (lado esquerdo do topo) e fumaca-calma-pe /
 fumaca-calma-deitado (seção Como agendar). O loop fecha sem emenda (fase 0 -> 2π).
 Os valores de modo/força/ciclo têm que bater com os data-* das caixas .fumaca do index.html.
-Uso: python tools/gerar_fumaca.py [nome ...]"""
+Uso: python tools/gerar_fumaca.py [nome ...]
+fumaca-hero-celular sai invertida como fumaca-hero-celular-preta.mp4 (fumaça preta do hero no celular)."""
 import os, sys, subprocess, base64
 from playwright.sync_api import sync_playwright
 import imageio_ffmpeg
@@ -14,6 +15,7 @@ FPS = 24
 VERSOES = [
     ('fumaca-hero-pe', 720, 1560, 0, 1.6, 40),
     ('fumaca-hero-deitado', 1280, 720, 0, 1.6, 40),
+    ('fumaca-hero-celular', 720, 1560, 2, 1.4, 40),
     ('fumaca-calma-pe', 720, 1280, 1, .8, 64),
     ('fumaca-calma-deitado', 1280, 720, 1, .8, 64),
 ]
@@ -30,6 +32,12 @@ def renderizar(pg, nome, w, h, modo, forca, ciclo):
         png = base64.b64decode(pg.evaluate(f"(T.desenhar({i / q * 6.283185307179586}), document.getElementById('c').toDataURL('image/png'))").split(',', 1)[1])
         enc.stdin.write(png)
     enc.stdin.close(); enc.wait()
+    if modo == 2:
+        # fumaça preta: fundo branco e fumaça escura, para o CSS somar com multiply
+        preta = os.path.join(VID, nome + '-preta.mp4')
+        subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), '-y', '-loglevel', 'error', '-i', mp4, '-vf', "format=yuv420p,lutyuv=y='clip(255-val*2.2,0,255)':u=128:v=128",
+            '-c:v', 'libx264', '-preset', 'slow', '-crf', '22', '-pix_fmt', 'yuv420p', '-profile:v', 'high', '-movflags', '+faststart', '-an', preta], check=True)
+        os.remove(mp4); mp4 = preta
     print(mp4, round(os.path.getsize(mp4) / 1e6, 2), 'MB', flush=True)
 
 if __name__ == '__main__':

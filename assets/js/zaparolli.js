@@ -110,6 +110,7 @@
   /* fumaça (assets/js/fumaca.js): ao vivo em WebGL no desktop; em telas de toque, o MP4 do mesmo
      shader (em pé ou deitado). Só anima quando está na tela; com "reduzir movimento" fica um quadro parado. */
   const toque = matchMedia('(hover: none), (pointer: coarse)').matches;
+  const celular = toque && Math.min(screen.width, screen.height) < 600;
   $$('[data-fumaca]').forEach(box => {
     const cv = $('canvas', box), vid = $('video', box);
     const ver = cb => 'IntersectionObserver' in window
@@ -120,7 +121,9 @@
       ver(dentro => {
         if (dentro) {
           if (!vid.src) {
-            vid.src = innerWidth > innerHeight ? box.dataset.vDeitado : box.dataset.vPe;
+            /* no celular o hero usa a fumaça preta (vídeo invertido, somado com multiply) */
+            if (celular && box.dataset.vCelular) { vid.src = box.dataset.vCelular; box.classList.add('fumaca--preta'); }
+            else vid.src = innerWidth > innerHeight ? box.dataset.vDeitado : box.dataset.vPe;
             vid.addEventListener('playing', () => vid.classList.add('on'), { once: true });
           }
           if (!reduz) { const p = vid.play(); if (p && p.catch) p.catch(() => {}); }
