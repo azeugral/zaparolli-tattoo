@@ -114,6 +114,24 @@ def fonte(tam, peso=900, largura=125, arquivo='Archivo.ttf'):
     return f
 
 
+def com_painel(dados):
+    """Pecas que entraram pelo Painel LRGZ (fotos ja em assets/obras) e a ordem que ele
+    gravou (auditoria = ordem de postagem do Instagram), de assets/obras/_painel.json.
+    Sem esse arquivo o portfolio sai como antes."""
+    arq = os.path.join(OBRAS, '_painel.json')
+    if not os.path.exists(arq):
+        return dados
+    with open(arq, encoding='utf-8') as fp:
+        reg = json.load(fp)
+    feitos = {d['f'] for d in dados}
+    dados = [{'f': p['f'], 'c': p['c'], 't': p['t']} for p in reversed(reg.get('pecas', []))
+             if p['f'] not in feitos] + dados
+    if reg.get('ordem'):
+        pos = {f: i for i, f in enumerate(reg['ordem'])}
+        dados.sort(key=lambda d: pos.get(d['f'], len(pos)))
+    return dados
+
+
 def main():
     for p in (IMG, OBRAS):
         os.makedirs(p, exist_ok=True)
@@ -155,6 +173,7 @@ def main():
         larg = min(1080, im.width)
         im.resize((larg, round(larg * im.height / im.width)), Image.LANCZOS).save(os.path.join(OBRAS, f + '-1080.webp'), 'WEBP', quality=88, method=6)
         dados.insert(pos, {'f': f, 'c': 'cob', 't': leg})
+    dados = com_painel(dados)
     with open(os.path.join(SITE, 'assets', 'js', 'obras.js'), 'w', encoding='utf-8') as fp:
         fp.write('/* gerado por tools/processar.py */\nwindow.OBRAS = ' + json.dumps(dados, ensure_ascii=False, indent=0) + ';\n')
 
