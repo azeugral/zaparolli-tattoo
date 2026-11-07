@@ -6,11 +6,12 @@ import os, re
 AQUI = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(AQUI)
 VIGENCIA = '24 de outubro de 2026'
+VIGENCIA_PRIVACIDADE = '7 de novembro de 2026'
 ZAP = '(48) 99810-0176'
 ZAP_LINK = 'https://wa.me/5548998100176'
 
 PRIVACIDADE = f'''
-<p class="vigencia">Em vigor desde {VIGENCIA}</p>
+<p class="vigencia">Em vigor desde {VIGENCIA_PRIVACIDADE}</p>
 <p class="abre">Esta política explica, em linguagem direta, quais dados pessoais passam por este site, para que servem e quais são os seus direitos, de acordo com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018, LGPD).</p>
 
 <h2>1. Quem é o responsável</h2>
@@ -38,15 +39,16 @@ PRIVACIDADE = f'''
 <h2>4. Com quem os dados podem ser compartilhados</h2>
 <ul>
   <li><strong>WhatsApp (Meta)</strong>, quando você conversa com o estúdio. O WhatsApp tem a própria política de privacidade.</li>
-  <li><strong>GitHub Pages (GitHub, Inc.)</strong>, que hospeda este site. Como qualquer servidor, ele registra dados técnicos de acesso, como o endereço IP, para segurança e funcionamento.</li>
+  <li><strong>Cloudflare (Cloudflare, Inc.)</strong>, que hospeda este site e mede as visitas. Como qualquer servidor, ela registra dados técnicos de acesso, como o endereço IP, para segurança e funcionamento.</li>
   <li>Autoridades públicas, quando houver obrigação legal ou ordem judicial.</li>
 </ul>
 <p>Alguns desses serviços podem processar dados fora do Brasil, com as garantias previstas na LGPD.</p>
 
 <h2>5. Cookies e armazenamento no navegador</h2>
-<p>Este site <strong>não usa cookies de rastreamento, de publicidade nem de estatísticas</strong>. As fontes e as imagens são servidas pelo próprio site, sem chamadas a serviços de terceiros ao abrir a página.</p>
+<p>Este site <strong>não usa cookies de rastreamento nem de publicidade</strong>. As fontes e as imagens são servidas pelo próprio site.</p>
+<p>Para contar as visitas, o site usa o Cloudflare Web Analytics, que funciona sem cookies e mede dados gerais de acesso, como páginas vistas, origem da visita e tempo de carregamento.</p>
 <p>Nada é guardado no seu navegador por este site, por isso não há aviso de cookies para aceitar.</p>
-<p>Se no futuro o site passar a usar alguma ferramenta de estatística, ela só será ativada com o seu aceite, e esta política será atualizada antes.</p>
+<p>Se no futuro o site passar a usar cookies de rastreamento ou de publicidade, eles só serão ativados com o seu aceite, e esta política será atualizada antes.</p>
 <p>Ao clicar em links para o WhatsApp ou o Instagram, você sai deste site e passa a seguir as regras desses serviços.</p>
 
 <h2>6. Por quanto tempo guardamos</h2>

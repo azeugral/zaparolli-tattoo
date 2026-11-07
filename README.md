@@ -33,7 +33,7 @@ Só o Instagram dele (extraído em 22/10/2026): bio, 674 legendas, fotos e os de
 
 - Fotos em alta enviadas pelo cliente em `../_ref/hq-cliente`: trocam as do Instagram no portfólio e no topo (`HQ` em `tools/processar.py`, casadas por ORB com `../_ref/casar.py`) e entram 3 obras novas (`NOVAS`). As 5 coberturas também foram trocadas pelas versões em alta (as antigas ficaram em `../_ref/coberturas-cliente/baixa`).
 - `privacidade.html` e `termos.html` são gerados por `tools/gerar_legais.py` (textos e data de vigência lá dentro). O site não tem aviso de cookies: não grava nada no navegador.
-- Fontes hospedadas no próprio site (`assets/fontes`, `assets/css/fontes.css`): nenhuma requisição a terceiros ao abrir as páginas.
+- Fontes hospedadas no próprio site (`assets/fontes`, `assets/css/fontes.css`): a única requisição externa é o script do Cloudflare Web Analytics, injetado pela hospedagem e sem cookies.
 
 ## Reorganização e otimização (24/10)
 
