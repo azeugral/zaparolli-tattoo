@@ -45,7 +45,7 @@ PRIVACIDADE = f'''
 
 <h2>5. Cookies e armazenamento no navegador</h2>
 <p>Este site <strong>não usa cookies de rastreamento, de publicidade nem de estatísticas</strong>. As fontes e as imagens são servidas pelo próprio site, sem chamadas a serviços de terceiros ao abrir a página.</p>
-<p>A única informação guardada no seu navegador é a sua escolha no aviso de cookies (armazenamento local, chamado <em>localStorage</em>), para o aviso não aparecer em toda visita. Você pode rever essa escolha pelo link <a href="#" data-preferencias>Preferências de cookies</a>, no rodapé, ou apagar os dados do site nas configurações do navegador.</p>
+<p>Nada é guardado no seu navegador por este site, por isso não há aviso de cookies para aceitar.</p>
 <p>Se no futuro o site passar a usar alguma ferramenta de estatística, ela só será ativada com o seu aceite, e esta política será atualizada antes.</p>
 <p>Ao clicar em links para o WhatsApp ou o Instagram, você sai deste site e passa a seguir as regras desses serviços.</p>
 
